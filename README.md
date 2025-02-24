@@ -1,4 +1,6 @@
-# CampusPulse
+## Campus Pulse
+# React + Vite
+
 A react + firebase app for tracking engagement of students at PFW
 
 # Installation instructions
@@ -17,6 +19,6 @@ cd campus-pulse
 npm install
 
 # Start the development server
-npm start
+npm run dev
 
 ```
