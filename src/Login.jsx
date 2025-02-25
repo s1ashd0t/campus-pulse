@@ -1,51 +1,51 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import "./Login.css";
+import "./App.css";
 
-const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Logging in with:", { email, password });
-    // Add authentication logic here
-  };
+function Login() {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
-  return (
-    <div className="login-container">
-      <img src="/public/vite.svg" alt="Campus Pulse Logo" className="logo" />
-      <h1>Campus Pulse</h1>
-      <p>An engagement tracker app for students at PFW</p>
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log("Logging in with:", username, password);
+    };
 
-      <form onSubmit={handleSubmit}>
-        <label>
-          <strong>Log in</strong>
-        </label>
-        <input
-          type="text"
-          placeholder="Username"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit">Log in</button>
-      </form>
+    return (
+        <div className="login-container">
+            <p>An engagement tracker app for students at PFW</p>
 
-      <p className="forgot-password">Forgot your password?</p>
+            <form onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    placeholder="Username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                />
+                <input
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                />
+                <button type="submit">Log in</button>
+            </form>
 
-      <div className="social-login">
-        <p>or continue with</p>
-        <button className="google-login">🔴 Log in with Google</button>
-        <button className="facebook-login">🔵 Log in with Facebook</button>
-      </div>
-    </div>
-  );
-};
+            <p className="forgot-password">Forgot your password?</p>
+
+            <div className="line-divider">
+                <span className="span-line-divider">or continue with</span>
+            </div>
+
+
+            <button className="google-login">Log in with Google</button>
+            <button className="facebook-login">Log in with Facebook</button>
+
+        </div>
+    );
+}
 
 export default Login;

@@ -1,24 +1,26 @@
-import { useState } from 'react'
-import logo from './assets/icon.png'
-import Login from './Login.jsx'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import logo from "./assets/icon.png";
+import "./App.css";
+import Login from "./Login";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={logo} className="logo" alt="logo" />
-        </a>
-      </div>
-      <h1>Campus Pulse</h1>
-      <div className="card">
-      </div>
-    </>
-  )
+    <Router>
+      <div className="app-container">
+        {/* Keep the logo in App.jsx */}
+        <div>
+          <a href="https://vite.dev" target="_blank">
+            <img src={logo} className="logo" alt="logo" />
+          </a>
+        </div>
 
+        {/* Define routes */}
+        <Routes>
+          <Route path="/" element={<Login />} />
+        </Routes>
+      </div>
+    </Router>
+  );
 }
 
-export default App
+export default App;
