@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import logo from './assets/icon.png'
+import Login from './Login.jsx'
 import './App.css'
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       </div>
     </>
   )
+
 }
 
 export default App
