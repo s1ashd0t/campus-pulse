@@ -7,8 +7,8 @@
 }
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
+  height: 7em;
+  padding: 0.5em;
   will-change: filter;
   transition: filter 300ms;
 }
@@ -48,7 +48,7 @@
 body {
   background-color: #000;
   color: white;
-  font-family: Arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,97 +57,6 @@ body {
 }
 
 
-/* Login container */
-.login-container {
-  text-align: center;
-  max-width: 250px;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
-}
 
-/* Input fields */
-input {
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border: none;
-  border-radius: 5px;
-  background: #222;
-  color: white;
-  font-size: 14px;
-  outline: none;
-}
 
-input::placeholder {
-  color: rgba(255, 255, 255, 0.7);
-}
 
-/* Buttons */
-button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  background: white;
-  color: black;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-button:hover {
-  background: #ddd;
-}
-
-/* Social login buttons */
-.google-login {
-  background: #db4437;
-  color: white;
-}
-
-.facebook-login {
-  background: #3b5998;
-  color: white;
-}
-
-.google-login:hover {
-  background: #c1351d;
-}
-
-.facebook-login:hover {
-  background: #2d4373;
-}
-
-/* Forgot password link */
-.forgot-password {
-  font-size: 12px;
-  opacity: 0.7;
-  cursor: pointer;
-  margin-top: 5px;
-  display: block;
-}
-
-.forgot-password:hover {
-  opacity: 1;
-}
-
-/* Horizontal line divider */
-
-.line-divider {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  color: #999;
-  margin: 20px 0;
-}
-
-.line-divider::before,
-.line-divider::after {
-  content: "";
-  flex: 1;
-  border-top: 2px solid #999;
-  margin: 0 10px;
-}

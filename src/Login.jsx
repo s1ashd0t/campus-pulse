@@ -14,8 +14,9 @@ function Login() {
 
     return (
         <div className="login-container">
-            <p>An engagement tracker app for students at PFW</p>
-
+            <h1>Campus Pulse</h1>
+            <p className="description">An engagement tracker app for students at PFW</p>
+            
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
@@ -36,13 +37,12 @@ function Login() {
 
             <p className="forgot-password">Forgot your password?</p>
 
-            <div className="line-divider">
-                <span className="span-line-divider">or continue with</span>
-            </div>
+            <div className="line-divider"><h6>or continue with</h6></div>
 
 
-            <button className="google-login">Log in with Google</button>
-            <button className="facebook-login">Log in with Facebook</button>
+
+            <button className="google-login">Google</button>
+            <button className="facebook-login">Facebook</button>
 
         </div>
     );
