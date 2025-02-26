@@ -19,7 +19,7 @@ function App() {
         {/* Define routes */}
         <Routes>
         <Route path="/" element={<Landing />} /> {/* Landing Page as Home */}
-          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </div>
     </Router>
