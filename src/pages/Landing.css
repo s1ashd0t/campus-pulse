@@ -1,0 +1,58 @@
+.landing {
+    text-align: center;
+    color: white;
+    background: black;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .hero {
+    margin-bottom: 40px;
+  }
+  
+  .hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .hero p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+  
+  .cta-button {
+    background-color: #ff7b00;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 5px;
+  }
+  
+  .cta-button:hover {
+    background-color: #e66a00;
+  }
+  
+  .features {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .feature {
+    background: #222;
+    padding: 20px;
+    border-radius: 10px;
+    width: 250px;
+  }
+  
+  .footer {
+    margin-top: 50px;
+    font-size: 0.8rem;
+  }
+  
