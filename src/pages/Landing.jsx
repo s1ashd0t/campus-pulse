@@ -1,14 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
 import "./Landing.css";
-import logo from "../assets/icon.png";
+import { Link } from "react-router-dom";
 
 const Landing = () => {
   return (
     <div className="landing">
-      <img src={logo} className="logo" alt="logo" />
+      {/* Logo */}
+      <img src="/path/to/logo.png" alt="Logo" className="logo" />
+
       {/* Hero Section */}
-      <header className="hero">
+      <section className="hero">
         <div className="hero-background"></div>
         <div className="hero-content">
           <h1>Turn Every Event Into Rewards—Join, Track, Win!</h1>
@@ -17,7 +17,7 @@ const Landing = () => {
             <button className="cta-button">Join Now</button>
           </Link>
         </div>
-      </header>
+      </section>
 
       {/* Features Section */}
       <section className="features">
@@ -38,7 +38,7 @@ const Landing = () => {
       {/* Call-to-Action Section */}
       <section className="cta-section">
         <h2>Don’t Miss Out on the Rewards. Start Earning Today!</h2>
-        <Link to="/signup">
+        <Link to="/login">
           <button className="cta-button">Sign Up & Start Winning</button>
         </Link>
       </section>
