@@ -1,36 +1,21 @@
+landing.css
 
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
-html, body {
-  height: 100%;
-}
-
-
-body, html {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background-color: black;
-  color: white;
-  height: 100%;
-  overflow-x: hidden; /* Prevent horizontal scrolling */
-}
-
-/* Landing Page Container */
+/* General Styles */
 .landing {
+  text-align: center;
+  color: white;
+  background: black;
+  height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
-  width: 100%;
-  text-align: center;
 }
 
-/* Logo */
 .logo {
   margin: 1.25rem 0;
   width: 6.25rem;
@@ -45,9 +30,8 @@ body, html {
   justify-content: center;
   align-items: center;
   text-align: center;
-  width: 100%;
-  padding: 60px 20px;
   color: white;
+  padding: 0 1.25rem;
 }
 
 .hero-background {
@@ -60,13 +44,19 @@ body, html {
   z-index: -1;
 }
 
-.hero-content h1 {
+
+.hero-content {
+  max-width: 37.5rem;
+  text-align: center;
+}
+
+.hero h1 {
   font-size: 3rem;
   font-weight: bold;
   margin-bottom: 1.25rem;
 }
 
-.hero-content p {
+.hero p {
   font-size: 1.4rem;
   margin-bottom: 1.875rem;
 }
@@ -145,28 +135,4 @@ body, html {
 .footer p {
   margin: 0;
   font-size: 0.9rem;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .features {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .feature {
-    margin-bottom: 20px;
-  }
-
-  .hero-content h1 {
-    font-size: 2rem;
-  }
-
-  .hero-content p {
-    font-size: 1rem;
-  }
-
-  .cta-section h2 {
-    font-size: 1.5rem;
-  }
 }

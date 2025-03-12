@@ -9,16 +9,16 @@ function App() {
   return (
     <Router>
       <div className="app-container">
-        {/* Keep the logo in App.jsx */}
+        {/* Keeping logo in App.jsx to appear in all pages for testing */}
         <div>
-          <a href="https://vite.dev" target="_blank">
+          <a href="https://vite.dev" target="_blank" rel="noopener noreferrer">
             <img src={logo} className="logo" alt="logo" />
           </a>
         </div>
 
-        {/* Define routes */}
+        {/* Defining the routes */}
         <Routes>
-        <Route path="/" element={<Landing />} /> {/* Landing Page as Home */}
+          <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
         </Routes>
       </div>
