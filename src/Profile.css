@@ -1,0 +1,171 @@
+* {
+    box-sizing: border-box;
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 40rem;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #111;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.3);
+    color: white;
+}
+
+.profile-container h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 300;
+}
+
+.profile-view {
+    width: 100%;
+}
+
+.profile-info {
+    margin-bottom: 2rem;
+}
+
+.profile-field {
+    display: flex;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #333;
+}
+
+.profile-field label {
+    font-weight: bold;
+    width: 30%;
+    color: #999;
+}
+
+.profile-field p {
+    margin: 0;
+    width: 70%;
+}
+
+.signup-method {
+    text-transform: capitalize;
+}
+
+.profile-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.edit-button, .logout-button {
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 0.3rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.edit-button {
+    background-color: #ff7b00;
+    color: white;
+}
+
+.edit-button:hover {
+    background-color: #e66a00;
+}
+
+.logout-button {
+    background-color: #333;
+    color: white;
+}
+
+.logout-button:hover {
+    background-color: #555;
+}
+
+/* Profile Edit Form */
+.profile-edit {
+    width: 100%;
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.form-row .form-group {
+    width: 50%;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #999;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.7rem;
+    background-color: #222;
+    border: none;
+    border-radius: 0.3rem;
+    color: white;
+    font-size: 1rem;
+}
+
+.form-group input:disabled {
+    background-color: #1a1a1a;
+    color: #666;
+    cursor: not-allowed;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.save-button, .cancel-button {
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 0.3rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 48%;
+}
+
+.save-button {
+    background-color: #ff7b00;
+    color: white;
+}
+
+.save-button:hover {
+    background-color: #e66a00;
+}
+
+.cancel-button {
+    background-color: #333;
+    color: white;
+}
+
+.cancel-button:hover {
+    background-color: #555;
+}
+
+.social-signup-note {
+    margin-top: 1rem;
+    padding: 0.8rem;
+    background-color: #333;
+    border-radius: 0.3rem;
+    font-size: 0.9rem;
+    color: #ccc;
+}
