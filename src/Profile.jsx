@@ -1,5 +1,9 @@
+// src/Profile.jsx
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase";
+import { getCurrentUserData, updateUserData, logout } from "./services/authService";
 import "./Profile.css";
 import "./App.css";
 
@@ -14,23 +18,31 @@ function Profile() {
     });
     const [isEditing, setIsEditing] = useState(false);
     const [signupMethod, setSignupMethod] = useState("email");
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
 
     useEffect(() => {
-        // Check if user is logged in
-        const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-        if (!isLoggedIn) {
-            navigate("/login");
-            return;
-        }
+        const unsubscribe = onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                try {
+                    const result = await getCurrentUserData(user.uid);
+                    if (result.success) {
+                        setUserData(result.userData);
+                        setSignupMethod(result.userData.signupMethod || "email");
+                    } else {
+                        setError("Error loading user data");
+                    }
+                } catch (error) {
+                    setError("Error loading user data");
+                } finally {
+                    setLoading(false);
+                }
+            } else {
+                navigate("/login");
+            }
+        });
 
-        // Load user data
-        try {
-            const storedUserData = JSON.parse(localStorage.getItem("userData") || "{}");
-            setUserData(storedUserData);
-            setSignupMethod(storedUserData.signupMethod || "email");
-        } catch (error) {
-            console.error("Error loading user data:", error);
-        }
+        return () => unsubscribe();
     }, [navigate]);
 
     const handleChange = (e) => {
@@ -41,24 +53,54 @@ function Profile() {
         });
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
+        setError("");
         
-        // Save updated user data
-        localStorage.setItem("userData", JSON.stringify(userData));
-        
-        // Exit edit mode
-        setIsEditing(false);
+        try {
+            const user = auth.currentUser;
+            if (!user) {
+                navigate("/login");
+                return;
+            }
+            
+            const result = await updateUserData(user.uid, {
+                phoneNumber: userData.phoneNumber,
+                dob: userData.dob
+            });
+            
+            if (result.success) {
+                setIsEditing(false);
+            } else {
+                setError(result.error);
+            }
+        } catch (error) {
+            setError(error.message);
+        }
     };
 
-    const handleLogout = () => {
-        localStorage.removeItem("isLoggedIn");
-        navigate("/login");
+    const handleLogout = async () => {
+        try {
+            const result = await logout();
+            if (result.success) {
+                navigate("/login");
+            } else {
+                setError(result.error);
+            }
+        } catch (error) {
+            setError(error.message);
+        }
     };
+
+    if (loading) {
+        return <div className="profile-container">Loading...</div>;
+    }
 
     return (
         <div className="profile-container">
             <h1>Profile</h1>
+            
+            {error && <p className="error-message">{error}</p>}
             
             {!isEditing ? (
                 <div className="profile-view">
@@ -133,7 +175,7 @@ function Profile() {
                                 name="email"
                                 value={userData.email}
                                 onChange={handleChange}
-                                disabled={signupMethod !== "email"}
+                                disabled={true} // Email cannot be changed
                             />
                         </div>
                         

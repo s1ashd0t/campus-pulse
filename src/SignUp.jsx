@@ -1,5 +1,7 @@
+// src/SignUp.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { signUpWithEmail, loginWithGoogle, loginWithFacebook } from "./services/authService";
 import "./SignUp.css";
 import "./App.css";
 
@@ -15,6 +17,7 @@ function SignUp() {
         confirmPassword: ""
     });
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -24,7 +27,7 @@ function SignUp() {
         });
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         
         // Basic validation
@@ -33,28 +36,53 @@ function SignUp() {
             return;
         }
         
-        // Here you would typically send this data to your backend
-        console.log("Signing up with:", formData);
-        
-        // Store user data in localStorage (for demo purposes)
-        // In a real app, this would be handled by your backend
-        const userData = {
-            firstName: formData.firstName,
-            lastName: formData.lastName,
-            email: formData.email,
-            phoneNumber: formData.phoneNumber,
-            dob: formData.dob,
-            signupMethod: "email"
-        };
-        
-        localStorage.setItem("userData", JSON.stringify(userData));
-        localStorage.setItem("userCredentials", JSON.stringify({
-            email: formData.email,
-            password: formData.password
-        }));
-        
-        // Redirect to login page after successful signup
-        navigate("/login");
+        try {
+            setLoading(true);
+            setError("");
+            
+            const userData = {
+                firstName: formData.firstName,
+                lastName: formData.lastName,
+                phoneNumber: formData.phoneNumber,
+                dob: formData.dob
+            };
+            
+            const result = await signUpWithEmail(formData.email, formData.password, userData);
+            
+            if (result.success) {
+                navigate("/profile");
+            } else {
+                setError(result.error);
+            }
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleSocialSignup = async (provider) => {
+        try {
+            setLoading(true);
+            setError("");
+            
+            let result;
+            if (provider === "google") {
+                result = await loginWithGoogle();
+            } else if (provider === "facebook") {
+                result = await loginWithFacebook();
+            }
+            
+            if (result.success) {
+                navigate("/profile");
+            } else {
+                setError(result.error);
+            }
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -97,7 +125,6 @@ function SignUp() {
                     placeholder="Phone Number"
                     value={formData.phoneNumber}
                     onChange={handleChange}
-                    required
                 />
                 <input
                     type="date"
@@ -105,7 +132,6 @@ function SignUp() {
                     placeholder="Date of Birth"
                     value={formData.dob}
                     onChange={handleChange}
-                    required
                 />
                 <input
                     type="password"
@@ -123,40 +149,33 @@ function SignUp() {
                     onChange={handleChange}
                     required
                 />
-                <button type="submit">Sign Up</button>
+                <button type="submit" disabled={loading}>
+                    {loading ? "Signing up..." : "Sign Up"}
+                </button>
             </form>
 
             <div className="line-divider"><h6>or continue with</h6></div>
 
-            <button className="google-login" onClick={() => handleSocialSignup("google")}>Google</button>
-            <button className="facebook-login" onClick={() => handleSocialSignup("facebook")}>Facebook</button>
+            <button 
+                className="google-login" 
+                onClick={() => handleSocialSignup("google")}
+                disabled={loading}
+            >
+                Google
+            </button>
+            <button 
+                className="facebook-login" 
+                onClick={() => handleSocialSignup("facebook")}
+                disabled={loading}
+            >
+                Facebook
+            </button>
             
             <p className="login-link">
                 Already have an account? <a href="/login">Log in</a>
             </p>
         </div>
     );
-    
-    function handleSocialSignup(provider) {
-        // In a real app, this would trigger OAuth authentication
-        console.log(`Signing up with ${provider}`);
-        
-        // For demo: simulate social signup by storing mock data
-        const mockUserData = {
-            firstName: provider === "google" ? "Google" : "Facebook",
-            lastName: "User",
-            email: `${provider}.user@example.com`,
-            phoneNumber: "",
-            dob: "",
-            signupMethod: provider
-        };
-        
-        localStorage.setItem("userData", JSON.stringify(mockUserData));
-        localStorage.setItem("isLoggedIn", "true");
-        
-        // Redirect to profile page after social signup
-        navigate("/profile");
-    }
 }
 
 export default SignUp;
