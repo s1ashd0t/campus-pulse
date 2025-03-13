@@ -4,6 +4,8 @@ import logo from "./assets/icon.png";
 import "./App.css";
 import Login from "./pages/Login";
 import Landing from "./pages/Landing";
+import Leaderboard from "./pages/Leaderboard";
+import Notifications from "./pages/Notifications";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/notifications" element={<Notifications />} />
         </Routes>
       </div>
     </Router>
