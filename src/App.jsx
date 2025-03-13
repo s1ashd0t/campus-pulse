@@ -7,8 +7,8 @@ import logo from "./assets/icon.png";
 import "./App.css";
 import Login from "./pages/Login";
 import Landing from "./pages/Landing";
-import Profile from "./Profile";
-import SignUp from "./SignUp";
+import Profile from "./pages/Profile";
+import SignUp from "./pages/SignUp";
 
 // PrivateRoute component to protect routes that require authentication
 const PrivateRoute = ({ element }) => {
@@ -37,9 +37,10 @@ function App() {
       <div className="app-container">
         {/* Keep the logo in App.jsx */}
         <div>
-          <a href="/" target="_blank">
-            <img src={logo} className="logo" alt="logo" />
+          <a href="/">
+            <img src={logo} className="logo" alt="logo"/>
           </a>
+          
         </div>
 
         {/* Define routes */}
@@ -49,6 +50,10 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/profile" element={<PrivateRoute element={<Profile />} />} />
         </Routes>
+        
+        <footer className="footer">
+        <p>&copy; {new Date().getFullYear()} Campus Pulse. All rights reserved.</p>
+      </footer>
       </div>
     </Router>
   );

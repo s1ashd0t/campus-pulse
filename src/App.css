@@ -1,14 +1,20 @@
 /* Root container */
 #root {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
+}
+
+.app-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .logo {
   height: 7em;
-  padding: 0.5em;
   will-change: filter;
   transition: filter 300ms;
 }
@@ -46,17 +52,31 @@
 
 /* General page styling */
 body {
-  background-color: #000;
   color: white;
   font-family: 'Poppins', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   margin: 0;
+  height: 100%;
 }
 
+.logo {
+  width: 6.25rem;
+  height: auto;
+  margin: 0.5em;
+}
 
+/* Footer */
+.footer {
+  background: #000;
+  padding: 1.25rem;
+  width: 100vw;
+  text-align: center;
+  margin-top: auto;
+}
 
-
-
+.footer p {
+  margin: 0;
+  font-size: 0.9rem;
+}

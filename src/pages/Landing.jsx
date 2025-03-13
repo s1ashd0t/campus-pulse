@@ -6,7 +6,6 @@ import logo from "../assets/icon.png";
 const Landing = () => {
   return (
     <div className="landing">
-      <img src={logo} className="logo" alt="logo" />
       {/* Hero Section */}
       <header className="hero">
         <div className="hero-background"></div>
@@ -44,9 +43,7 @@ const Landing = () => {
       </section>
 
       {/* Footer */}
-      <footer className="footer">
-        <p>&copy; {new Date().getFullYear()} Campus Pulse. All rights reserved.</p>
-      </footer>
+
     </div>
   );
 };
