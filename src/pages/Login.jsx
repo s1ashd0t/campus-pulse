@@ -82,8 +82,8 @@ function Login() {
 
     return (
         <div className="login-container">
-            <h1>Campus Pulse</h1>
-            <p className="description">An engagement tracker app for students at PFW</p>
+            <h1>Login</h1>
+            <p className="description">Login to your account</p>
             
             {error && <p className="error-message">{error}</p>}
             

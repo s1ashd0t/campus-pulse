@@ -9,6 +9,10 @@ import Login from "./pages/Login";
 import Landing from "./pages/Landing";
 import Profile from "./pages/Profile";
 import SignUp from "./pages/SignUp";
+import Navigation from "./pages/Navigation";
+import close from './assets/close.svg'
+import menu from './assets/menu.svg'
+
 
 // PrivateRoute component to protect routes that require authentication
 const PrivateRoute = ({ element }) => {
@@ -36,9 +40,11 @@ function App() {
     <Router>
       <div className="app-container">
         {/* Keep the logo in App.jsx */}
-        <div>
+        <img src={menu} className="menu" />
+        <Navigation />
+        <div className="heading">
           <a href="/">
-            <img src={logo} className="logo" alt="logo"/>
+          <h1>Campus Pulse</h1>
           </a>
           
         </div>

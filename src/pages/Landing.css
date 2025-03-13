@@ -3,16 +3,14 @@
 }
 
 body{
-  background: url("../assets/bg_landing.jpg") center/cover no-repeat;
+  background: url("../assets/bg_landing.jpg")  no-repeat;
   overflow-x: hidden;
 }
 
-.app-container{
-  height: 100%;
-}
 
 /* General Styles */
 .landing {
+  margin-top: 6rem;
   text-align: center;
   color: white;
   width: 100%;
