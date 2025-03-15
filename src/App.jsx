@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import logo from "./assets/icon.png";
 import "./App.css";
 import Login from "./pages/Login";
@@ -17,6 +17,13 @@ function App() {
             <img src={logo} className="logo" alt="logo" />
           </a>
         </div>
+
+        <nav>
+          <Link to="/">Home</Link> |{" "}
+          <Link to="/leaderboard">Leaderboard</Link> |{" "}
+          <Link to="/notifications">Notifications</Link> |{" "}
+          <Link to="/login">Login</Link>
+        </nav>
 
         {/* Defining the routes */}
         <Routes>

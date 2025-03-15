@@ -1,0 +1,107 @@
+/* Leaderboard Container */
+.leaderboard-container {
+  width: 50%;
+  max-width: 900px;
+  margin: auto;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+}
+
+/* Title */
+.leaderboard-container h1 {
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Table Header */
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #7b61ff;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  color: white;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+/* List */
+.leaderboard-container ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Each Row */
+.leaderboard-container li {
+  background: #222;
+  padding: 1rem;
+  margin: 0.7rem 0;
+  border-radius: 0.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  transition: transform 0.2s, box-shadow 0.3s;
+}
+
+/* Hover effect */
+.leaderboard-container li:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* Rank */
+.leaderboard-container .rank {
+  flex: 0.5;
+  text-align: left;
+  font-weight: bold;
+}
+
+/* Name + Avatar */
+.name-section {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+}
+
+/* Points */
+.points {
+  flex: 1;
+  text-align: right;
+  color: #ffcc00;
+  font-weight: bold;
+}
+
+/* Avatar */
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Mobile-friendly responsiveness */
+@media (max-width: 600px) {
+  .leaderboard-container {
+    padding: 1rem; /* Reduce side padding */
+  }
+
+  .leaderboard-container li {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .name-section {
+    justify-content: center;
+  }
+
+  .points {
+    text-align: center;
+  }
+}

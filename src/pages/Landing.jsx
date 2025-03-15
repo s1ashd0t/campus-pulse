@@ -3,7 +3,16 @@ import { Link } from "react-router-dom";
 
 const Landing = () => {
   return (
+
+    
     <div className="landing">
+
+  <nav>
+  <Link to="/">Home</Link>
+  <Link to="/leaderboard">Leaderboard</Link>
+  <Link to="/notifications">Notifications</Link>
+  <Link to="/login">Login</Link>
+  </nav>
       {/* Logo */}
       <img src="/path/to/logo.png" alt="Logo" className="logo" />
 
