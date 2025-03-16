@@ -9,7 +9,10 @@ import Login from "./pages/Login";
 import Landing from "./pages/Landing";
 import Profile from "./pages/Profile";
 import SignUp from "./pages/SignUp";
+import Homepage from "./pages/Homepage";
 import Navigation from "./pages/Navigation";
+import QRScannerComponent from './pages/Scanner'
+
 import close from './assets/close.svg'
 import menu from './assets/menu.svg'
 
@@ -55,6 +58,10 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/profile" element={<PrivateRoute element={<Profile />} />} />
+          <Route path="/homepage" element={<PrivateRoute element={<Homepage />} />} />
+          <Route path="/scanner" element={<PrivateRoute element={<QRScannerComponent />} />} />
+
+
         </Routes>
         
         <footer className="footer">

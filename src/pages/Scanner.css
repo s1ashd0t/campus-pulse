@@ -1,0 +1,20 @@
+
+.scanner{
+    margin-top: 5rem;
+
+}
+
+#status{
+    margin: 1rem auto;
+    background-color: #cf7a26;
+    padding: 1rem;
+    width: 50vw;
+    border-radius: 15px;
+
+}
+
+video{
+    width: 90vw;
+    /* height: 70vh; */
+    border-radius: 15px;
+}

@@ -1,3 +1,7 @@
+*{
+  user-select: none;
+}
+
 /* Root container */
 #root {
   margin: 0 auto;
@@ -58,7 +62,6 @@ body {
   justify-content: center;
   align-items: center;
   margin: 0;
-  height: 100%;
 }
 
 .logo {
