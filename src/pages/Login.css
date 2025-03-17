@@ -24,7 +24,7 @@
 }
 
 .forgot-password {
-  align-self: flex-end;
+  align-self: center;
   margin: 0.5rem 0;
   font-size: 0.9rem;
   color: #999;
@@ -43,7 +43,7 @@
   align-items: center;
   justify-content: center;
   height: auto;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.5);
   color: white;
   text-align: center;
   max-width: 30rem;

@@ -121,12 +121,7 @@ function Login() {
                     >
                         Google
                     </button>
-                    <button 
-                        className="facebook-login" 
-                        onClick={() => handleSocialLogin("facebook")}
-                    >
-                        Facebook
-                    </button>
+
                 </>
             ) : (
                 <>

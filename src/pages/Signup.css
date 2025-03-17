@@ -10,7 +10,7 @@
     align-items: center;
     justify-content: center;
     height: auto;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.5);
     color: white;
     text-align: center;
     max-width: 30rem;
@@ -42,6 +42,7 @@ form {
     flex-direction: column;
     gap: 0.8rem;
     width: 100%;
+    align-items: center;
 }
 
 input {
@@ -75,6 +76,10 @@ button {
     font-size: 1rem;
     cursor: pointer;
     transition: background 0.3s;
+}
+
+button[type="submit"]{
+    width: 50%;
 }
 
 button:hover {

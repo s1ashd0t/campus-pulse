@@ -162,13 +162,6 @@ function SignUp() {
             >
                 Google
             </button>
-            <button 
-                className="facebook-login" 
-                onClick={() => handleSocialSignup("facebook")}
-                disabled={loading}
-            >
-                Facebook
-            </button>
             
             <p className="login-link">
                 Already have an account? <a href="/login">Log in</a>
