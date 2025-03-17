@@ -2,6 +2,7 @@
   user-select: none;
 }
 
+
 /* Root container */
 #root {
   margin: 0 auto;
@@ -15,6 +16,7 @@
   text-align: center;
   align-items: center;
   height: 100vh;
+  backdrop-filter: blur(1px);
 }
 
 .logo {
@@ -85,7 +87,6 @@ body {
 }
 
 .heading{
-  position: fixed;
   background: rgba(0, 0, 0, 0.5);
   width: 100vw;
   z-index: 999;
@@ -100,14 +101,36 @@ a{
 
 }
 
-.navigation{
-  position: fixed;
+.sidebar{
+  position: absolute;
   left: 0;
+  z-index: 9999;
+}
+
+.navigation{
+  top: 0;
+  padding: 0;
 }
 
 .navigation ul{
-  display: none;
+  margin: 0;
+  padding-top: 6rem;
+  padding-left: 0;
   list-style: none;
+  width: 20vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.navigation ul li{
+  padding: 15px;
+  margin: 5px;
+  border-radius: 3px;
+}
+
+.navigation ul li:hover{
+  background: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
 }
 
 .menu{

@@ -12,6 +12,7 @@ import SignUp from "./pages/SignUp";
 import Homepage from "./pages/Homepage";
 import Navigation from "./pages/Navigation";
 import QRScannerComponent from './pages/Scanner'
+import Search from "./pages/Search";
 
 import close from './assets/close.svg'
 import menu from './assets/menu.svg'
@@ -39,12 +40,16 @@ const PrivateRoute = ({ element }) => {
 };
 
 function App() {
+  const [sidebar, toggleSidebar] = useState(true);
+
   return (
     <Router>
       <div className="app-container">
         {/* Keep the logo in App.jsx */}
-        <img src={menu} className="menu" />
-        <Navigation />
+        <div className="sidebar">
+          <img src={sidebar ? menu : close} onClick= {() =>toggleSidebar(!sidebar)} className="menu" />
+          {sidebar ? null : <Navigation />}
+        </div>
         <div className="heading">
           <a href="/">
           <h1>Campus Pulse</h1>
@@ -60,6 +65,7 @@ function App() {
           <Route path="/profile" element={<PrivateRoute element={<Profile />} />} />
           <Route path="/homepage" element={<PrivateRoute element={<Homepage />} />} />
           <Route path="/scanner" element={<PrivateRoute element={<QRScannerComponent />} />} />
+          <Route path="/search" element={<PrivateRoute element={<Search />} />} />
 
 
         </Routes>

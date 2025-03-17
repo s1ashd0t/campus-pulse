@@ -1,5 +1,5 @@
+
 .homepage{
-    margin-top: 20vh;
     background-color: rgb(60, 70, 80, 0.4);
     width: 90vw;
     border-radius: 10px;
@@ -21,18 +21,31 @@
     margin: 0.5rem;
     padding: 1rem;
     background-color: #CEB888;
-    border-radius: 5px;
+    border-radius: 10px;
     box-shadow: 0px 0px 3px black;
-    cursor: pointer;
     justify-content: center;
     align-items: center;
     text-align: center;
 }
 
 .card a{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
     text-decoration: none;
     font-weight: 600;
     font-size: x-large;
+    width: max-content;
+    height: max-content;
+    color: black;
+
+}
+
+.card img{
+    height: 50px;
+    width: 50px;
+    padding: 10px;
 }
 
 .card:hover{

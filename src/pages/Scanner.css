@@ -1,6 +1,6 @@
 
 .scanner{
-    margin-top: 5rem;
+    margin-top: 1rem;
 
 }
 
@@ -8,13 +8,13 @@
     margin: 1rem auto;
     background-color: #cf7a26;
     padding: 1rem;
-    width: 50vw;
+    width: 30vw;
     border-radius: 15px;
 
 }
 
 video{
-    width: 90vw;
+    width: 40vw;
     /* height: 70vh; */
     border-radius: 15px;
 }
