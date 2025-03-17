@@ -102,19 +102,71 @@ a{
 
 }
 
-.navigation{
+.navigation {
   position: fixed;
+  top: 0;
   left: 0;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 1.5rem;
+  z-index: 1000;
 }
 
-.navigation ul{
-  display: none;
+.navigation ul {
   list-style: none;
+  padding: 0;
+  margin: 0;
+  display: none;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: left;
+  box-sizing: border-box; /* Prevent overflow */
 }
 
-.menu{
-  position: fixed;
-  left: 0;
-  z-index: 9999;
-  padding: 2rem;
+.navigation ul li {
+  padding: 0.5rem 1rem;
+  box-sizing: border-box; /* Prevent overflow */
+
+}
+
+.navigation ul li a, .logout-btn {
+  display: inline-block;
+  color: orange;
+  font-size: 1rem;
+}
+
+.logout-btn {
+  all: unset; /* Reset all default button styles */
+  color: orange;
+  box-sizing:content-box;;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
+
+.navigation ul li a:hover, .logout-btn:hover {
+  text-decoration: underline;
+  background-color: #0000004d;
+}
+
+.menu {
+  width: 2rem;
+  height: auto;
+  cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+/* Always visible on desktop */
+@media (min-width: 768px) {
+  .navigation ul {
+    display: flex !important;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .menu {
+    display: none; 
+  }
 }
