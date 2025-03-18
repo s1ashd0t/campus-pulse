@@ -9,6 +9,16 @@ const Landing = () => {
 
       {/* Hero Section */}
       <section className="hero">
+import React from "react";
+import { Link } from "react-router-dom";
+import "./Landing.css";
+import logo from "../assets/icon.png";
+
+const Landing = () => {
+  return (
+    <div className="landing">
+      {/* Hero Section */}
+      <header className="hero">
         <div className="hero-background"></div>
         <div className="hero-content">
           <h1>Turn Every Event Into Rewards—Join, Track, Win!</h1>
@@ -18,6 +28,7 @@ const Landing = () => {
           </Link>
         </div>
       </section>
+      </header>
 
       {/* Features Section */}
       <section className="features">
@@ -39,7 +50,7 @@ const Landing = () => {
       <section className="cta-section">
         <h2>Don’t Miss Out on the Rewards. Start Earning Today!</h2>
         <Link to="/login">
-          <button className="cta-button">Sign Up & Start Winning</button>
+        <Link to="/signup">
         </Link>
       </section>
 
@@ -47,6 +58,7 @@ const Landing = () => {
       <footer className="footer">
         <p>&copy; {new Date().getFullYear()} Campus Pulse. All rights reserved.</p>
       </footer>
+
     </div>
   );
 };

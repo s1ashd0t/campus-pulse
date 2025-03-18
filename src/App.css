@@ -16,6 +16,15 @@
   box-sizing: border-box; /* ✅ Good practice */
 }
 
+.app-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+  height: 100vh;
+}
+
 .logo {
   height: 7em;
   will-change: filter;
@@ -64,6 +73,15 @@ body {
   /* display: flex;
   justify-content: center;
   align-items: center; */
+/* General page styling */
+body {
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  height: 100%;
 }
 
 .logo {
@@ -169,4 +187,21 @@ a{
   .menu {
     display: none; 
   }
+}
+=======
+.navigation{
+  position: fixed;
+  left: 0;
+}
+
+.navigation ul{
+  display: none;
+  list-style: none;
+}
+
+.menu{
+  position: fixed;
+  left: 0;
+  z-index: 9999;
+  padding: 2rem;
 }

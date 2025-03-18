@@ -1,13 +1,18 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+// src/App.jsx
+import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase";
 import logo from "./assets/icon.png";
 import "./App.css";
 import Login from "./pages/Login";
 import Landing from "./pages/Landing";
-<<<<<<< Updated upstream
+
 import Leaderboard from "./pages/Leaderboard";
 import Notifications from "./pages/Notifications";
-=======
+
 import Profile from "./pages/Profile";
 import SignUp from "./pages/SignUp";
 import Navigation from "./pages/Navigation";
@@ -37,13 +42,13 @@ const PrivateRoute = ({ element }) => {
 
   return isAuthenticated ? element : <Navigate to="/login" />;
 };
->>>>>>> Stashed changes
+
 
 function App() {
   return (
     <Router>
       <div className="app-container">
-<<<<<<< Updated upstream
+
         {/* Keeping logo in App.jsx to appear in all pages for testing */}
         <div>
           <a href="https://vite.dev" target="_blank" rel="noopener noreferrer">
@@ -65,7 +70,6 @@ function App() {
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/notifications" element={<Notifications />} />
         </Routes>
-=======
         {/* Keep the logo in App.jsx */}
         
         <Navigation />
@@ -85,7 +89,27 @@ function App() {
         <footer className="footer">
           <p>&copy; {new Date().getFullYear()} Campus Pulse. All rights reserved.</p>
         </footer>
->>>>>>> Stashed changes
+        {/* Keep the logo in App.jsx */}
+        <img src={menu} className="menu" />
+        <Navigation />
+        <div className="heading">
+          <a href="/">
+          <h1>Campus Pulse</h1>
+          </a>
+          
+        </div>
+
+        {/* Define routes */}
+        <Routes>
+          <Route path="/" element={<Landing />} /> {/* Landing Page as Home */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/profile" element={<PrivateRoute element={<Profile />} />} />
+        </Routes>
+        
+        <footer className="footer">
+        <p>&copy; {new Date().getFullYear()} Campus Pulse. All rights reserved.</p>
+      </footer>
       </div>
     </Router>
   );
