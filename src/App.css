@@ -16,7 +16,7 @@
   text-align: center;
   align-items: center;
   height: 100vh;
-  backdrop-filter: blur(1px);
+  backdrop-filter: blur(3px);
 }
 
 .logo {
@@ -91,7 +91,7 @@ body {
   width: 100vw;
   z-index: 999;
   font-family: "Indie Flower", cursive;
-  font-weight: 400;
+  font-weight: 200;
   font-style: normal;
 }
 

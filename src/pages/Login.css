@@ -25,19 +25,15 @@
 
 .forgot-password {
   align-self: center;
-  margin: 0.5rem 0;
-  font-size: 0.9rem;
-  color: #999;
+  color: #4745f0;
   cursor: pointer;
-  text-decoration: underline;
 }
 
 .forgot-password:hover {
-  color: #fff;
+  text-decoration: underline;
 }
 
 .login-container{
-  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -56,4 +52,12 @@
 body{
   height: 100%;
 
+}
+
+p a{
+  color: #2b28d3;
+}
+
+p a:hover{
+  text-decoration: underline;
 }
