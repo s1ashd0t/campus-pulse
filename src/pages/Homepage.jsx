@@ -13,29 +13,47 @@ const Homepage = () => {
         <div className="cards">
             <div className="card">
                 <a href="./scanner">
+                <div className="card-image">
                     <img src={qrcode} alt="" />
+                </div>
+                <div className="card-name">
                     Scan QR
+                </div>
                 </a>
                 </div>
             <div className="card">
                 <a href="./search">
+                <div className="card-image">
                     <img src={searchicon} alt="" />
+                </div>
                     Search
                 </a>
                 </div>
             <div className="card">
                 <a href="">
+                    <div className="card-image">
                     <img src={leaderboardicon} alt="" />
+                    </div>
                     Leaderboard
                 </a>
                 </div>
             <div className="card">
                 <a href="./profile">
+                <div className="card-image">
                 <img src={profileicon} alt="" />
+                </div>
                     Profile
                 </a>
             </div>
         </div>
+        </div>
+        <div className="news-section">
+            <div className="newscard">New App to Boost Student Engagement at PFW</div>
+            <div className="newscard">Student Engagement Workshops Return This Spring</div>
+            <div className="newscard">Volunteer Fair to Connect Students with Local Non-Profits</div>
+            <div className="newscard">Purdue Fort Wayne Hosts Spring 2025 Clubs & Organizations Fair</div>
+            <div className="newscard">PFW Launches New Mentorship Program for Student Success</div>
+            <div className="newscard"> Campus Wellness Week Promotes Health and Well-being</div>
         </div>
         </>
     )

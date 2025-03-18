@@ -55,7 +55,7 @@ function QRScannerComponent() {
       ) : (
         false
       )}
-        <p id='status'>Scanning for QR code...</p>
+        <p id='status'>Scanning...</p>
 
     </div>
   );
