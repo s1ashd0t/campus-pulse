@@ -9,11 +9,8 @@ import Landing from "./pages/Landing";
 import Profile from "./pages/Profile";
 import SignUp from "./pages/SignUp";
 import Navigation from "./pages/Navigation";
-import close from './assets/close.svg'
-import menu from './assets/menu.svg'
-import Leaderboard from './pages/Leaderboard';
-import Notifications from './pages/Notifications';
-
+import close from './assets/close.svg';
+import menu from './assets/menu.svg';
 
 // PrivateRoute component to protect routes that require authentication
 const PrivateRoute = ({ element }) => {
@@ -36,60 +33,17 @@ const PrivateRoute = ({ element }) => {
   return isAuthenticated ? element : <Navigate to="/login" />;
 };
 
-
 function App() {
   return (
     <Router>
       <div className="app-container">
-
-        {/* Keeping logo in App.jsx to appear in all pages for testing */}
-        <div>
-          <a href="https://vite.dev" target="_blank" rel="noopener noreferrer">
-            <img src={logo} className="logo" alt="logo" />
-          </a>
-        </div>
-
-        <nav>
-          <Link to="/">Home</Link> |{" "}
-          <Link to="/leaderboard">Leaderboard</Link> |{" "}
-          <Link to="/notifications">Notifications</Link> |{" "}
-          <Link to="/login">Login</Link>
-        </nav>
-
-        {/* Defining the routes */}
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/leaderboard" element={<Leaderboard />} />
-          <Route path="/notifications" element={<Notifications />} />
-        </Routes>
         {/* Keep the logo in App.jsx */}
-        
-        <Navigation />
-
-
-
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/profile" element={<PrivateRoute element={<Profile />} />} />
-          <Route path="/leaderboard" element={<PrivateRoute element={<Leaderboard />} />} />
-          <Route path="/notifications" element={<PrivateRoute element={<Notifications />} />} />
-        </Routes>
-
-
-        <footer className="footer">
-          <p>&copy; {new Date().getFullYear()} Campus Pulse. All rights reserved.</p>
-        </footer>
-        {/* Keep the logo in App.jsx */}
-        <img src={menu} className="menu" />
+        <img src={menu} className="menu" alt="menu" />
         <Navigation />
         <div className="heading">
           <a href="/">
-          <h1>Campus Pulse</h1>
+            <h1>Campus Pulse</h1>
           </a>
-          
         </div>
 
         {/* Define routes */}
@@ -98,11 +52,13 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/profile" element={<PrivateRoute element={<Profile />} />} />
+          <Route path="/leaderboard" element={<PrivateRoute element={<Leaderboard />} />} />
+          <Route path="/notifications" element={<PrivateRoute element={<Notifications />} />} />
         </Routes>
         
         <footer className="footer">
-        <p>&copy; {new Date().getFullYear()} Campus Pulse. All rights reserved.</p>
-      </footer>
+          <p>&copy; {new Date().getFullYear()} Campus Pulse. All rights reserved.</p>
+        </footer>
       </div>
     </Router>
   );

@@ -1,14 +1,3 @@
-import "./Landing.css";
-import { Link } from "react-router-dom";
-
-const Landing = () => {
-  return (
-
-    
-    <div className="landing">
-
-      {/* Hero Section */}
-      <section className="hero">
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Landing.css";
@@ -27,7 +16,6 @@ const Landing = () => {
             <button className="cta-button">Join Now</button>
           </Link>
         </div>
-      </section>
       </header>
 
       {/* Features Section */}
@@ -49,15 +37,12 @@ const Landing = () => {
       {/* Call-to-Action Section */}
       <section className="cta-section">
         <h2>Don’t Miss Out on the Rewards. Start Earning Today!</h2>
-        <Link to="/login">
         <Link to="/signup">
+          <button className="cta-button">Sign Up & Start Winning</button>
         </Link>
       </section>
 
       {/* Footer */}
-      <footer className="footer">
-        <p>&copy; {new Date().getFullYear()} Campus Pulse. All rights reserved.</p>
-      </footer>
 
     </div>
   );
