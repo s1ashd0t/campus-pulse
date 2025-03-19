@@ -1,6 +1,3 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-// src/App.jsx
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
@@ -9,10 +6,6 @@ import logo from "./assets/icon.png";
 import "./App.css";
 import Login from "./pages/Login";
 import Landing from "./pages/Landing";
-
-import Leaderboard from "./pages/Leaderboard";
-import Notifications from "./pages/Notifications";
-
 import Profile from "./pages/Profile";
 import SignUp from "./pages/SignUp";
 import Navigation from "./pages/Navigation";
