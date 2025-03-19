@@ -1,18 +1,14 @@
-// src/App.jsx
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
-import logo from "./assets/icon.png";
 import "./App.css";
 import Login from "./pages/Login";
 import Landing from "./pages/Landing";
 import Profile from "./pages/Profile";
 import SignUp from "./pages/SignUp";
-import Navigation from "./pages/Navigation";
-import close from './assets/close.svg'
-import menu from './assets/menu.svg'
-
+import Navigation from "./pages/Navigation"; // Import Navigation
+import Dashboard from "./pages/Dashboard";
 
 // PrivateRoute component to protect routes that require authentication
 const PrivateRoute = ({ element }) => {
@@ -36,32 +32,34 @@ const PrivateRoute = ({ element }) => {
 };
 
 function App() {
-  return (
-    <Router>
-      <div className="app-container">
-        {/* Keep the logo in App.jsx */}
-        <img src={menu} className="menu" />
-        <Navigation />
-        <div className="heading">
-          <a href="/">
-          <h1>Campus Pulse</h1>
-          </a>
-          
-        </div>
+  const location = useLocation(); // Get current route
 
-        {/* Define routes */}
-        <Routes>
-          <Route path="/" element={<Landing />} /> {/* Landing Page as Home */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/profile" element={<PrivateRoute element={<Profile />} />} />
-        </Routes>
-        
-        <footer className="footer">
+  // Show Navigation except on Login & Signup pages
+  const showNavigation = !["/login", "/signup"].includes(location.pathname);
+
+  return (
+    <div className="app-container">
+      {showNavigation && <Navigation />} {/* Display Navigation */}
+
+      <div className="heading">
+        <a href="/profile">
+          <h1>Campus Pulse</h1>
+        </a>
+      </div>
+
+      {/* Define Routes */}
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} />} />
+        <Route path="/profile" element={<PrivateRoute element={<Profile />} />} />
+      </Routes>
+
+      <footer className="footer">
         <p>&copy; {new Date().getFullYear()} Campus Pulse. All rights reserved.</p>
       </footer>
-      </div>
-    </Router>
+    </div>
   );
 }
 

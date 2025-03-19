@@ -43,7 +43,9 @@ const Landing = () => {
       </section>
 
       {/* Footer */}
-
+      <footer className="footer">
+        <p>&copy; {new Date().getFullYear()} Campus Pulse. All rights reserved.</p>
+      </footer>
     </div>
   );
 };

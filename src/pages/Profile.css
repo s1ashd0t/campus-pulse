@@ -1,70 +1,63 @@
-* {
-    box-sizing: border-box;
-}
-
+/* Profile Page Styling */
 .profile-container {
-    margin-top: 6rem;
     display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 40rem;
-    margin: 0 auto;
-    padding: 2rem;
-    background: rgba(0, 0, 0, 0.8);
-    border-radius: 0.5rem;
-    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.3);
+    justify-content: center;
+    align-items: center; /* Center content vertically */
+    height: 100vh;
+    background: url("../assets/background.jpg") no-repeat center center/cover;
+    position: relative;
+    padding: 0 20px; /* Add padding for better responsiveness */
+}
+
+/* Profile Card - Lowered Position */
+.profile-card {
+    position: relative;
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.85); /* Darker background */
     color: white;
-}
-
-.profile-container h1 {
+    padding: 25px;
+    border-radius: 12px;
     text-align: center;
-    margin-bottom: 2rem;
-    font-weight: 300;
+    width: 450px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+    margin-top: 40px; /* Push card lower */
 }
 
-.profile-view {
-    width: 100%;
-}
-
+/* Profile Info */
 .profile-info {
-    margin-bottom: 2rem;
+    margin-top: 10px;
+    padding: 15px;
+    border-radius: 10px;
 }
 
+/* Profile Fields */
 .profile-field {
     display: flex;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid #333;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid #444;
 }
 
-.profile-field label {
-    font-weight: bold;
-    width: 30%;
-    color: #999;
-}
-
-.profile-field p {
-    margin: 0;
-    width: 70%;
-}
-
-.signup-method {
-    text-transform: capitalize;
-}
-
+/* Buttons */
+/* Profile Actions - Buttons Container */
 .profile-actions {
     display: flex;
-    justify-content: space-between;
-    margin-top: 2rem;
+    justify-content: center; /* Center the buttons */
+    gap: 15px; /* Add spacing between buttons */
+    margin-top: 20px;
 }
 
+/* Buttons */
 .edit-button, .logout-button {
-    padding: 0.7rem 1.5rem;
+    padding: 10px 15px;
+    font-size: 14px;
     border: none;
-    border-radius: 0.3rem;
-    font-size: 1rem;
+    border-radius: 4px;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
+    flex: 1; /* Makes buttons equal width */
+    max-width: 150px; /* Prevents excessive width */
+    text-align: center;
 }
 
 .edit-button {
@@ -73,100 +66,24 @@
 }
 
 .edit-button:hover {
-    background-color: #e66a00;
+    background-color: #e67000;
 }
 
 .logout-button {
-    background-color: #333;
+    background-color: #444;
     color: white;
 }
 
 .logout-button:hover {
-    background-color: #555;
-}
-
-/* Profile Edit Form */
-.profile-edit {
-    width: 100%;
-}
-
-.form-row {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-    width: 100%;
-}
-
-.form-row .form-group {
-    width: 50%;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-size: 0.9rem;
-    color: #999;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 0.7rem;
     background-color: #222;
-    border: none;
-    border-radius: 0.3rem;
+}
+
+/* Footer */
+.footer {
+    position: absolute;
+    bottom: 0px;
     color: white;
-    font-size: 1rem;
-}
-
-.form-group input:disabled {
-    background-color: #1a1a1a;
-    color: #666;
-    cursor: not-allowed;
-}
-
-.form-actions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 2rem;
-}
-
-.save-button, .cancel-button {
-    padding: 0.7rem 1.5rem;
-    border: none;
-    border-radius: 0.3rem;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s;
-    width: 48%;
-}
-
-.save-button {
-    background-color: #ff7b00;
-    color: white;
-}
-
-.save-button:hover {
-    background-color: #e66a00;
-}
-
-.cancel-button {
-    background-color: #333;
-    color: white;
-}
-
-.cancel-button:hover {
-    background-color: #555;
-}
-
-.social-signup-note {
-    margin-top: 1rem;
-    padding: 0.8rem;
-    background-color: #333;
-    border-radius: 0.3rem;
-    font-size: 0.9rem;
-    color: #ccc;
+    font-size: 14px;
+    text-align: center;
+    width: 100%;
 }

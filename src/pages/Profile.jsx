@@ -1,4 +1,3 @@
-// src/Profile.jsx
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
@@ -80,12 +79,8 @@ function Profile() {
 
     const handleLogout = async () => {
         try {
-            const result = await logout();
-            if (result.success) {
-                navigate("/login");
-            } else {
-                setError(result.error);
-            }
+            await logout();
+            navigate("/login");
         } catch (error) {
             setError(error.message);
         }
@@ -97,126 +92,63 @@ function Profile() {
 
     return (
         <div className="profile-container">
-            <h1>Profile</h1>
-            
-            {error && <p className="error-message">{error}</p>}
-            
-            {!isEditing ? (
-                <div className="profile-view">
-                    <div className="profile-info">
-                        <div className="profile-field">
-                            <label>Name:</label>
-                            <p>{userData.firstName} {userData.lastName}</p>
-                        </div>
-                        <div className="profile-field">
-                            <label>Email:</label>
-                            <p>{userData.email}</p>
-                        </div>
-                        <div className="profile-field">
-                            <label>Phone:</label>
-                            <p>{userData.phoneNumber || "Not provided"}</p>
-                        </div>
-                        <div className="profile-field">
-                            <label>Date of Birth:</label>
-                            <p>{userData.dob || "Not provided"}</p>
-                        </div>
-                        <div className="profile-field">
-                            <label>Sign Up Method:</label>
-                            <p className="signup-method">{signupMethod}</p>
-                        </div>
-                    </div>
-                    
-                    <div className="profile-actions">
-                        <button 
-                            className="edit-button"
-                            onClick={() => setIsEditing(true)}
-                        >
-                            Edit Profile
-                        </button>
-                        <button 
-                            className="logout-button"
-                            onClick={handleLogout}
-                        >
-                            Log Out
-                        </button>
-                    </div>
-                </div>
-            ) : (
-                <div className="profile-edit">
-                    <form onSubmit={handleSubmit}>
-                        <div className="form-row">
-                            <div className="form-group">
-                                <label>First Name</label>
-                                <input
-                                    type="text"
-                                    name="firstName"
-                                    value={userData.firstName}
-                                    onChange={handleChange}
-                                    disabled={signupMethod !== "email"}
-                                />
+            <div className="profile-card">
+                {/* <h1>Campus Pulse</h1> */}
+                <h2>Profile</h2>
+                
+                {error && <p className="error-message">{error}</p>}
+                
+                {!isEditing ? (
+                    <div className="profile-view">
+                        <div className="profile-info">
+                            <div className="profile-field">
+                                <label>Name:</label>
+                                <p>{userData.firstName} {userData.lastName}</p>
                             </div>
-                            <div className="form-group">
-                                <label>Last Name</label>
-                                <input
-                                    type="text"
-                                    name="lastName"
-                                    value={userData.lastName}
-                                    onChange={handleChange}
-                                    disabled={signupMethod !== "email"}
-                                />
+                            <div className="profile-field">
+                                <label>Email:</label>
+                                <p>{userData.email}</p>
+                            </div>
+                            <div className="profile-field">
+                                <label>Phone:</label>
+                                <p>{userData.phoneNumber || "Not provided"}</p>
+                            </div>
+                            <div className="profile-field">
+                                <label>Date of Birth:</label>
+                                <p>{userData.dob || "Not provided"}</p>
+                            </div>
+                            <div className="profile-field">
+                                <label>Sign Up Method:</label>
+                                <p className="signup-method">{signupMethod}</p>
                             </div>
                         </div>
                         
-                        <div className="form-group">
-                            <label>Email</label>
-                            <input
-                                type="email"
-                                name="email"
-                                value={userData.email}
-                                onChange={handleChange}
-                                disabled={true} // Email cannot be changed
-                            />
+                        <div className="profile-actions">
+                            <button className="edit-button" onClick={() => setIsEditing(true)}>Edit Profile</button>
+                            <button className="logout-button" onClick={handleLogout}>Log Out</button>
                         </div>
-                        
-                        <div className="form-group">
-                            <label>Phone Number</label>
-                            <input
-                                type="tel"
-                                name="phoneNumber"
-                                value={userData.phoneNumber || ""}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        
-                        <div className="form-group">
-                            <label>Date of Birth</label>
-                            <input
-                                type="date"
-                                name="dob"
-                                value={userData.dob || ""}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        
-                        {signupMethod !== "email" && (
-                            <p className="social-signup-note">
-                                Some fields cannot be edited because you signed up with {signupMethod}.
-                            </p>
-                        )}
-                        
-                        <div className="form-actions">
-                            <button type="submit" className="save-button">Save Changes</button>
-                            <button 
-                                type="button" 
-                                className="cancel-button"
-                                onClick={() => setIsEditing(false)}
-                            >
-                                Cancel
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            )}
+                    </div>
+                ) : (
+                    <div className="profile-edit">
+                        <form onSubmit={handleSubmit}>
+                            <div className="form-group">
+                                <label>Phone Number</label>
+                                <input type="tel" name="phoneNumber" value={userData.phoneNumber || ""} onChange={handleChange} />
+                            </div>
+                            
+                            <div className="form-group">
+                                <label>Date of Birth</label>
+                                <input type="date" name="dob" value={userData.dob || ""} onChange={handleChange} />
+                            </div>
+                            
+                            <div className="form-actions">
+                                <button type="submit" className="save-button">Save Changes</button>
+                                <button type="button" className="cancel-button" onClick={() => setIsEditing(false)}>Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                )}
+            </div>
         </div>
     );
 }

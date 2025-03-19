@@ -1,0 +1,80 @@
+/* Dashboard Page */
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    background: url("../assets/background.jpg") no-repeat center center/cover;
+}
+
+/* Dashboard Content */
+.dashboard-content {
+    background: rgba(0, 0, 0, 0.85); /* Darker background */
+    color: white;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+    margin-top: 20px;
+}
+
+/* Dashboard Stats */
+.dashboard-stats {
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+.dashboard-stats p {
+    margin: 10px 0;
+}
+
+/* Loading Text */
+.loading-text {
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 20px;
+}
+/* Dashboard Page */
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh; /* Full height to ensure proper spacing */
+    padding: 20px;
+    background: url("../assets/background.jpg") no-repeat center center/cover;
+}
+
+/* Dashboard Content - Lowered Box */
+.dashboard-content {
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    margin-top: 100px;
+}
+
+/* Dashboard Stats */
+.dashboard-stats {
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+.dashboard-stats p {
+    margin: 10px 0;
+}
+
+/* Loading Text */
+.loading-text {
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 20px;
+}
