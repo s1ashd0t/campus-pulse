@@ -4,13 +4,13 @@
   text-align: center;
 }
 
-.app-container{
+.app-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  text-align: center;
+  justify-content: flex-start;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .logo {
@@ -54,17 +54,9 @@
 body {
   color: white;
   font-family: 'Poppins', sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   margin: 0;
   height: 100%;
-}
-
-.logo {
-  width: 2.25rem;
-  height: auto;
-  margin: 0.5em;
+  background: #f0f0f0;
 }
 
 /* Footer */
@@ -81,35 +73,89 @@ body {
   font-size: 0.9rem;
 }
 
-.heading{
+/* Fixed heading */
+.heading {
   position: fixed;
-  background: rgba(0, 0, 0, 0.5);
-  width: 100vw;
-  z-index: 999;
+  top: 0;
+  background: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  z-index: 998;
+  padding: 0.5rem 0;
   font-family: "Indie Flower", cursive;
-  font-weight: 400;
-  font-style: normal;
 }
 
-a{
+.heading h1 {
+  margin: 0.5rem 0;
+  font-size: 2rem;
+}
+
+a {
   text-decoration: none;
   color: white;
-
 }
 
-.navigation{
+/* Menu icon */
+.menu-icon {
   position: fixed;
-  left: 0;
+  top: 20px;
+  left: 20px;
+  width: 32px;
+  cursor: pointer;
+  z-index: 1000;
 }
 
-.navigation ul{
-  display: none;
-  list-style: none;
-}
-
-.menu{
+/* Nav overlay */
+.nav-overlay {
   position: fixed;
+  top: 0;
   left: 0;
-  z-index: 9999;
-  padding: 2rem;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(30, 30, 30, 0.97);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 80px;
+}
+
+.nav-overlay ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-overlay ul li {
+  margin: 20px 0;
+  font-size: 1.8rem;
+}
+
+.nav-overlay a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.logout-button {
+  background-color: #c0392b;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin-top: 20px;
+}
+
+.logout-button:hover {
+  opacity: 0.85;
+}
+
+/* Close icon inside nav overlay */
+.close-icon {
+  width: 32px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  filter: invert(1);
 }
