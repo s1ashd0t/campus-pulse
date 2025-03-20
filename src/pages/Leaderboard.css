@@ -94,6 +94,7 @@
   display: flex;
   align-items: center;
   justify-content: start;
+
 }
 
 /* Hover effect consistent with notifications */
@@ -104,7 +105,7 @@
 /* Responsive */
 @media (max-width: 600px) {
   .table, .player {
-    grid-template-columns: minmax(30px, auto) minmax(100px, 2fr) minmax(50px, 1fr) minmax(50px, 1fr);
+    grid-template-columns: 40px 1.5fr 1fr 1fr 1fr;
   }
   .leader-1 img { width: 90px; height: 90px; }
   .leader-2 img, .leader-3 img { width: 70px; height: 70px; }
