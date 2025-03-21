@@ -32,8 +32,10 @@ const PrivateRoute = ({ element }) => {
   return isAuthenticated ? element : <Navigate to="/login" />;
 };
 
-const NavBar = ({ onClose }) => {
+// Navbar overlay — conditional based on auth
+const NavBar = ({ isAuthenticated, onClose }) => {
   const navigate = useNavigate();
+
   const handleLogout = async () => {
     await signOut(auth);
     navigate("/login");
@@ -41,13 +43,25 @@ const NavBar = ({ onClose }) => {
 
   return (
     <div className="nav-overlay">
-      <img src={closeIcon} alt="close menu" className="close-icon" onClick={onClose} />
       <ul>
         <li><Link to="/" onClick={onClose}>Home</Link></li>
-        <li><Link to="/leaderboard" onClick={onClose}>Leaderboard</Link></li>
-        <li><Link to="/notifications" onClick={onClose}>Notifications</Link></li>
-        <li><Link to="/profile" onClick={onClose}>Profile</Link></li>
-        <li><button onClick={() => { handleLogout(); onClose(); }} className="logout-button">Logout</button></li>
+        {isAuthenticated ? (
+          <>
+            <li><Link to="/leaderboard" onClick={onClose}>Leaderboard</Link></li>
+            <li><Link to="/notifications" onClick={onClose}>Notifications</Link></li>
+            <li><Link to="/profile" onClick={onClose}>Profile</Link></li>
+            <li>
+              <button onClick={() => { handleLogout(); onClose(); }} className="logout-button">
+                Logout
+              </button>
+            </li>
+          </>
+        ) : (
+          <>
+            <li><Link to="/login" onClick={onClose}>Login</Link></li>
+            <li><Link to="/signup" onClick={onClose}>Sign Up</Link></li>
+          </>
+        )}
       </ul>
     </div>
   );
@@ -55,23 +69,34 @@ const NavBar = ({ onClose }) => {
 
 function App() {
   const [showNav, setShowNav] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setIsAuthenticated(!!user);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   return (
     <Router>
       <div className="app-container">
+        {/* Toggle between menu and close icon */}
         <img
-          src={menuIcon}
+          src={showNav ? closeIcon : menuIcon}
           className="menu-icon"
-          alt="menu icon"
-          onClick={() => setShowNav(true)}
+          alt={showNav ? "close menu" : "menu icon"}
+          onClick={() => setShowNav(!showNav)}
         />
+
         <div className="heading">
           <a href="/">
             <h1>Campus Pulse</h1>
           </a>
         </div>
 
-        {showNav && <NavBar onClose={() => setShowNav(false)} />}
+        {showNav && <NavBar isAuthenticated={isAuthenticated} onClose={() => setShowNav(false)} />}
 
         <Routes>
           <Route path="/" element={<Landing />} />
