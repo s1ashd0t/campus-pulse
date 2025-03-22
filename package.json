@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -10,6 +11,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "normalize.css": "^8.0.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-firebase-hooks": "^5.1.1",
     "firebase": "^11.4.0",
     "qr-scanner": "^1.4.2",
     "react": "^19.0.0",
