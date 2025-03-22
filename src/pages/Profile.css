@@ -3,12 +3,11 @@
 }
 
 .profile-container {
-    margin-top: 6rem;
+    margin-top: 1rem;
     display: flex;
     flex-direction: column;
     width: 100%;
     max-width: 40rem;
-    margin: 0 auto;
     padding: 2rem;
     background: rgba(0, 0, 0, 0.8);
     border-radius: 0.5rem;

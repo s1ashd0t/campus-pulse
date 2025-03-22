@@ -7,10 +7,17 @@ import Login from "./pages/Login";
 import Landing from "./pages/Landing";
 import Profile from "./pages/Profile";
 import SignUp from "./pages/SignUp";
+import Homepage from "./pages/Homepage";
+import Navigation from "./pages/Navigation";
+import QRScannerComponent from './pages/Scanner'
+import Search from "./pages/Search";
+import CreateEvent from "./components/CreateEvent";
+
 import Leaderboard from "./pages/Leaderboard";
 import Notifications from "./pages/Notifications";
 import menuIcon from "./assets/menu.svg";
 import closeIcon from "./assets/close.svg";
+
 
 const PrivateRoute = ({ element }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
@@ -79,9 +86,11 @@ function App() {
     return () => unsubscribe();
   }, []);
 
+
   return (
     <Router>
       <div className="app-container">
+
         {/* Toggle between menu and close icon */}
         <img
           src={showNav ? closeIcon : menuIcon}
@@ -103,6 +112,12 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/profile" element={<PrivateRoute element={<Profile />} />} />
+          <Route path="/homepage" element={<PrivateRoute element={<Homepage />} />} />
+          <Route path="/scanner" element={<PrivateRoute element={<QRScannerComponent />} />} />
+          <Route path="/search" element={<PrivateRoute element={<Search />} />} />
+          <Route path="/admin" element={<PrivateRoute element={<CreateEvent />} />} />
+
+
           <Route path="/leaderboard" element={<PrivateRoute element={<Leaderboard />} />} />
           <Route path="/notifications" element={<PrivateRoute element={<Notifications />} />} />
         </Routes>

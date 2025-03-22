@@ -1,3 +1,8 @@
+*{
+  user-select: none;
+}
+
+
 /* Root container */
 #root {
   margin: 0 auto;
@@ -9,6 +14,8 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  height: 100vh;
+  backdrop-filter: blur(3px);
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -55,6 +62,13 @@ body {
   color: white;
   font-family: 'Poppins', sans-serif;
   margin: 0;
+}
+
+.logo {
+  width: 2.25rem;
+  height: auto;
+  margin: 0.5em;
+=======
   height: 100%;
   background: #f0f0f0;
 }
@@ -73,6 +87,32 @@ body {
   font-size: 0.9rem;
 }
 
+.heading {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  z-index: 999;
+  font-family: "Indie Flower", cursive;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.heading a{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.heading img{
+  width: 2rem;
+  height: 2rem;
+  margin: 0.5em;
+}
+
+a{
 /* Fixed heading */
 .heading {
   position: fixed;
@@ -104,6 +144,77 @@ a {
   z-index: 1000;
 }
 
+.sidebar{
+  position: absolute;
+  left: 0;
+  z-index: 9999;
+}
+
+
+.navigation{
+  top: 0;
+  padding: 0;
+}
+
+.navigation ul{
+  margin: 0;
+  padding-top: 6rem;
+  padding-left: 0;
+  list-style: none;
+  width: 20vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.navigation ul li{
+  padding: 15px;
+  margin: 5px;
+  border-radius: 3px;
+}
+
+.navigation ul li:hover{
+  background: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.menu{
+  position: fixed;
+  left: 0;
+  z-index: 9999;
+  padding: 2rem;
+}
+
+input {
+  width: 100%;
+  padding: 0.7rem;
+  margin: 0.3rem 0;
+  border: none;
+  border-radius: 0.3rem;
+  /* background: #222; */
+  color: white;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+input[type="date"] {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+input::placeholder {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+textarea {
+  width: 40%;
+  padding: 0.7rem;
+  margin: 0.3rem 0;
+  border: none;
+  border-radius: 0.3rem;
+  /* background: #222; */
+  color: white;
+  font-size: 0.9rem;
+  outline: none;
+}
 /* Nav overlay */
 .nav-overlay {
   position: fixed;

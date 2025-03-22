@@ -3,14 +3,14 @@
 }
 
 .signup-container {
-  margin-top: 6rem;
+  margin-top: 1rem;
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: auto;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.5);
     color: white;
     text-align: center;
     max-width: 30rem;
@@ -42,27 +42,10 @@ form {
     flex-direction: column;
     gap: 0.8rem;
     width: 100%;
+    align-items: center;
 }
 
-input {
-    width: 100%;
-    padding: 0.7rem;
-    margin: 0.3rem 0;
-    border: none;
-    border-radius: 0.3rem;
-    background: #222;
-    color: white;
-    font-size: 0.9rem;
-    outline: none;
-}
 
-input[type="date"] {
-    color: rgba(255, 255, 255, 0.7);
-}
-
-input::placeholder {
-    color: rgba(255, 255, 255, 0.7);
-}
 
 button {
     width: 100%;
@@ -75,6 +58,10 @@ button {
     font-size: 1rem;
     cursor: pointer;
     transition: background 0.3s;
+}
+
+button[type="submit"]{
+    width: 50%;
 }
 
 button:hover {

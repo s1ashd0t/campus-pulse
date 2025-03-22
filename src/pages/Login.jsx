@@ -31,7 +31,7 @@ function Login() {
         const result = await loginWithEmail(formData.email, formData.password);
         
         if (result.success) {
-            navigate("/profile");
+            navigate("/Homepage");
         } else {
             setError(result.error);
         }
@@ -121,12 +121,7 @@ function Login() {
                     >
                         Google
                     </button>
-                    <button 
-                        className="facebook-login" 
-                        onClick={() => handleSocialLogin("facebook")}
-                    >
-                        Facebook
-                    </button>
+
                 </>
             ) : (
                 <>
