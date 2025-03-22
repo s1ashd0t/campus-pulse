@@ -8,7 +8,6 @@ import news1 from '../assets/newapp.jpg'
 import news2 from '../assets/careerexpo.jpg'
 import news3 from '../assets/volun.jpg'
 
-
 const Homepage = () => {
     return(
         <>

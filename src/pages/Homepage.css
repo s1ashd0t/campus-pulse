@@ -55,8 +55,6 @@
 
 }
 
-
-
 .news-section{
     width: 80vw;
     padding: 1rem;
@@ -70,7 +68,6 @@
 .newscard{
     background-color: rgb(83, 72, 58);
     cursor: pointer;
-    height: ;
 }
 
 .newscard img{
@@ -81,6 +78,13 @@
     object-fit: cover;
 }
 
+.create-event{
+    padding: 10px;
+}
+
+textarea{
+    width: 100%;
+}
 
 @media (max-width: 600px) {
     .card, .newscard{

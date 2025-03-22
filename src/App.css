@@ -86,13 +86,29 @@ body {
   font-size: 0.9rem;
 }
 
-.heading{
+.heading {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   background: rgba(0, 0, 0, 0.5);
   width: 100vw;
   z-index: 999;
   font-family: "Indie Flower", cursive;
   font-weight: 200;
   font-style: normal;
+}
+
+.heading a{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.heading img{
+  width: 2rem;
+  height: 2rem;
+  margin: 0.5em;
 }
 
 a{
@@ -106,6 +122,7 @@ a{
   left: 0;
   z-index: 9999;
 }
+
 
 .navigation{
   top: 0;
@@ -138,4 +155,36 @@ a{
   left: 0;
   z-index: 9999;
   padding: 2rem;
+}
+
+input {
+  width: 100%;
+  padding: 0.7rem;
+  margin: 0.3rem 0;
+  border: none;
+  border-radius: 0.3rem;
+  /* background: #222; */
+  color: white;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+input[type="date"] {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+input::placeholder {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+textarea {
+  width: 40%;
+  padding: 0.7rem;
+  margin: 0.3rem 0;
+  border: none;
+  border-radius: 0.3rem;
+  /* background: #222; */
+  color: white;
+  font-size: 0.9rem;
+  outline: none;
 }

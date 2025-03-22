@@ -16,6 +16,7 @@ import Search from "./pages/Search";
 
 import close from './assets/close.svg'
 import menu from './assets/menu.svg'
+import CreateEvent from "./components/CreateEvent";
 
 
 // PrivateRoute component to protect routes that require authentication
@@ -52,6 +53,7 @@ function App() {
         </div>
         <div className="heading">
           <a href="/">
+          <img src={logo} alt="" />
           <h1>Campus Pulse</h1>
           </a>
           
@@ -66,6 +68,7 @@ function App() {
           <Route path="/homepage" element={<PrivateRoute element={<Homepage />} />} />
           <Route path="/scanner" element={<PrivateRoute element={<QRScannerComponent />} />} />
           <Route path="/search" element={<PrivateRoute element={<Search />} />} />
+          <Route path="/admin" element={<PrivateRoute element={<CreateEvent />} />} />
 
 
         </Routes>
