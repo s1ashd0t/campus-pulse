@@ -1,0 +1,112 @@
+/* Leaderboard container now identical to notifications-container */
+.container {
+  margin-top: 6rem;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  max-width: 40rem;
+  margin: 6rem auto;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* Podium (kept intact) */
+.topLeadersList {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 8px;
+  margin-bottom: 2rem;
+  height: 150px;
+}
+
+.leader {
+  text-align: center;
+  position: relative;
+}
+
+.leader-1 {
+  order: 2;
+  margin-bottom: 15px;
+}
+.leader-2 {
+  order: 1;
+  margin-bottom: 10px;
+}
+.leader-3 {
+  order: 3;
+  margin-bottom: 5px;
+}
+
+.leader-1 img { width: 110px; height: 110px; border-radius: 50%; border: 5px solid gold; }
+.leader-2 img { width: 90px; height: 90px; border-radius: 50%; border: 4px solid silver; }
+.leader-3 img { width: 90px; height: 90px; border-radius: 50%; border: 4px solid #cd7f32; }
+
+.leaderName { margin-top: 5px; font-size: 1.1rem; color: white; font-weight: bold; }
+.leaderPoints { font-size: 0.9rem; color: #ffeb3b; }
+
+/* Players List */
+.playerslist {
+  width: 100%;
+  padding: 1rem 0;
+  box-sizing: border-box;
+}
+
+/* Table headers */
+.table {
+  display: grid;
+  grid-template-columns: minmax(30px, auto) minmax(100px, 2fr) repeat(3, minmax(60px, 1fr));
+  text-align: center;
+  width: 100%;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #333;
+  margin-bottom: 1rem;
+}
+
+/* Player row */
+.player {
+  display: grid;
+  grid-template-columns: minmax(30px, auto) minmax(100px, 2fr) repeat(3, minmax(60px, 1fr));
+  text-align: center;
+  width: 100%;
+  padding: 1rem;
+  border-bottom: 1px solid #333;
+  box-sizing: border-box;
+  transition: all 0.3s;
+}
+
+.player:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Avatar styling */
+.player .image {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 8px;
+  border: 2px solid white;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+
+}
+
+/* Hover effect consistent with notifications */
+.hover-card {
+  transition: all 0.3s;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .table, .player {
+    grid-template-columns: 40px 1.5fr 1fr 1fr 1fr;
+  }
+  .leader-1 img { width: 90px; height: 90px; }
+  .leader-2 img, .leader-3 img { width: 70px; height: 70px; }
+}
