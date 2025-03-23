@@ -8,15 +8,14 @@ import Landing from "./pages/Landing";
 import Profile from "./pages/Profile";
 import SignUp from "./pages/SignUp";
 import Homepage from "./pages/Homepage";
-import Navigation from "./pages/Navigation";
 import QRScannerComponent from './pages/Scanner'
 import Search from "./pages/Search";
-import CreateEvent from "./components/CreateEvent";
-
+import CreateEvent from "./pages/components/CreateEvent";
 import Leaderboard from "./pages/Leaderboard";
 import Notifications from "./pages/Notifications";
 import menuIcon from "./assets/menu.svg";
 import closeIcon from "./assets/close.svg";
+import icon from "./assets/icon.png";
 
 
 const PrivateRoute = ({ element }) => {
@@ -51,7 +50,7 @@ const NavBar = ({ isAuthenticated, onClose }) => {
   return (
     <div className="nav-overlay">
       <ul>
-        <li><Link to="/" onClick={onClose}>Home</Link></li>
+        <li><Link to="/homepage" onClick={onClose}>Home</Link></li>
         {isAuthenticated ? (
           <>
             <li><Link to="/leaderboard" onClick={onClose}>Leaderboard</Link></li>
@@ -101,7 +100,11 @@ function App() {
 
         <div className="heading">
           <a href="/">
-            <h1>Campus Pulse</h1>
+            <img src={icon} alt="" />
+            <div className="text">
+              <h1>Campus Pulse</h1>
+              <h6>Never miss a beat</h6>
+            </div>
           </a>
         </div>
 
@@ -116,8 +119,6 @@ function App() {
           <Route path="/scanner" element={<PrivateRoute element={<QRScannerComponent />} />} />
           <Route path="/search" element={<PrivateRoute element={<Search />} />} />
           <Route path="/admin" element={<PrivateRoute element={<CreateEvent />} />} />
-
-
           <Route path="/leaderboard" element={<PrivateRoute element={<Leaderboard />} />} />
           <Route path="/notifications" element={<PrivateRoute element={<Notifications />} />} />
         </Routes>

@@ -1,7 +1,7 @@
 // src/components/EventList.jsx
 import { useEffect, useState } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../../firebase";
 
 export default function EventList() {
   const [events, setEvents] = useState([]);

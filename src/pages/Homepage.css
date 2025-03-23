@@ -1,5 +1,6 @@
 
 .homepage{
+    margin-top: 1rem;
     background-color: rgb(60, 70, 80, 0.4);
     width: 90vw;
     border-radius: 10px;
@@ -7,14 +8,14 @@
     user-select: none;
 }
 
-.cards, .newscard{
+.cards{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 }
 
-.card, .newscard{
+.cards a{
     display: flex;
     width: 300px;
     height: 150px;
@@ -28,7 +29,7 @@
     text-align: center;
 }
 
-.card a{
+a{
     justify-content: center;
     text-align: center;
     align-items: center;
@@ -37,8 +38,11 @@
     font-size: x-large;
     width: max-content;
     height: max-content;
-    color: black;
 
+}
+
+.cards a{
+    color: black;
 }
 
 .card img{
@@ -47,7 +51,7 @@
     padding: 10px;
 }
 
-.card:hover{
+.cards a:hover{
     transform: scale(1.01);
     transition: transform 0.3s;
     background-color: #C28E0E;
@@ -56,26 +60,40 @@
 }
 
 .news-section{
-    width: 80vw;
+    background-color: #4b4023;
+    width: 90vw;
+    border-radius: 10px;
     padding: 1rem;
-    margin: 1rem;
     display: flex;
-    flex-wrap: wrap;
-    background-color: rgb(60, 70, 80, 0.4);
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .newscard{
-    background-color: rgb(83, 72, 58);
+    display: flex;
+    margin: 1rem;
+    width: 350px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: large;
     cursor: pointer;
+    border-radius: 10px;
+}
+
+.newscard:hover{
+    transform: scale(1.01);
+    transition: transform 0.3s;
+    box-shadow: 0px 0px 10px white;
 }
 
 .newscard img{
     border-radius: 10px;
-    position: relative;
-    height: 80%;
+    width: 300px;
+    height: 150px;
     aspect-ratio: 1/1;
     object-fit: cover;
+    padding: 4px;
 }
 
 .create-event{
@@ -87,7 +105,7 @@ textarea{
 }
 
 @media (max-width: 600px) {
-    .card, .newscard{
+    .card{
         width: 40vw;
         height: 9rem;
     }

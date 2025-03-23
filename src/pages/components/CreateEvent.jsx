@@ -1,7 +1,7 @@
 // src/components/CreateEvent.jsx
 import { useState } from "react";
 import { addDoc, collection } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../../firebase";
 
 export default function CreateEvent() {
   const [eventData, setEventData] = useState({

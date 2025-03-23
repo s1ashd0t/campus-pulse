@@ -14,40 +14,40 @@ const Homepage = () => {
         <div className="homepage">
         <h1>Homepage</h1>
         <div className="cards">
+            <a href="./scanner">
             <div className="card">
-                <a href="./scanner">
                 <div className="card-image">
                     <img src={qrcode} alt="" />
                 </div>
                 <div className="card-name">
                     Scan QR
                 </div>
-                </a>
                 </div>
+                </a>
+            <a href="./search">
             <div className="card">
-                <a href="./search">
                 <div className="card-image">
                     <img src={searchicon} alt="" />
                 </div>
                     Search
-                </a>
                 </div>
+                </a>
+            <a href="./leaderboard">
             <div className="card">
-                <a href="">
                     <div className="card-image">
                     <img src={leaderboardicon} alt="" />
                     </div>
                     Leaderboard
-                </a>
                 </div>
+                </a>
+            <a href="./profile">
             <div className="card">
-                <a href="./profile">
                 <div className="card-image">
                 <img src={profileicon} alt="" />
                 </div>
                     Profile
-                </a>
             </div>
+                </a>
         </div>
         </div>
         <div className="news-container">
