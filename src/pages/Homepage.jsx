@@ -7,13 +7,34 @@ import profileicon from '../assets/name-id-icon.svg'
 import news1 from '../assets/newapp.jpg'
 import news2 from '../assets/careerexpo.jpg'
 import news3 from '../assets/volun.jpg'
+import CreateEvent from './components/CreateEvent'
+
 
 const Homepage = () => {
+
+    // TEMPORARY SWITCH
+    const admin = true
+    
     return(
         <>
         <div className="homepage">
         <h1>Homepage</h1>
         <div className="cards">
+<<<<<<< Updated upstream
+=======
+            {admin ? <a href='./event'>
+            <div className="card">
+                <div className="card-image">
+                    <img src={qrcode} alt="" />
+                </div>
+                <div className="card-name">
+                    Create Event
+                </div>
+                </div>
+                </a> 
+                :
+                <a href="./scanner">
+>>>>>>> Stashed changes
             <div className="card">
                 <a href="./scanner">
                 <div className="card-image">
@@ -22,8 +43,14 @@ const Homepage = () => {
                 <div className="card-name">
                     Scan QR
                 </div>
+<<<<<<< Updated upstream
                 </a>
                 </div>
+=======
+                </div>
+                </a>}
+            <a href="./search">
+>>>>>>> Stashed changes
             <div className="card">
                 <a href="./search">
                 <div className="card-image">
