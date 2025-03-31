@@ -15,7 +15,6 @@ import CreateEvent from "./components/CreateEvent";
 
 import Leaderboard from "./pages/Leaderboard";
 import Notifications from "./pages/Notifications";
-import CreateEvent from "./pages/components/CreateEvent";
 import menuIcon from "./assets/menu.svg";
 import closeIcon from "./assets/close.svg";
 
