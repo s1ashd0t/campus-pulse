@@ -41,12 +41,32 @@ const Homepage = () => {
 
     return (
         <div className="homepage-container">
-            <section className="welcome-section">
-                <h1>Welcome Back!</h1>
-                <p>Stay connected with campus events and earn points!</p>
-            </section>
+
 
             <div className="homepage-content">
+            <div className="right-column">
+                    {/* Add the Points Summary Component */}
+                    
+                    <section className="quick-links">
+                        <h2>Quick Links</h2>
+                        <div className="links-grid">
+                            <Link to="/scanner" className="quick-link">
+                                <span>Scan QR Code</span>
+                            </Link>
+                            <Link to="/leaderboard" className="quick-link">
+                                <span>Leaderboard</span>
+                            </Link>
+                            <Link to="/notifications" className="quick-link">
+                                <span>Notifications</span>
+                            </Link>
+                            <Link to="/profile" className="quick-link">
+                                <span>My Profile</span>
+                            </Link>
+                        </div>
+                    </section>
+                    <PointsSummary points={userPoints} />
+
+                </div>
                 <div className="left-column">
                     <section className="upcoming-events">
                         <h2>Upcoming Events</h2>
@@ -70,28 +90,7 @@ const Homepage = () => {
                     </section>
                 </div>
 
-                <div className="right-column">
-                    {/* Add the Points Summary Component */}
-                    <PointsSummary points={userPoints} />
-                    
-                    <section className="quick-links">
-                        <h2>Quick Links</h2>
-                        <div className="links-grid">
-                            <Link to="/scanner" className="quick-link">
-                                <span>Scan QR Code</span>
-                            </Link>
-                            <Link to="/leaderboard" className="quick-link">
-                                <span>Leaderboard</span>
-                            </Link>
-                            <Link to="/notifications" className="quick-link">
-                                <span>Notifications</span>
-                            </Link>
-                            <Link to="/profile" className="quick-link">
-                                <span>My Profile</span>
-                            </Link>
-                        </div>
-                    </section>
-                </div>
+                
             </div>
         </div>
     );
