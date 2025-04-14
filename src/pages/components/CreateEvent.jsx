@@ -3,6 +3,7 @@ import { useState } from "react";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase";
 
+
 export default function CreateEvent() {
   const [eventData, setEventData] = useState({
     title: "",
@@ -24,7 +25,7 @@ export default function CreateEvent() {
 
   return (
     <div className="create-event">
-
+    <h2>Create Event</h2>
     <form onSubmit={handleSubmit}>
       <input
         type="text"

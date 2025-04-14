@@ -10,7 +10,7 @@ import SignUp from "./pages/SignUp";
 import Homepage from "./pages/Homepage";
 import QRScannerComponent from './pages/Scanner'
 import Search from "./pages/Search";
-import CreateEvent from "./pages/components/CreateEvent";
+import Admin from "./pages/Admin";
 import Leaderboard from "./pages/Leaderboard";
 import Notifications from "./pages/Notifications";
 import menuIcon from "./assets/menu.svg";
@@ -118,7 +118,7 @@ function App() {
           <Route path="/homepage" element={<PrivateRoute element={<Homepage />} />} />
           <Route path="/scanner" element={<PrivateRoute element={<QRScannerComponent />} />} />
           <Route path="/search" element={<PrivateRoute element={<Search />} />} />
-          <Route path="/admin" element={<PrivateRoute element={<CreateEvent />} />} />
+          <Route path="/admin" element={<PrivateRoute element={<Admin />} />} />
           <Route path="/leaderboard" element={<PrivateRoute element={<Leaderboard />} />} />
           <Route path="/notifications" element={<PrivateRoute element={<Notifications />} />} />
         </Routes>

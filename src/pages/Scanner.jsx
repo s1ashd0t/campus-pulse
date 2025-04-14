@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import QrScanner from 'qr-scanner';
-import './Scanner.css'
+import './Scanner.css';
 
 function QRScannerComponent() {
   const [scanResult, setScanResult] = useState('');
   const [qrScanner, setQrScanner] = useState(null);
+  const [locationAllowed, setLocationAllowed] = useState(false);
+  const [error, setError] = useState("Accessing location...")
 
   const handleScan = (result) => {
     setScanResult(result);
@@ -38,25 +40,61 @@ function QRScannerComponent() {
     };
   };
 
+  const checkLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          console.log('Location:', position.coords);
+          // Bottom left corner of the campus: 41.114346, -85.114388
+          // Top right corner of the campus: 41.122330, -85.102813
+          if (position.coords.longitude >= -85.114388 && position.coords.longitude <= -85.102813 &&
+              position.coords.latitude >= 41.114346 && position.coords.latitude <= 41.122330) {
+            setLocationAllowed(true);
+          }
+          else {
+            console.error('Location is outside the allowed range.');
+            setLocationAllowed(false);
+            setError("You are not in campus.")
+          }
+        },
+        (error) => {
+          console.error('Location access denied:', error);
+          setLocationAllowed(false);
+        }
+      );
+    } else {
+      console.error('Geolocation is not supported by this browser.');
+      setLocationAllowed(false);
+    }
+  };
+
   React.useEffect(() => {
-    const cleanup = startScan();
-    return cleanup;
+    checkLocation();
   }, []);
 
-  console.log(scanResult.data)
+  React.useEffect(() => {
+    if (locationAllowed) {
+      const cleanup = startScan();
+      return cleanup;
+    }
+  }, [locationAllowed]);
+
+  console.log(scanResult.data);
 
   return (
     <div className='scanner'>
-      {scanResult ? (
-        <div id='result'>
-          <p>Scan Result:</p>
-          <p>{scanResult}</p>
-        </div>
+      {locationAllowed ? (
+        scanResult ? (
+          <div id='result'>
+            <p>Scan Result:</p>
+            <p>{scanResult}</p>
+          </div>
+        ) : (
+          <p id='status'>Scanning...</p>
+        )
       ) : (
-        false
+        <p id='status'>{error}</p>
       )}
-        <p id='status'>Scanning...</p>
-
     </div>
   );
 }

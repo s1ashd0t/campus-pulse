@@ -1,33 +1,44 @@
-// src/components/EventList.jsx
 import { useEffect, useState } from "react";
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase";
 
 export default function EventList() {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, "events"), (snapshot) => {
-      const eventsData = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      setEvents(eventsData);
-    });
+    const fetchEvents = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "events"));
+        const eventsArray = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setEvents(eventsArray);
+      } catch (error) {
+        console.error("Error fetching events: ", error);
+      }
+    };
 
-    return () => unsubscribe();
+    fetchEvents();
   }, []);
 
   return (
-    <div>
-      {events.map(event => (
-        <div key={event.id}>
-          <h3>{event.title}</h3>
-          <p>{event.date}</p>
-          <p>{event.location}</p>
-          <p>{event.description}</p>
-        </div>
-      ))}
+    <div className="event-list">
+      <h2>Upcoming Events</h2>
+      {events.length === 0 ? (
+        <p>No events found.</p>
+      ) : (
+        <ul>
+          {events.map((event) => (
+            <li key={event.id}>
+              <h3>{event.title}</h3>
+              <p><strong>Date:</strong> {new Date(event.date).toLocaleString()}</p>
+              {/* <p><strong>Location:</strong> {event.location}</p> */}
+              <p>{event.description}</p>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

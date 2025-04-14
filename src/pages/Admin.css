@@ -1,0 +1,53 @@
+.admin{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.users{
+    display: flex;
+    justify-content: center;
+    width: 90vw;
+}
+
+.event-list{
+    width: 400px;
+    background-color: #4B2840;
+    margin: 1rem;
+}
+
+ul{
+    padding: 1rem;
+    margin: 1rem;
+    list-style: decimal;
+    width: 400px;
+}
+
+li{
+    background-color: #1c5242;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 10px;
+}
+
+.create-event{
+    padding: 10px;
+    margin: 1rem;
+    border-radius: 0.3rem;
+    background: #4B2840;
+    font-size: 0.9rem;
+    outline: none;
+    width: 400px;
+    height: 500px;
+}
+
+.qr-code{
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 400px;
+    background-color: #4B2840;
+    margin: 1rem;
+    padding: 1rem;
+}
