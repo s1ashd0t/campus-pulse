@@ -17,6 +17,7 @@ import RedeemPoints from "./pages/RedeemPoints";
 import menuIcon from "./assets/menu.svg";
 import closeIcon from "./assets/close.svg";
 import icon from "./assets/icon.png";
+import Dashboard from "./pages/dashboard";
 
 
 const PrivateRoute = ({ element }) => {
@@ -58,6 +59,7 @@ const NavBar = ({ isAuthenticated, onClose }) => {
             <li><Link to="/notifications" onClick={onClose}>Notifications</Link></li>
             <li><Link to="/redeem" onClick={onClose}>Redeem Points</Link></li>
             <li><Link to="/profile" onClick={onClose}>Profile</Link></li>
+            <li><Link to="/dashboard" onClick={onClose}>Dashboard</Link></li>
             <li>
               <button onClick={() => { handleLogout(); onClose(); }} className="logout-button">
                 Logout
@@ -124,6 +126,7 @@ function App() {
           <Route path="/leaderboard" element={<PrivateRoute element={<Leaderboard />} />} />
           <Route path="/notifications" element={<PrivateRoute element={<Notifications />} />} />
           <Route path="/redeem" element={<PrivateRoute element={<RedeemPoints />} />} />
+          <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} />} />
         </Routes>
 
         <footer className="footer">
