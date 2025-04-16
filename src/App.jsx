@@ -13,6 +13,7 @@ import Search from "./pages/Search";
 import CreateEvent from "./pages/components/CreateEvent";
 import Leaderboard from "./pages/Leaderboard";
 import Notifications from "./pages/Notifications";
+import RedeemPoints from "./pages/RedeemPoints";
 import menuIcon from "./assets/menu.svg";
 import closeIcon from "./assets/close.svg";
 import icon from "./assets/icon.png";
@@ -56,6 +57,7 @@ const NavBar = ({ isAuthenticated, onClose }) => {
           <>
             <li><Link to="/leaderboard" onClick={onClose}>Leaderboard</Link></li>
             <li><Link to="/notifications" onClick={onClose}>Notifications</Link></li>
+            <li><Link to="/redeem" onClick={onClose}>Redeem Points</Link></li>
             <li><Link to="/profile" onClick={onClose}>Profile</Link></li>
             <li><Link to="/dashboard" onClick={onClose}>Dashboard</Link></li>
             <li>
@@ -123,6 +125,7 @@ function App() {
           <Route path="/admin" element={<PrivateRoute element={<CreateEvent />} />} />
           <Route path="/leaderboard" element={<PrivateRoute element={<Leaderboard />} />} />
           <Route path="/notifications" element={<PrivateRoute element={<Notifications />} />} />
+          <Route path="/redeem" element={<PrivateRoute element={<RedeemPoints />} />} />
           <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} />} />
         </Routes>
 

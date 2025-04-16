@@ -1,68 +1,99 @@
-import React from 'react'
-import './Homepage.css'
-import qrcode from '../assets/scan-icon.svg'
-import searchicon from '../assets/search-icon.svg'
-import leaderboardicon from '../assets/leaderboard.svg'
-import profileicon from '../assets/name-id-icon.svg'
-import news1 from '../assets/newapp.jpg'
-import news2 from '../assets/careerexpo.jpg'
-import news3 from '../assets/volun.jpg'
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import './Homepage.css';
+import PointsSummary from './PointsSummary';
 
 const Homepage = () => {
-    return(
-        <>
-        <div className="homepage">
-        <h1>Homepage</h1>
-        <div className="cards">
-            <a href="./scanner">
-            <div className="card">
-                <div className="card-image">
-                    <img src={qrcode} alt="" />
-                </div>
-                <div className="card-name">
-                    Scan QR
-                </div>
-                </div>
-                </a>
-            <a href="./search">
-            <div className="card">
-                <div className="card-image">
-                    <img src={searchicon} alt="" />
-                </div>
-                    Search
-                </div>
-                </a>
-            <a href="./leaderboard">
-            <div className="card">
-                    <div className="card-image">
-                    <img src={leaderboardicon} alt="" />
-                    </div>
-                    Leaderboard
-                </div>
-                </a>
-            <a href="./profile">
-            <div className="card">
-                <div className="card-image">
-                <img src={profileicon} alt="" />
-                </div>
-                    Profile
-            </div>
-                </a>
-        </div>
-        </div>
-        <div className="news-container">
-            <h1>Updates</h1>
-            <div className="news-section">
-                <div className="newscard"><img src={news1} alt="" />New App to Boost Student Engagement at PFW  </div>
-                <div className="newscard"><img src={news2} alt="" />Student Engagement Workshops Return This Spring</div>
-                <div className="newscard"><img src={news3} alt="" />Volunteer Fair to Connect Students with Local Non-Profits</div>
-                <div className="newscard"><img src={news2} alt="" />Purdue Fort Wayne Hosts Spring 2025 Clubs & Organizations Fair</div>
-                <div className="newscard"><img src={news3} alt="" />PFW Launches New Mentorship Program for Student Success</div>
-                <div className="newscard"><img src={news1} alt="" />Campus Wellness Week Promotes Health and Well-being</div>
-            </div>
-        </div>
-        </>
-    )
-}
+    const [upcomingEvents, setUpcomingEvents] = useState([]);
+    const [userPoints, setUserPoints] = useState(120);
 
-export default Homepage
+    useEffect(() => {
+        // Sample upcoming events data
+        const dummyEvents = [
+            {
+                id: 1,
+                title: 'Tech Career Fair',
+                date: '2025-04-15',
+                time: '10:00 AM - 3:00 PM',
+                location: 'Student Union',
+                points: 20
+            },
+            {
+                id: 2,
+                title: 'Entrepreneurship Workshop',
+                date: '2025-04-18',
+                time: '2:00 PM - 4:00 PM',
+                location: 'Business Building, Room 302',
+                points: 15
+            },
+            {
+                id: 3,
+                title: 'Campus Cleanup Day',
+                date: '2025-04-22',
+                time: '9:00 AM - 12:00 PM',
+                location: 'Main Quad',
+                points: 25
+            }
+        ];
+        
+        setUpcomingEvents(dummyEvents);
+    }, []);
+
+    return (
+        <div className="homepage-container">
+
+
+            <div className="homepage-content">
+            <div className="right-column">
+                    {/* Add the Points Summary Component */}
+                    
+                    <section className="quick-links">
+                        <h2>Quick Links</h2>
+                        <div className="links-grid">
+                            <Link to="/scanner" className="quick-link">
+                                <span>Scan QR Code</span>
+                            </Link>
+                            <Link to="/leaderboard" className="quick-link">
+                                <span>Leaderboard</span>
+                            </Link>
+                            <Link to="/notifications" className="quick-link">
+                                <span>Notifications</span>
+                            </Link>
+                            <Link to="/profile" className="quick-link">
+                                <span>My Profile</span>
+                            </Link>
+                        </div>
+                    </section>
+                    <PointsSummary points={userPoints} />
+
+                </div>
+                <div className="left-column">
+                    <section className="upcoming-events">
+                        <h2>Upcoming Events</h2>
+                        <div className="events-list">
+                            {upcomingEvents.map(event => (
+                                <div key={event.id} className="event-card">
+                                    <div className="event-details">
+                                        <h3>{event.title}</h3>
+                                        <p><strong>Date:</strong> {event.date}</p>
+                                        <p><strong>Time:</strong> {event.time}</p>
+                                        <p><strong>Location:</strong> {event.location}</p>
+                                    </div>
+                                    <div className="event-points">
+                                        <span>{event.points}</span>
+                                        <small>points</small>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        <Link to="/search" className="view-all-link">View All Events</Link>
+                    </section>
+                </div>
+
+                
+            </div>
+        </div>
+    );
+};
+
+export default Homepage;
