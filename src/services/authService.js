@@ -32,10 +32,36 @@ import {
         phoneNumber: userData.phoneNumber || "",
         dob: userData.dob || "",
         signupMethod: "email",
+        role: "user", // Default role
         createdAt: new Date()
       });
   
       return { success: true, user };
+    } catch (error) {
+      return { success: false, error: error.message };
+    }
+  };
+  
+  // Check if user is admin
+  export const checkAdminRole = async (userId) => {
+    try {
+      const userDoc = await getDoc(doc(db, "users", userId));
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        return { success: true, isAdmin: userData.role === "admin" };
+      }
+      return { success: false, isAdmin: false };
+    } catch (error) {
+      return { success: false, isAdmin: false, error: error.message };
+    }
+  };
+  
+  // Update user role
+  export const updateUserRole = async (userId, newRole) => {
+    try {
+      const userRef = doc(db, "users", userId);
+      await updateDoc(userRef, { role: newRole });
+      return { success: true };
     } catch (error) {
       return { success: false, error: error.message };
     }

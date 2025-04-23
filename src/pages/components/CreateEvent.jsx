@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase";
+import "./CreateEvent.css";
 
 
 export default function CreateEvent() {

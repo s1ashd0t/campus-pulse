@@ -1,46 +1,69 @@
-
-.scanner{
-
+.scanner {
+    margin-top: 1rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
 }
 
-#status{
-    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    margin: 1rem auto;
-    background-color: #8f6616;
+#status {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: rgba(143, 102, 22, 0.8);
     padding: 1rem;
-    width: 30vw;
+    border-radius: 15px;
+    text-align: center;
+    width: auto;
+    min-width: 200px;
+}
+
+video {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.qr-scanner-container {
+    position: relative;
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 2rem;
     border-radius: 15px;
 }
 
-video{
-    width: 60vw;
-    border-radius: 15px;
+.scan-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #4CAF50;
+    animation: scan 2s linear infinite;
 }
 
-    /* QRScanner.css */
-    .qr-scanner-container {
-        position: relative;
-        display: inline-block;
-      }
-  
-      .scan-line {
-        position: absolute;
+#result {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 1rem;
+    border-radius: 15px;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+@keyframes scan {
+    0% {
         top: 0;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background-color: #4CAF50; /* Green color */
-        animation: scan 2s linear infinite;
-      }
-  
-      @keyframes scan {
-        0% {
-          top: 0;
-        }
-        50% {
-          top: 100%;
-        }
-        100% {
-          top: 0;
-        }
-      }
+    }
+    50% {
+        top: 100%;
+    }
+    100% {
+        top: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    video {
+        width: 90vw;
+    }
+}

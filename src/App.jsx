@@ -8,7 +8,7 @@ import Landing from "./pages/Landing";
 import Profile from "./pages/Profile";
 import SignUp from "./pages/SignUp";
 import Homepage from "./pages/Homepage";
-import QRScannerComponent from './pages/Scanner'
+import QRScannerComponent from './pages/Scanner';
 import Search from "./pages/Search";
 import Admin from "./pages/Admin";
 import Leaderboard from "./pages/Leaderboard";
@@ -16,7 +16,10 @@ import Notifications from "./pages/Notifications";
 import menuIcon from "./assets/menu.svg";
 import closeIcon from "./assets/close.svg";
 import icon from "./assets/icon.png";
-
+import Dashboard from "./pages/dashboard";
+import Admin from "./pages/Admin";
+import Unauthorized from "./pages/Unauthorized";
+import { AdminRoute } from "./components/AdminRoute";
 
 const PrivateRoute = ({ element }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
@@ -114,11 +117,12 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/unauthorized" element={<Unauthorized />} />
           <Route path="/profile" element={<PrivateRoute element={<Profile />} />} />
           <Route path="/homepage" element={<PrivateRoute element={<Homepage />} />} />
           <Route path="/scanner" element={<PrivateRoute element={<QRScannerComponent />} />} />
           <Route path="/search" element={<PrivateRoute element={<Search />} />} />
-          <Route path="/admin" element={<PrivateRoute element={<Admin />} />} />
+          <Route path="/admin" element={<AdminRoute element={<Admin />} />} />
           <Route path="/leaderboard" element={<PrivateRoute element={<Leaderboard />} />} />
           <Route path="/notifications" element={<PrivateRoute element={<Notifications />} />} />
         </Routes>

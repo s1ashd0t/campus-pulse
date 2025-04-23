@@ -1,27 +1,27 @@
-import React from 'react'
-import CreateEvent from './components/CreateEvent'
-import EventList from './components/EventList'
-import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { db } from '../firebase'
-import './Admin.css'
-import QRCodeGenerator from './components/QRCodeGenerator'
+// src/pages/Admin.jsx
+import { useAuth } from "../context/AuthContext";
+import CreateEvent from "./components/CreateEvent";
+import EventList from "./components/EventList";
+import "./Admin.css";
 
 const Admin = () => {
-    const [users, setUsers] = useState([])
-    const navigate = useNavigate()
+  const { isAdmin } = useAuth();
 
-    return (
-        <div className='admin'>
-            <h1>Admin Panel</h1>
-            <div className="users">
-                
-                <QRCodeGenerator />
-                <CreateEvent />
-                <EventList />
-
-            </div>
+  return (
+    <div className="admin-container">
+      <h1>Admin Dashboard</h1>
+      <div className="admin-content">
+        <div className="admin-section">
+          <h2>Create New Event</h2>
+          <CreateEvent />
         </div>
-    )
-}
-export default Admin
+        <div className="admin-section">
+          <h2>Manage Events</h2>
+          <EventList />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Admin;
