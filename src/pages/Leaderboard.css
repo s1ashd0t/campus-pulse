@@ -101,6 +101,22 @@
   transition: all 0.3s;
 }
 
+.loading {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.error {
+  text-align: center;
+  padding: 2rem;
+  color: #ff4444;
+  font-size: 1.2rem;
+  background: rgba(255, 0, 0, 0.1);
+  border-radius: 0.5rem;
+}
+
 /* Responsive */
 @media (max-width: 600px) {
   .table, .player {

@@ -33,6 +33,8 @@ import {
         dob: userData.dob || "",
         signupMethod: "email",
         role: "user", // Default role
+        points: 0,
+        eventsAttended: 0,
         createdAt: new Date()
       });
   
@@ -100,6 +102,8 @@ import {
           phoneNumber: user.phoneNumber || "",
           dob: "",
           signupMethod: "google",
+          points: 0,
+          eventsAttended: 0,
           createdAt: new Date()
         });
       }
@@ -133,6 +137,8 @@ import {
           phoneNumber: user.phoneNumber || "",
           dob: "",
           signupMethod: "facebook",
+          points: 0,
+          eventsAttended: 0,
           createdAt: new Date()
         });
       }

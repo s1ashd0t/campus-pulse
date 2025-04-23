@@ -2,8 +2,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginWithEmail, loginWithGoogle, loginWithFacebook, resetPassword } from "../services/authService";
-import "./Login.css";
-import "../App.css";
+import "../styles/auth.css";
 
 function Login() {
     const navigate = useNavigate();
@@ -18,10 +17,10 @@ function Login() {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({
-            ...formData,
+        setFormData(prevData => ({
+            ...prevData,
             [name]: value
-        });
+        }));
     };
 
     const handleSubmit = async (event) => {
@@ -81,15 +80,15 @@ function Login() {
     };
 
     return (
-        <div className="login-container">
+        <div className="auth-container">
             <h1>Login</h1>
-            <p className="description">Login to your account</p>
+            <p className="auth-description">Welcome back to Campus Pulse</p>
             
             {error && <p className="error-message">{error}</p>}
             
             {!showForgotPassword ? (
                 <>
-                    <form onSubmit={handleSubmit}>
+                    <form className="auth-form" onSubmit={handleSubmit}>
                         <input
                             type="email"
                             name="email"
@@ -106,37 +105,39 @@ function Login() {
                             onChange={handleChange}
                             required
                         />
-                        <button type="submit">Log in</button>
+                        <button type="submit" className="submit-button">Log in</button>
                     </form>
 
                     <p className="forgot-password" onClick={() => setShowForgotPassword(true)}>
                         Forgot your password?
                     </p>
 
-                    <div className="line-divider"><h6>or continue with</h6></div>
+                    <div className="social-divider">or continue with</div>
 
                     <button 
-                        className="google-login" 
+                        className="social-button google-login" 
                         onClick={() => handleSocialLogin("google")}
                     >
                         Google
                     </button>
-
                 </>
             ) : (
                 <>
                     {resetEmailSent ? (
-                        <div className="reset-success">
+                        <div className="success-message">
                             <p>Password reset link sent to your email!</p>
-                            <button onClick={() => {
-                                setShowForgotPassword(false);
-                                setResetEmailSent(false);
-                            }}>
+                            <button 
+                                className="submit-button"
+                                onClick={() => {
+                                    setShowForgotPassword(false);
+                                    setResetEmailSent(false);
+                                }}
+                            >
                                 Back to Login
                             </button>
                         </div>
                     ) : (
-                        <form onSubmit={handleForgotPassword}>
+                        <form className="auth-form" onSubmit={handleForgotPassword}>
                             <p>Enter your email to receive a password reset link</p>
                             <input
                                 type="email"
@@ -145,10 +146,12 @@ function Login() {
                                 onChange={(e) => setResetEmail(e.target.value)}
                                 required
                             />
-                            <button type="submit">Send Reset Link</button>
+                            <button type="submit" className="submit-button">
+                                Send Reset Link
+                            </button>
                             <button 
                                 type="button" 
-                                className="cancel-button"
+                                className="social-button"
                                 onClick={() => setShowForgotPassword(false)}
                             >
                                 Cancel
@@ -158,7 +161,7 @@ function Login() {
                 </>
             )}
 
-            <p className="signup-link">
+            <p className="auth-link">
                 Don't have an account? <a href="/signup">Sign up</a>
             </p>
         </div>

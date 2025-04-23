@@ -3,33 +3,33 @@
     padding: 2rem;
     width: 100%;
     max-width: 800px;
-    background-color: rgba(0, 0, 0, 0.8);
-    border-radius: 20px;
+    background: var(--background-dark);
+    border-radius: var(--border-radius);
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
 }
 
-#search-btn {
+.search-input {
     width: 100%;
     max-width: 500px;
     height: 4rem;
-    border: none;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    font-size: large;
+    background: var(--background-light);
+    color: var(--text-color);
+    font-size: 1.2rem;
     padding: 0 1.5rem;
-    transition: all 0.3s ease;
+    transition: var(--transition);
+    border: 1px solid transparent;
 }
 
-#search-btn:focus {
+.search-input:focus {
     background: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    box-shadow: var(--shadow);
+    border-color: var(--primary-color);
 }
 
-#search-btn::placeholder {
+.search-input::placeholder {
     color: rgba(255, 255, 255, 0.5);
 }
 

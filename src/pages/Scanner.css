@@ -33,7 +33,7 @@ video {
 }
 
 .scan-line {
-    position: absolute;
+    position: inherit;
     top: 0;
     left: 0;
     width: 100%;

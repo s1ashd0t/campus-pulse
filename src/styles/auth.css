@@ -1,0 +1,156 @@
+/* Common styles for authentication forms */
+.auth-container {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--background-dark);
+    color: var(--text-color);
+    text-align: center;
+    max-width: 30rem;
+    width: 100%;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+.auth-description {
+    font-family: var(--font-primary);
+    font-weight: 400;
+    font-size: 1rem;
+    margin: 0.5rem 0 1.5rem;
+    opacity: 0.8;
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+}
+
+.form-row input {
+    width: 50%;
+}
+
+.submit-button {
+    width: 50%;
+    margin: 1rem auto 0;
+    background: var(--primary-color);
+    color: var(--text-color);
+}
+
+.submit-button:hover {
+    background: var(--primary-hover);
+}
+
+.social-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: var(--text-color);
+    margin: 1.5rem 0;
+    width: 100%;
+    opacity: 0.6;
+}
+
+.social-divider::before,
+.social-divider::after {
+    content: "";
+    flex: 1;
+    border-top: 1px solid currentColor;
+    margin: 0 10px;
+}
+
+.social-button {
+    width: 100%;
+    padding: 0.8rem;
+    margin-top: 0.5rem;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.google-login {
+    background: #db4437;
+    color: white;
+}
+
+.google-login:hover {
+    background: #c1351d;
+}
+
+.facebook-login {
+    background: #3b5998;
+    color: white;
+}
+
+.facebook-login:hover {
+    background: #2d4373;
+}
+
+.auth-link {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.auth-link a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.auth-link a:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    color: var(--error-color);
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
+}
+
+.success-message {
+    color: var(--success-color);
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
+}
+
+.forgot-password {
+    color: var(--text-color);
+    text-align: center;
+    margin: 1rem 0;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: var(--transition);
+}
+
+.forgot-password:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .auth-container {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-row input {
+        width: 100%;
+    }
+
+    .submit-button {
+        width: 100%;
+    }
+}

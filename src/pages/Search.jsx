@@ -1,12 +1,27 @@
-import React from 'react'
-import './Search.css'
-const Search = () => {
-    return(
-        <div className="search">
-            <h1>Search</h1>
-            <input type="text" name="" id="search-btn" placeholder='Enter text here' autoFocus />
-        </div>
-    )
-}
+import React, { useState } from 'react';
+import './Search.css';
 
-export default Search
+const Search = () => {
+    const [query, setQuery] = useState('');
+
+    const handleSearch = (e) => {
+        setQuery(e.target.value);
+        // TODO: Implement search functionality
+    };
+
+    return (
+        <div className="search">
+            <h1>Search Events</h1>
+            <input
+                type="text"
+                className="search-input"
+                value={query}
+                onChange={handleSearch}
+                placeholder="Enter event name or keywords..."
+                autoFocus
+            />
+        </div>
+    );
+};
+
+export default Search;

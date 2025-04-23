@@ -13,10 +13,10 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 100vh;
-  backdrop-filter: blur(3px);
   min-height: 100vh;
+  backdrop-filter: blur(3px);
   overflow-x: hidden;
+  position: relative;
 }
 
 .logo {
@@ -67,15 +67,16 @@ body {
 
 /* Footer */
 .footer {
-  background: #000;
+  background: black;
   padding: 1.25rem;
-  width: 100vw;
+  width: 100%;
   text-align: center;
   margin-top: auto;
+  position: relative;
+  z-index: 1;
 }
 
 .footer p {
-  margin: 0;
   font-size: 0.9rem;
 }
 
@@ -83,191 +84,37 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.5);
-  width: 100vw;
-  z-index: 999;
-  font-family: "Indie Flower", cursive;
-  font-weight: 200;
-  font-style: normal;
-  top: 0;
-  background: rgba(0, 0, 0, 0.6);
   width: 100%;
-  z-index: 998;
   padding: 0.5rem 0;
-  font-family: "Indie Flower", cursive;
+  background: var(--background-dark);
+  font-family: var(--font-decorative);
+  position: relative;
+  z-index: 2;
 }
 
-.heading a{
+.heading a {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   height: 70px;
+  text-decoration: none;
+  color: white;
 }
 
-.heading img{
+.heading img {
   height: 4rem;
   margin: 0.5em;
 }
 
-
 .heading h1 {
-  margin: 0rem 0;
+  margin: 0;
   font-size: 2rem;
+  font-weight: 200;
 }
 
-.text h6{
-  padding: 0;
-  margin: 0;
-  border: none;
-}
-
-a {
-  text-decoration: none;
-  color: white;
-}
-
-/* Menu icon */
-.menu-icon {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  width: 40px;
-  cursor: pointer;
-  z-index: 1000;
-  padding: 5px;
-}
-
-.sidebar{
-  position: absolute;
-  left: 0;
-  z-index: 9999;
-}
-
-
-.navigation{
-  top: 0;
-  padding: 0;
-}
-
-.navigation ul{
-  margin: 0;
-  padding-top: 6rem;
-  padding-left: 0;
-  list-style: none;
-  width: 20vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
-}
-
-.navigation ul li{
-  padding: 15px;
-  margin: 5px;
-  border-radius: 3px;
-}
-
-.navigation ul li:hover{
-  background: rgba(0, 0, 0, 0.5);
-  cursor: pointer;
-}
-
-.menu{
-  position: fixed;
-  left: 0;
-  z-index: 9999;
-  padding: 2rem;
-}
-
-input {
-  width: 100%;
-  padding: 0.7rem;
-  margin: 0.3rem 0;
-  border: none;
-  border-radius: 0.3rem;
-  /* background: #222; */
-  font-size: 0.9rem;
-  outline: none;
-}
-
-input[type="date"] {
-  color: rgba(0, 0, 0, 0.7);
-}
-
-input::placeholder {
-  color: rgba(0, 0, 0, 0.7);
-}
-
-textarea {
-  width: 40%;
-  padding: 0.7rem;
-  margin: 0.3rem 0;
-  border: none;
-  border-radius: 0.3rem;
-  /* background: #222; */
-  font-size: 0.9rem;
-  outline: none;
-}
-/* Nav overlay */
-.nav-overlay {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  background-color: #310D20;
-  z-index: 999;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 80px;
-  overflow: hidden;
-}
-
-.nav-overlay ul {
-  list-style-type: none;
-  padding: 0;
+.text h6 {
   margin: 0;
 }
 
-.nav-overlay ul li {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
-  font-size: 1.8rem;
-}
-
-.nav-overlay ul li a:hover {
-  color: #000;
-  background-color: #fff;
-}
-
-.nav-overlay a {
-  text-decoration: none;
-  color: #fff;
-  padding: 1rem;
-  border-radius: 10px;
-  width: 100%;
-}
-
-.logout-button {
-  background-color: #c0392b;
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1.2rem;
-  margin-top: 20px;
-}
-
-.logout-button:hover {
-  opacity: 0.85;
-}
-
-
-.close-icon {
-  width: 32px;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  cursor: pointer;
-  filter: invert(1);
-}
+/* Remove duplicate navigation styles since they're in Navigation.css */

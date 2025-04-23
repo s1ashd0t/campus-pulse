@@ -1,42 +1,40 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../firebase';
 import { useAuth } from '../context/AuthContext';
 import menu from '../assets/menu.svg';
 import close from '../assets/close.svg';
 import './Navigation.css';
 
-const Navigation = () => {
+const Navigation = ({ isOpen, onClose }) => {
     const { user, isAdmin } = useAuth();
-    const [menuOpen, setMenuOpen] = useState(false);
-
-    const toggleMenu = () => setMenuOpen(!menuOpen);
+    const navigate = useNavigate();
 
     const handleLogout = () => {
         auth.signOut();
-        setMenuOpen(false);
+        onClose();
+        navigate("/login");
     };
 
     return (
-        <nav className={`navigation ${menuOpen ? 'open' : ''}`}>
+        <nav className={`navigation ${isOpen ? 'open' : ''}`}>
             <img 
-                src={menuOpen ? close : menu} 
-                className="menu" 
-                onClick={toggleMenu} 
-                alt="Menu"
+                src={isOpen ? close : menu} 
+                className="menu-icon" 
+                onClick={onClose} 
+                alt={isOpen ? "Close menu" : "Open menu"}
             />
             <ul>
-                <li><Link to="/" onClick={toggleMenu}>Home</Link></li>
+                <li><Link to="/homepage" onClick={onClose}>Home</Link></li>
                 {user ? (
                     <>
-                        <li><Link to="/leaderboard" onClick={toggleMenu}>Leaderboard</Link></li>
-                        <li><Link to="/notifications" onClick={toggleMenu}>Notifications</Link></li>
-                        <li><Link to="/redeem" onClick={toggleMenu}>Redeem Points</Link></li>
-                        <li><Link to="/scanner" onClick={toggleMenu}>Scan QR</Link></li>
-                        <li><Link to="/profile" onClick={toggleMenu}>Profile</Link></li>
-                        <li><Link to="/dashboard" onClick={toggleMenu}>Dashboard</Link></li>
+                        <li><Link to="/leaderboard" onClick={onClose}>Leaderboard</Link></li>
+                        <li><Link to="/notifications" onClick={onClose}>Notifications</Link></li>
+                        <li><Link to="/redeem" onClick={onClose}>Redeem Points</Link></li>
+                        <li><Link to="/scanner" onClick={onClose}>Scan QR</Link></li>
+                        <li><Link to="/profile" onClick={onClose}>Profile</Link></li>
                         {isAdmin && (
-                            <li><Link to="/admin" onClick={toggleMenu}>Admin Panel</Link></li>
+                            <li><Link to="/admin" onClick={onClose}>Admin Panel</Link></li>
                         )}
                         <li>
                             <button onClick={handleLogout} className="logout-btn">
@@ -46,8 +44,8 @@ const Navigation = () => {
                     </>
                 ) : (
                     <>
-                        <li><Link to="/login" onClick={toggleMenu}>Login</Link></li>
-                        <li><Link to="/signup" onClick={toggleMenu}>Sign Up</Link></li>
+                        <li><Link to="/login" onClick={onClose}>Login</Link></li>
+                        <li><Link to="/signup" onClick={onClose}>Sign Up</Link></li>
                     </>
                 )}
             </ul>
