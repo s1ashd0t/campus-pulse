@@ -6,9 +6,8 @@ import PointsSummary from './PointsSummary';
 const Homepage = () => {
     const [upcomingEvents, setUpcomingEvents] = useState([]);
     const [userPoints, setUserPoints] = useState(120);
-
+    
     useEffect(() => {
-        // Sample upcoming events data
         const dummyEvents = [
             {
                 id: 1,
@@ -35,44 +34,30 @@ const Homepage = () => {
                 points: 25
             }
         ];
-        
         setUpcomingEvents(dummyEvents);
     }, []);
-
+    
     return (
         <div className="homepage-container">
-
-
             <div className="homepage-content">
-            <div className="right-column">
-                    {/* Add the Points Summary Component */}
-                    
+                <div className="right-column">
                     <section className="quick-links">
                         <h2>Quick Links</h2>
                         <div className="links-grid">
-                            <Link to="/scanner" className="quick-link">
-                                <span>Scan QR Code</span>
-                            </Link>
-                            <Link to="/leaderboard" className="quick-link">
-                                <span>Leaderboard</span>
-                            </Link>
-                            <Link to="/notifications" className="quick-link">
-                                <span>Notifications</span>
-                            </Link>
-                            <Link to="/profile" className="quick-link">
-                                <span>My Profile</span>
-                            </Link>
+                            <Link to="/scanner" className="quick-link"><span>Scan QR Code</span></Link>
+                            <Link to="/leaderboard" className="quick-link"><span>Leaderboard</span></Link>
+                            <Link to="/notifications" className="quick-link"><span>Notifications</span></Link>
+                            <Link to="/profile" className="quick-link"><span>My Profile</span></Link>
                         </div>
                     </section>
                     <PointsSummary points={userPoints} />
-
                 </div>
                 <div className="left-column">
                     <section className="upcoming-events">
                         <h2>Upcoming Events</h2>
                         <div className="events-list">
                             {upcomingEvents.map(event => (
-                                <div key={event.id} className="event-card">
+                                <Link to={`/event/${event.id}`} key={event.id} className="event-card">
                                     <div className="event-details">
                                         <h3>{event.title}</h3>
                                         <p><strong>Date:</strong> {event.date}</p>
@@ -83,14 +68,18 @@ const Homepage = () => {
                                         <span>{event.points}</span>
                                         <small>points</small>
                                     </div>
-                                </div>
+                                </Link>
                             ))}
                         </div>
                         <Link to="/search" className="view-all-link">View All Events</Link>
                     </section>
-                </div>
 
-                
+                    <div className="survey-link-container">
+                        <Link to="/survey" className="quick-link">
+                            <span>Take Surveys</span>
+                        </Link>
+                    </div>
+                </div>
             </div>
         </div>
     );

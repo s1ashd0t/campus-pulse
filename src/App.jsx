@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate, Link, useNavigate } f
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "./firebase";
 import "./App.css";
+import EventDetails from "./pages/EventDetails";
+import Survey from "./pages/Survey";
 import Login from "./pages/Login";
 import Landing from "./pages/Landing";
 import Profile from "./pages/Profile";
@@ -127,6 +129,9 @@ function App() {
           <Route path="/notifications" element={<PrivateRoute element={<Notifications />} />} />
           <Route path="/redeem" element={<PrivateRoute element={<RedeemPoints />} />} />
           <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} />} />
+          <Route path="/survey" element={<PrivateRoute element={<Survey />} />} />
+          <Route path="/event/:id" element={<PrivateRoute element={<EventDetails />} />} />
+
         </Routes>
 
         <footer className="footer">
