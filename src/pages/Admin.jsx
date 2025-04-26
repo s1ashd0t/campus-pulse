@@ -2,8 +2,8 @@
 import { useAuth } from "../context/AuthContext";
 import CreateEvent from "./components/CreateEvent";
 import EventList from "./components/EventList";
-import "./Admin.css";
-
+import CurrentUsers from "./components/CurrentUsers";
+import "./admin.css"; // Assuming you have a CSS file for admin styles
 const Admin = () => {
   const { isAdmin } = useAuth();
 
@@ -12,12 +12,14 @@ const Admin = () => {
       <h1>Admin Dashboard</h1>
       <div className="admin-content">
         <div className="admin-section">
-          <h2>Create New Event</h2>
           <CreateEvent />
         </div>
         <div className="admin-section">
-          <h2>Manage Events</h2>
           <EventList />
+        </div>
+        <div className="admin-section">
+          {/* Assuming CurrentUsers is a component that lists current users */}
+          <CurrentUsers />
         </div>
       </div>
     </div>

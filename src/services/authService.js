@@ -9,7 +9,7 @@ import {
     FacebookAuthProvider,
     signInWithPopup
   } from "firebase/auth";
-  import { setDoc, doc, getDoc, updateDoc } from "firebase/firestore";
+  import { setDoc, doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
   import { auth, db } from "../firebase";
   
   // Email/Password signup
@@ -190,6 +190,17 @@ import {
   export const resetPassword = async (email) => {
     try {
       await sendPasswordResetEmail(auth, email);
+      return { success: true };
+    } catch (error) {
+      return { success: false, error: error.message };
+    }
+  };
+
+  // Delete user from Firestore
+  export const deleteUser = async (userId) => {
+    try {
+      const userRef = doc(db, "users", userId);
+      await deleteDoc(userRef);
       return { success: true };
     } catch (error) {
       return { success: false, error: error.message };

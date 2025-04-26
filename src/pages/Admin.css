@@ -1,6 +1,6 @@
 :root {
     --background-dark: #4B2840;
-    --border-radius: 0.3rem;
+    --border-radius: 0.5rem;
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     --text-color: #ffffff;
 }
@@ -61,23 +61,29 @@ li {
 
 .admin-container {
     width: 100%;
-    max-width: 1200px;
-    padding: 2rem;
     margin: 0 auto;
 }
 
+.admin-container h1 {
+    margin: 0 auto;
+    color: var(--text-color);
+    text-align: center;
+    background-color: #4B2840;
+    width: 100%;
+}   
+
 .admin-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 2rem;
     margin-top: 2rem;
 }
 
 .admin-section {
     background: var(--background-dark);
+    padding: 1rem;
     border-radius: var(--border-radius);
-    padding: 1.5rem;
-    box-shadow: var(--shadow);
 }
 
 .admin-section h2 {
