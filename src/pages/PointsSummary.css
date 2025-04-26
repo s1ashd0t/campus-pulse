@@ -1,0 +1,91 @@
+.points-summary-card {
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 1rem 0;
+    transition: transform 0.3s ease;
+}
+
+.points-summary-card:hover {
+    transform: translateY(-5px);
+}
+
+.points-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #444;
+    padding-bottom: 0.5rem;
+}
+
+.points-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.points-badge {
+    background: #ff7b00;
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 1rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.points-info {
+    margin-bottom: 1rem;
+}
+
+.points-info p {
+    margin-bottom: 1rem;
+    color: #ddd;
+}
+
+.points-examples {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.point-example {
+    display: flex;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 0.3rem;
+}
+
+.example-name {
+    font-weight: bold;
+}
+
+.example-points {
+    color: #ff7b00;
+    font-weight: bold;
+}
+
+.redeem-link {
+    display: block;
+    background: #ff7b00;
+    color: white;
+    text-align: center;
+    padding: 0.8rem;
+    border-radius: 0.3rem;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.redeem-link:hover {
+    background: #e66a00;
+}
+
+@media (max-width: 768px) {
+    .points-examples {
+        flex-direction: column;
+    }
+}

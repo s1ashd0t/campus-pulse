@@ -1,0 +1,46 @@
+
+.scanner{
+
+}
+
+#status{
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 1rem auto;
+    background-color: #8f6616;
+    padding: 1rem;
+    width: 30vw;
+    border-radius: 15px;
+}
+
+video{
+    width: 60vw;
+    border-radius: 15px;
+}
+
+    /* QRScanner.css */
+    .qr-scanner-container {
+        position: relative;
+        display: inline-block;
+      }
+  
+      .scan-line {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #4CAF50; /* Green color */
+        animation: scan 2s linear infinite;
+      }
+  
+      @keyframes scan {
+        0% {
+          top: 0;
+        }
+        50% {
+          top: 100%;
+        }
+        100% {
+          top: 0;
+        }
+      }

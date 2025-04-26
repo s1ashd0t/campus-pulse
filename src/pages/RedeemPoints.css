@@ -1,0 +1,128 @@
+.redeem-container {
+    margin-top: 1rem;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    max-width: 60rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.3);
+    width: 100%;
+  }
+  
+  .redeem-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #444;
+    padding-bottom: 1rem;
+  }
+  
+  .points-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #ff7b00;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+  }
+  
+  .points-value {
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+  
+  .points-label {
+    font-size: 0.8rem;
+  }
+  
+  .rewards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .reward-card {
+    background: #222;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .reward-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .reward-image {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+  }
+  
+  .reward-info {
+    padding: 1rem;
+  }
+  
+  .reward-info h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+  }
+  
+  .reward-description {
+    color: #ccc;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    height: 2.5rem;
+  }
+  
+  .reward-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .reward-points {
+    font-weight: bold;
+    color: #ff7b00;
+  }
+  
+  .redeem-button {
+    background-color: #ff7b00;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  
+  .redeem-button:hover {
+    background-color: #e66a00;
+  }
+  
+  .redeem-button.disabled {
+    background-color: #666;
+    cursor: not-allowed;
+  }
+  
+  .redeem-status {
+    background: rgba(255, 123, 0, 0.2);
+    border-left: 4px solid #ff7b00;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0.3rem;
+  }
+  
+  @media (max-width: 768px) {
+    .redeem-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    
+    .rewards-grid {
+      grid-template-columns: 1fr;
+    }
+  }

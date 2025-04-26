@@ -1,0 +1,82 @@
+.notifications-container {
+  margin-top: 1rem;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  max-width: 40rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.3);
+  width: 100%;
+}
+
+.notifications-container h1 {
+  margin-bottom: 1.5rem;
+}
+
+.notifications-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.notifications-container li {
+  padding: 1rem;
+  border-bottom: 1px solid #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.notifications-container li:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.hover-card {
+  transition: all 0.3s;
+}
+
+/* Loading and error states */
+.loading, .error, .no-notifications {
+  padding: 1rem;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.error {
+  color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.1);
+  border-radius: 0.3rem;
+}
+
+/* Read vs Unread notifications */
+.unread {
+  background: rgba(255, 123, 0, 0.1);
+  font-weight: bold;
+}
+
+.read {
+  opacity: 0.7;
+}
+
+.unread-indicator {
+  width: 10px;
+  height: 10px;
+  background-color: #ff7b00;
+  border-radius: 50%;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+}
+
+.notification-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.notification-date {
+  font-size: 0.8rem;
+  color: #aaa;
+  margin-top: 0.5rem;
+}
