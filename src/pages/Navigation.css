@@ -1,11 +1,13 @@
 .navigation {
-    position: fixed;
+    display: flex;
+    justify-content: center;
+    position: absolute;
     top: 0;
     left: 0;
     height: 100vh;
     width: 100vw;
     z-index: 9999;
-    background-color: rgba(49, 13, 32, 0.95);
+    background-color: rgba(49, 13, 32, 0.8);
     backdrop-filter: blur(5px);
     transform: translateX(-100%);
     transition: transform 0.3s ease;
@@ -15,10 +17,14 @@
 
 .navigation.open {
     transform: translateX(0);
+    /* stop scrolling */
+    overflow: hidden;
+    pointer-events: auto;
+
 }
 
 .navigation ul {
-    background: var(--background-dark);
+    /* background: var(--background-dark); */
     margin: 0;
     padding-top: 6rem;
     padding-left: 0;
@@ -72,7 +78,7 @@
     color: var(--error-color) !important;
 }
 
-@media (min-width: 769px) {
+@media (width: 769px) {
     .navigation {
         width: 300px;
     }
