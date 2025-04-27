@@ -48,7 +48,7 @@ function SignUp() {
             const result = await signUpWithEmail(formData.email, formData.password, userData);
             
             if (result.success) {
-                navigate("/profile");
+                navigate("/Homepage");
             } else {
                 setError(result.error);
             }

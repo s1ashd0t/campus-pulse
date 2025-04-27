@@ -1,7 +1,6 @@
 /* Common styles for authentication forms */
 .auth-container {
-    margin-top: 1rem;
-    display: flex;
+    margin: 1rem;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -9,7 +8,7 @@
     color: var(--text-color);
     text-align: center;
     max-width: 30rem;
-    width: 100%;
+    width: 90%;
     padding: 2rem;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
@@ -138,7 +137,6 @@
 
 @media (max-width: 768px) {
     .auth-container {
-        margin: 1rem;
         padding: 1.5rem;
     }
 

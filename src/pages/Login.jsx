@@ -48,7 +48,7 @@ function Login() {
             }
             
             if (result.success) {
-                navigate("/profile");
+                navigate("/Homepage");
             } else {
                 setError(result.error);
             }
