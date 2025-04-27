@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './RedeemPoints.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 
 const RedeemPoints = () => {
+    const { userRole } = useContext(AuthContext);
     const [userPoints, setUserPoints] = useState(120); // Example starting points
     const [redeemStatus, setRedeemStatus] = useState('');
     const navigate = useNavigate();
+    
+    // Redirect admins to admin dashboard
+    if (userRole === "admin") {
+        return <Navigate to="/admin-dashboard" />;
+    }
 
     const rewards = [
         { id: 1, title: 'Discount Coupon (10%)', points: 50, image: '/api/placeholder/150/120', description: 'Valid at campus stores' },

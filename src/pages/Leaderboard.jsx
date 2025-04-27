@@ -1,8 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { Navigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 import './Leaderboard.css';
 
 const Leaderboard = () => {
+    const { userRole } = useContext(AuthContext);
     const [leaders, setLeaders] = useState([]);
+    
+    // Redirect admins to admin dashboard
+    if (userRole === "admin") {
+        return <Navigate to="/admin-dashboard" />;
+    }
 
     useEffect(() => {
         const dummyData = [

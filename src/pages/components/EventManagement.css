@@ -64,6 +64,37 @@
   color: #aaa;
 }
 
+.events-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.events-section {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.events-section h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pending-section h3 {
+  color: #f39c12;
+}
+
+.approved-section h3 {
+  color: #2ecc71;
+}
+
+.rejected-section h3 {
+  color: #e74c3c;
+}
+
 .events-list {
   display: flex;
   flex-direction: column;
@@ -103,24 +134,25 @@
   color: #ff7b00;
 }
 
-.status-badge {
+.event-status {
   padding: 0.25rem 0.75rem;
   border-radius: 20px;
   font-size: 0.8rem;
   font-weight: bold;
+  text-transform: capitalize;
 }
 
-.status-badge.pending {
+.event-card.pending .event-status {
   background-color: rgba(243, 156, 18, 0.2);
   color: #f39c12;
 }
 
-.status-badge.approved {
+.event-card.approved .event-status {
   background-color: rgba(46, 204, 113, 0.2);
   color: #2ecc71;
 }
 
-.status-badge.rejected {
+.event-card.rejected .event-status {
   background-color: rgba(231, 76, 60, 0.2);
   color: #e74c3c;
 }

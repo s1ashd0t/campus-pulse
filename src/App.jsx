@@ -11,12 +11,18 @@ import Landing from "./pages/Landing";
 import Profile from "./pages/Profile";
 import SignUp from "./pages/SignUp";
 import Homepage from "./pages/Homepage";
+import AdminHomepage from "./pages/AdminHomepage";
 import QRScannerComponent from './pages/Scanner'
 import Search from "./pages/Search";
 import CreateEvent from "./pages/components/CreateEvent";
 import Leaderboard from "./pages/Leaderboard";
 import Notifications from "./pages/Notifications";
 import RedeemPoints from "./pages/RedeemPoints";
+import RewardManagement from "./pages/components/RewardManagement";
+
+// Import components from Previous folder
+import EventsPage from "./pages/EventsPage";
+import AdminEventsPage from "./pages/AdminEventsPage";
 import menuIcon from "./assets/menu.svg";
 import closeIcon from "./assets/close.svg";
 import icon from "./assets/icon.png";
@@ -61,17 +67,25 @@ const NavBar = ({ onClose }) => {
         <li><Link to="/homepage" onClick={onClose}>Home</Link></li>
         {user ? (
           <>
-            <li><Link to="/leaderboard" onClick={onClose}>Leaderboard</Link></li>
-            <li><Link to="/notifications" onClick={onClose}>Notifications</Link></li>
-            <li><Link to="/redeem" onClick={onClose}>Redeem Points</Link></li>
-            <li><Link to="/profile" onClick={onClose}>Profile</Link></li>
-            <li><Link to="/dashboard" onClick={onClose}>Dashboard</Link></li>
+            {/* Student-only links */}
+            {!isAdmin && (
+              <>
+                <li><Link to="/events" onClick={onClose}>Events</Link></li>
+                <li><Link to="/leaderboard" onClick={onClose}>Leaderboard</Link></li>
+                <li><Link to="/notifications" onClick={onClose}>Notifications</Link></li>
+                <li><Link to="/redeem" onClick={onClose}>Redeem Points</Link></li>
+                <li><Link to="/profile" onClick={onClose}>Profile</Link></li>
+                <li><Link to="/dashboard" onClick={onClose}>Dashboard</Link></li>
+              </>
+            )}
             
             {/* Admin-only links */}
             {isAdmin && (
               <>
-                <li><Link to="/admin" onClick={onClose}>Create Event</Link></li>
+                <li><Link to="/admin-events" onClick={onClose}>Event Management</Link></li>
                 <li><Link to="/admin-dashboard" onClick={onClose}>Admin Dashboard</Link></li>
+                <li><Link to="/reward-management" onClick={onClose}>Reward Management</Link></li>
+                <li><Link to="/notifications" onClick={onClose}>Notifications</Link></li>
               </>
             )}
             
@@ -123,7 +137,17 @@ function AppContent() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/profile" element={<PrivateRoute element={<Profile />} />} />
-        <Route path="/homepage" element={<PrivateRoute element={<Homepage />} />} />
+        <Route path="/homepage" element={
+          <PrivateRoute 
+            element={
+              <AuthContext.Consumer>
+                {({ userRole }) => 
+                  userRole === "admin" ? <AdminHomepage /> : <Homepage />
+                }
+              </AuthContext.Consumer>
+            } 
+          />
+        } />
         <Route path="/scanner" element={<PrivateRoute element={<QRScannerComponent />} />} />
         <Route path="/search" element={<PrivateRoute element={<Search />} />} />
         <Route path="/admin" element={<AdminRoute element={<CreateEvent />} />} />
@@ -131,9 +155,16 @@ function AppContent() {
         <Route path="/leaderboard" element={<PrivateRoute element={<Leaderboard />} />} />
         <Route path="/notifications" element={<PrivateRoute element={<Notifications />} />} />
         <Route path="/redeem" element={<PrivateRoute element={<RedeemPoints />} />} />
+        <Route path="/reward-management" element={<AdminRoute element={<RewardManagement />} />} />
         <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} />} />
-        <Route path="/survey" element={<PrivateRoute element={<Survey />} />} />
         <Route path="/event/:id" element={<PrivateRoute element={<EventDetails />} />} />
+        
+        {/* Routes for Previous folder components */}
+        <Route path="/events" element={<PrivateRoute element={<EventsPage />} />} />
+        <Route path="/admin-events" element={<AdminRoute element={<AdminEventsPage />} />} />
+        
+        {/* Survey route is now only accessible via notification or event completion */}
+        <Route path="/survey/:eventId" element={<PrivateRoute element={<Survey />} />} />
       </Routes>
 
       <footer className="footer">

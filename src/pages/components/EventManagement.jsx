@@ -1,21 +1,18 @@
-// src/pages/components/EventManagement.jsx
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { getAllEvents, reviewEvent, deleteEvent } from "../../services/eventService";
-import "./EventManagement.css";
 
 const EventManagement = () => {
   const { user, userRole } = useContext(AuthContext);
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [filter, setFilter] = useState("pending"); // pending, approved, rejected, all
   const [reviewNotes, setReviewNotes] = useState("");
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [actionLoading, setActionLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
-  // Check if user is admin
+  // Only allow admin access
   if (userRole !== "admin") {
     return (
       <div className="event-management-container">
@@ -27,15 +24,16 @@ const EventManagement = () => {
 
   useEffect(() => {
     fetchEvents();
-  }, [filter]);
+  }, [user]);
 
   const fetchEvents = async () => {
+    if (!user) return;
+
     setLoading(true);
     setError("");
-    
+
     try {
-      const result = await getAllEvents(filter === "all" ? null : filter);
-      
+      const result = await getAllEvents();
       if (result.success) {
         setEvents(result.events);
       } else {
@@ -52,15 +50,15 @@ const EventManagement = () => {
   const handleReview = async (eventId, status) => {
     setActionLoading(true);
     setSuccessMessage("");
-    
+
     try {
       const result = await reviewEvent(eventId, status, user.uid, reviewNotes);
-      
+
       if (result.success) {
         setSuccessMessage(`Event ${status === "approved" ? "approved" : "rejected"} successfully`);
         setReviewNotes("");
         setSelectedEvent(null);
-        fetchEvents(); // Refresh the list
+        fetchEvents();
       } else {
         setError(result.error || "Failed to update event status");
       }
@@ -76,16 +74,16 @@ const EventManagement = () => {
     if (!window.confirm("Are you sure you want to delete this event? This action cannot be undone.")) {
       return;
     }
-    
+
     setActionLoading(true);
     setSuccessMessage("");
-    
+
     try {
       const result = await deleteEvent(eventId);
-      
+
       if (result.success) {
         setSuccessMessage("Event deleted successfully");
-        fetchEvents(); // Refresh the list
+        fetchEvents();
       } else {
         setError(result.error || "Failed to delete event");
       }
@@ -103,101 +101,106 @@ const EventManagement = () => {
     return date.toLocaleDateString() + " " + date.toLocaleTimeString();
   };
 
+  // Group events by status
+  const pendingEvents = events.filter(event => !event.status || event.status === "pending");
+  const approvedEvents = events.filter(event => event.status === "approved");
+  const rejectedEvents = events.filter(event => event.status === "rejected");
+
+  // Render an event card
+  const renderEventCard = (event) => (
+    <div key={event.id} className={`event-card ${event.status || "pending"}`}>
+      <div className="event-header">
+        <h3>{event.title}</h3>
+        <span className="event-status">{event.status || "pending"}</span>
+      </div>
+
+      <div className="event-details">
+        <p><strong>Date:</strong> {formatDate(event.dateTime || event.date)}</p>
+        <p><strong>Location:</strong> {event.location}</p>
+        <p><strong>Category:</strong> {event.category}</p>
+        <p><strong>Points:</strong> {event.points}</p>
+        {event.organizer && <p><strong>Organizer:</strong> {event.organizer}</p>}
+        <p><strong>Created:</strong> {formatDate(event.createdAt?.toDate())}</p>
+        {event.reviewedAt && (
+          <p><strong>Reviewed:</strong> {formatDate(event.reviewedAt.toDate())}</p>
+        )}
+        {event.reviewNotes && (
+          <p><strong>Review Notes:</strong> {event.reviewNotes}</p>
+        )}
+      </div>
+
+      <div className="event-description">
+        <p>{event.description}</p>
+      </div>
+
+      <div className="event-actions">
+        <button className="approve-button" onClick={() => setSelectedEvent(event)} disabled={actionLoading}>
+          Review
+        </button>
+        <button className="delete-button" onClick={() => handleDelete(event.id)} disabled={actionLoading}>
+          Delete
+        </button>
+      </div>
+    </div>
+  );
+
   return (
     <div className="event-management-container">
       <h2>Event Management</h2>
-      
+
       {successMessage && <div className="success-message">{successMessage}</div>}
       {error && <div className="error-message">{error}</div>}
-      
-      <div className="filter-controls">
-        <label htmlFor="filter">Filter by status:</label>
-        <select 
-          id="filter" 
-          value={filter} 
-          onChange={(e) => setFilter(e.target.value)}
-          disabled={loading}
-        >
-          <option value="pending">Pending Review</option>
-          <option value="approved">Approved</option>
-          <option value="rejected">Rejected</option>
-          <option value="all">All Events</option>
-        </select>
-        
-        <button 
-          className="refresh-button" 
-          onClick={fetchEvents} 
-          disabled={loading}
-        >
-          Refresh
-        </button>
-      </div>
-      
+
+      <button className="refresh-button" onClick={fetchEvents} disabled={loading}>
+        Refresh
+      </button>
+
       {loading ? (
         <div className="loading">Loading events...</div>
       ) : events.length === 0 ? (
-        <div className="no-events">No {filter !== "all" ? filter : ""} events found</div>
+        <div className="no-events">No events found</div>
       ) : (
-        <div className="events-list">
-          {events.map((event) => (
-            <div key={event.id} className={`event-card ${event.status}`}>
-              <div className="event-header">
-                <h3>{event.title}</h3>
-                <span className={`status-badge ${event.status}`}>
-                  {event.status.charAt(0).toUpperCase() + event.status.slice(1)}
-                </span>
+        <div className="events-sections">
+          <div className="events-section pending-section">
+            <h3>Pending Events ({pendingEvents.length})</h3>
+            {pendingEvents.length === 0 ? (
+              <p>No pending events</p>
+            ) : (
+              <div className="events-list">
+                {pendingEvents.map(renderEventCard)}
               </div>
-              
-              <div className="event-details">
-                <p><strong>Date:</strong> {formatDate(event.dateTime || event.date)}</p>
-                <p><strong>Location:</strong> {event.location}</p>
-                <p><strong>Category:</strong> {event.category}</p>
-                <p><strong>Points:</strong> {event.points}</p>
-                {event.organizer && <p><strong>Organizer:</strong> {event.organizer}</p>}
-                <p><strong>Created:</strong> {formatDate(event.createdAt?.toDate())}</p>
-                {event.reviewedAt && (
-                  <p><strong>Reviewed:</strong> {formatDate(event.reviewedAt.toDate())}</p>
-                )}
-                {event.reviewNotes && (
-                  <p><strong>Review Notes:</strong> {event.reviewNotes}</p>
-                )}
+            )}
+          </div>
+
+          <div className="events-section approved-section">
+            <h3>Approved Events ({approvedEvents.length})</h3>
+            {approvedEvents.length === 0 ? (
+              <p>No approved events</p>
+            ) : (
+              <div className="events-list">
+                {approvedEvents.map(renderEventCard)}
               </div>
-              
-              <div className="event-description">
-                <p>{event.description}</p>
+            )}
+          </div>
+
+          <div className="events-section rejected-section">
+            <h3>Rejected Events ({rejectedEvents.length})</h3>
+            {rejectedEvents.length === 0 ? (
+              <p>No rejected events</p>
+            ) : (
+              <div className="events-list">
+                {rejectedEvents.map(renderEventCard)}
               </div>
-              
-              <div className="event-actions">
-                {event.status === "pending" && (
-                  <>
-                    <button 
-                      className="approve-button" 
-                      onClick={() => setSelectedEvent(event)}
-                      disabled={actionLoading}
-                    >
-                      Review
-                    </button>
-                  </>
-                )}
-                
-                <button 
-                  className="delete-button" 
-                  onClick={() => handleDelete(event.id)}
-                  disabled={actionLoading}
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          ))}
+            )}
+          </div>
         </div>
       )}
-      
+
       {selectedEvent && (
         <div className="review-modal">
           <div className="review-modal-content">
             <h3>Review Event: {selectedEvent.title}</h3>
-            
+
             <div className="review-form">
               <div className="form-group">
                 <label htmlFor="reviewNotes">Review Notes (optional):</label>
@@ -208,32 +211,17 @@ const EventManagement = () => {
                   placeholder="Add notes about your decision..."
                 />
               </div>
-              
+
               <div className="review-actions">
-                <button 
-                  className="approve-button" 
-                  onClick={() => handleReview(selectedEvent.id, "approved")}
-                  disabled={actionLoading}
-                >
+                <button className="approve-button" onClick={() => handleReview(selectedEvent.id, "approved")} disabled={actionLoading}>
                   {actionLoading ? "Processing..." : "Approve"}
                 </button>
-                
-                <button 
-                  className="reject-button" 
-                  onClick={() => handleReview(selectedEvent.id, "rejected")}
-                  disabled={actionLoading}
-                >
+
+                <button className="reject-button" onClick={() => handleReview(selectedEvent.id, "rejected")} disabled={actionLoading}>
                   {actionLoading ? "Processing..." : "Reject"}
                 </button>
-                
-                <button 
-                  className="cancel-button" 
-                  onClick={() => {
-                    setSelectedEvent(null);
-                    setReviewNotes("");
-                  }}
-                  disabled={actionLoading}
-                >
+
+                <button className="cancel-button" onClick={() => { setSelectedEvent(null); setReviewNotes(""); }} disabled={actionLoading}>
                   Cancel
                 </button>
               </div>

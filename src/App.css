@@ -187,11 +187,11 @@ a {
 input {
   width: 100%;
   padding: 0.7rem;
-  margin: 0.3rem 0;
+  margin: 0.3rem 0; 
   border: none;
   border-radius: 0.3rem;
   /* background: #222; */
-  color: white;
+  color: black;
   font-size: 0.9rem;
   outline: none;
 }

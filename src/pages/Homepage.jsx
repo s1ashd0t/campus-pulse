@@ -71,14 +71,10 @@ const Homepage = () => {
                                 </Link>
                             ))}
                         </div>
-                        <Link to="/search" className="view-all-link">View All Events</Link>
+                        <Link to="/events" className="view-all-link">View All Events</Link>
                     </section>
 
-                    <div className="survey-link-container">
-                        <Link to="/survey" className="quick-link">
-                            <span>Take Surveys</span>
-                        </Link>
-                    </div>
+                    {/* Surveys are now only accessible after event attendance */}
                 </div>
             </div>
         </div>

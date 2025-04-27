@@ -1,5 +1,5 @@
 // src/pages/components/CreateEvent.jsx
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { createEvent } from "../../services/eventService";
 import "./CreateEvent.css";
@@ -21,22 +21,12 @@ export default function CreateEvent() {
     imageUrl: "",
     organizer: "",
     contactEmail: "",
-    status: "pending" // Default to pending for non-admins
+    status: "pending" // All events start as pending
   });
   
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  
-  // Set default status based on role
-  useEffect(() => {
-    if (isAdmin) {
-      setEventData(prev => ({
-        ...prev,
-        status: "approved" // Admins can create pre-approved events
-      }));
-    }
-  }, [isAdmin]);
 
   const validateForm = () => {
     const newErrors = {};
@@ -97,7 +87,7 @@ export default function CreateEvent() {
           imageUrl: "",
           organizer: "",
           contactEmail: "",
-          status: isAdmin ? "approved" : "pending"
+          status: "pending" // Always reset to pending
         });
       } else {
         setErrors({ submit: result.error });
@@ -128,13 +118,11 @@ export default function CreateEvent() {
 
   return (
     <div className="create-event-container">
-      <h2>{isAdmin ? "Create New Event" : "Propose New Event"}</h2>
+      <h2>Propose New Event</h2>
       
       {success && (
         <div className="success-message">
-          {isAdmin 
-            ? "Event created successfully! It is now visible to all users." 
-            : "Event submitted successfully! It will be reviewed by an administrator."}
+          Event submitted successfully! It will be reviewed by an administrator.
         </div>
       )}
       
@@ -304,24 +292,8 @@ export default function CreateEvent() {
           />
         </div>
         
-        {isAdmin && (
-          <div className="form-group">
-            <label htmlFor="status">Status</label>
-            <select
-              id="status"
-              name="status"
-              value={eventData.status}
-              onChange={handleChange}
-            >
-              <option value="approved">Approved</option>
-              <option value="pending">Pending</option>
-              <option value="rejected">Rejected</option>
-            </select>
-          </div>
-        )}
-        
         <button type="submit" disabled={loading}>
-          {loading ? "Creating..." : isAdmin ? "Create Event" : "Submit for Approval"}
+          {loading ? "Submitting..." : "Submit for Approval"}
         </button>
       </form>
     </div>

@@ -1,0 +1,160 @@
+.admin-homepage-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.admin-homepage-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.admin-homepage-content {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.admin-left-column {
+  flex: 1;
+}
+
+.admin-right-column {
+  flex: 2;
+}
+
+.admin-quick-links {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.admin-quick-links h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.admin-links-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.admin-quick-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.admin-quick-link:hover {
+  background-color: #4285f4;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.pending-events, .recent-events {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.pending-events h2, .recent-events h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.admin-events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-event-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.admin-event-card:hover {
+  transform: translateY(-2px);
+}
+
+.admin-event-details h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 1rem;
+}
+
+.admin-event-details p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.review-button {
+  padding: 8px 16px;
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.review-button:hover {
+  background-color: #3367d6;
+}
+
+.view-all-link {
+  display: block;
+  text-align: center;
+  margin-top: 15px;
+  color: #4285f4;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.view-all-link:hover {
+  text-decoration: underline;
+}
+
+.loading, .no-events, .error-message {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+}
+
+.error-message {
+  color: #f44336;
+}
+
+@media (max-width: 768px) {
+  .admin-homepage-content {
+    flex-direction: column;
+  }
+  
+  .admin-left-column, .admin-right-column {
+    width: 100%;
+  }
+}

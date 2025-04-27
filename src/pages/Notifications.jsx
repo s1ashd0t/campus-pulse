@@ -11,31 +11,44 @@ const Notifications = () => {
 
     useEffect(() => {
         const fetchNotifications = async () => {
-            if (user) {
-                try {
-                    const result = await getUserNotifications(user.uid);
-                    if (result.success) {
-                        setNotifications(result.notifications);
-                    } else {
-                        setError("Failed to load notifications");
-                    }
-                } catch (err) {
-                    setError("An error occurred while fetching notifications");
-                } finally {
-                    setLoading(false);
+            if (!user) {
+                console.warn("No user detected in AuthContext.");
+                return;
+            }
+
+            try {
+                setLoading(true);
+                console.log("Fetching notifications for user ID:", user.uid);
+
+                const result = await getUserNotifications(user.uid);
+
+                if (result.success) {
+                    setNotifications(result.notifications);
+                    setError("");
+                } else {
+                    setError("An error fetching notifications. Please try again later.");
                 }
+            } catch (err) {
+                console.error("Error fetching notifications:", err);
+                setError("An error fetching notifications. Please try again later.");
+            } finally {
+                setLoading(false);
             }
         };
 
-        fetchNotifications();
+        // Explicitly wait for user to be defined
+        if (user !== undefined) {
+            fetchNotifications();
+        }
     }, [user]);
 
     const handleMarkAsRead = async (notificationId) => {
         try {
             const result = await markNotificationAsRead(notificationId);
+
             if (result.success) {
                 setNotifications(notifications.map(notif => 
-                    notif.id === notificationId ? {...notif, read: true} : notif
+                    notif.id === notificationId ? { ...notif, read: true } : notif
                 ));
             }
         } catch (err) {
@@ -43,18 +56,28 @@ const Notifications = () => {
         }
     };
 
-    // Helper function to get emoji based on notification type
     const getNotificationEmoji = (type) => {
         switch (type) {
             case 'event': return '🎉';
             case 'points': return '🎁';
             case 'admin': return '📢';
+            case 'rsvp': return '✅';
             default: return '🔔';
         }
     };
 
     if (loading) return <div className="loading">Loading notifications...</div>;
-    if (error) return <div className="error">{error}</div>;
+
+    if (error) return (
+        <div className="error">
+            <p>{error}</p>
+            {user ? (
+                <p>Check if your notifications exist in the database for user ID: <code>{user.uid}</code></p>
+            ) : (
+                <p>Waiting for user to be loaded...</p>
+            )}
+        </div>
+    );
 
     return (
         <div className="notifications-container">
@@ -64,8 +87,8 @@ const Notifications = () => {
             ) : (
                 <ul>
                     {notifications.map((notif) => (
-                        <li 
-                            key={notif.id} 
+                        <li
+                            key={notif.id}
                             className={`hover-card ${notif.read ? 'read' : 'unread'}`}
                             onClick={() => !notif.read && handleMarkAsRead(notif.id)}
                         >
