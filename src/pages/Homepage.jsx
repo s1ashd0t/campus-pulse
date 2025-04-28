@@ -1,46 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
+import { db } from '../firebase';
 import './Homepage.css';
 import qrcode from '../assets/scan-icon.svg';
 import searchicon from '../assets/search-icon.svg';
 import leaderboardicon from '../assets/leaderboard.svg';
 import profileicon from '../assets/name-id-icon.svg';
-import news1 from '../assets/newapp.jpg';
-import news2 from '../assets/careerexpo.jpg';
-import news3 from '../assets/volun.jpg';
-
-const newsItems = [
-    {
-        image: news1,
-        title: "New App to Boost Student Engagement at PFW",
-        link: "#"
-    },
-    {
-        image: news2,
-        title: "Student Engagement Workshops Return This Spring",
-        link: "#"
-    },
-    {
-        image: news3,
-        title: "Volunteer Fair to Connect Students with Local Non-Profits",
-        link: "#"
-    },
-    {
-        image: news2,
-        title: "Purdue Fort Wayne Hosts Spring 2025 Clubs & Organizations Fair",
-        link: "#"
-    },
-    {
-        image: news3,
-        title: "PFW Launches New Mentorship Program for Student Success",
-        link: "#"
-    },
-    {
-        image: news1,
-        title: "Campus Wellness Week Promotes Health and Well-being",
-        link: "#"
-    }
-];
 
 const quickLinks = [
     {
@@ -66,6 +32,34 @@ const quickLinks = [
 ];
 
 const Homepage = () => {
+    const [newsItems, setNewsItems] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchNews = async () => {
+            try {
+                const newsRef = collection(db, 'news');
+                const q = query(newsRef, orderBy('createdAt', 'desc'), limit(6));
+                const querySnapshot = await getDocs(q);
+                
+                const newsData = querySnapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data()
+                }));
+                
+                setNewsItems(newsData);
+            } catch (err) {
+                console.error('Error fetching news:', err);
+                setError('Failed to load news items');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchNews();
+    }, []);
+
     return (
         <main className="homepage">
             <h1>Quick Actions</h1>
@@ -83,14 +77,22 @@ const Homepage = () => {
             <section className="news-container">
                 <h1>Updates</h1>
                 <div className="news-section">
-                    {newsItems.map((news, index) => (
-                        <article className="newscard" key={index}>
-                            <img src={news.image} alt={news.title} />
-                            <div className="newscard-content">
-                                {news.title}
-                            </div>
-                        </article>
-                    ))}
+                    {loading ? (
+                        <div className="loading">Loading news...</div>
+                    ) : error ? (
+                        <div className="error">{error}</div>
+                    ) : newsItems.length > 0 ? (
+                        newsItems.map((news) => (
+                            <article className="newscard" key={news.id}>
+                                <img src={news.image} alt={news.title} />
+                                <div className="newscard-content">
+                                    {news.title}
+                                </div>
+                            </article>
+                        ))
+                    ) : (
+                        <div className="no-news">No news items available</div>
+                    )}
                 </div>
             </section>
         </main>

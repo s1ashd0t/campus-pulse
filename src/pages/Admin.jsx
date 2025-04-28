@@ -1,9 +1,11 @@
 // src/pages/Admin.jsx
 import { useAuth } from "../context/AuthContext";
 import CreateEvent from "./components/CreateEvent";
+import CreateNews from "./components/CreateNews";
 import EventList from "./components/EventList";
 import CurrentUsers from "./components/CurrentUsers";
 import "./admin.css"; // Assuming you have a CSS file for admin styles
+
 const Admin = () => {
   const { isAdmin } = useAuth();
 
@@ -14,11 +16,13 @@ const Admin = () => {
         <div className="admin-section">
           <CreateEvent />
         </div>
-        <div className="admin-section">
+        <div className="news-section">
+          <CreateNews />
+        </div>
+        <div >
           <EventList />
         </div>
         <div className="admin-section">
-          {/* Assuming CurrentUsers is a component that lists current users */}
           <CurrentUsers />
         </div>
       </div>

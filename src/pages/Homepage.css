@@ -95,15 +95,13 @@ textarea {
     width: 100%;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 568px) {
     .homepage {
         width: 95vw;
         padding: 0.5rem;
     }
 
-    .cards {
-        padding: 0.5rem;
-    }
+
 
     .news-section {
         padding: 1rem;

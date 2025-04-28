@@ -1,64 +1,79 @@
-.scanner {
-    margin-top: 1rem;
-    padding: 2rem;
+.scanner-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    justify-content: center;
+    min-height: 80vh;
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
-#status {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    background-color: rgba(143, 102, 22, 0.8);
-    padding: 1rem;
-    border-radius: 15px;
-    text-align: center;
-    width: auto;
-    min-width: 200px;
-}
-
-.status-message{
-    background-color: red;
-    padding: 1rem;
-    border-radius: 15px;
-    text-align: center;
-    width: auto;
-    min-width: 200px;
-    color: white;
-    font-weight: bold;
-}
-
-video {
+.scanner-wrapper {
+    position: relative;
     width: 100%;
     max-width: 600px;
+    aspect-ratio: 4/3;
+    background-color: #000;
     border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
-.qr-scanner-container {
-    position: relative;
-    display: inline-block;
-    background: rgba(0, 0, 0, 0.8);
-    padding: 2rem;
+.scanner-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     border-radius: 15px;
 }
 
 .scan-line {
-    position: inherit;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 2px;
-    background-color: #4CAF50;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        #4CAF50 20%, 
+        #4CAF50 80%, 
+        transparent 100%);
     animation: scan 2s linear infinite;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
 }
 
-#result {
-    background: rgba(0, 0, 0, 0.8);
+.scan-result {
+    margin-top: 2rem;
     padding: 1rem;
-    border-radius: 15px;
-    margin-top: 1rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
+    width: 100%;
+    max-width: 600px;
+}
+
+.scan-result p:first-child {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.scan-result p:last-child {
+    color: #666;
+    word-break: break-all;
+}
+
+.status-message {
+    background-color: #dc3545;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 600px;
+    width: 90%;
+    margin: 2rem auto;
+    font-weight: 500;
+    box-shadow: 0 2px 10px rgba(220, 53, 69, 0.2);
 }
 
 @keyframes scan {
@@ -66,7 +81,7 @@ video {
         top: 0;
     }
     50% {
-        top: 100%;
+        top: calc(100% - 2px);
     }
     100% {
         top: 0;
@@ -74,7 +89,16 @@ video {
 }
 
 @media (max-width: 768px) {
-    video {
-        width: 90vw;
+    .scanner-container {
+        padding: 1rem;
+    }
+    
+    .scanner-wrapper {
+        width: 90%;
+    }
+    
+    .status-message {
+        width: 85%;
+        padding: 0.75rem 1rem;
     }
 }
