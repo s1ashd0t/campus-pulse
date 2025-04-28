@@ -29,7 +29,7 @@ import Dashboard from "./pages/dashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminHomepage from "./pages/AdminHomepage";
 import AdminEventsPage from "./pages/AdminEventsPage";
-
+import Events from "./pages/Events";
 
 const PrivateRoute = ({ element, requireAdmin }) => {
   const { user, userRole, loading } = useContext(AuthContext);
@@ -45,17 +45,29 @@ const PrivateRoute = ({ element, requireAdmin }) => {
   
   // If route requires admin access but user is not admin
   if (requireAdmin && userRole !== "admin") {
-    return <Navigate to="/homepage" />;
+    return <Navigate to="/unauthorized" />;
   }
   
   return element;
 };
 
-// Admin route wrapper
 const AdminRoute = ({ element }) => {
-  return <PrivateRoute element={element} requireAdmin={true} />;
-};
+  const { user, userRole, loading } = useContext(AuthContext);
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!user) {
+    return <Navigate to="/login" />;
+  }
+
+  if (userRole !== "admin") {
+    return <Navigate to="/unauthorized" />;
+  }
+
+  return element;
+};
 
 function App() {
   const [showNav, setShowNav] = useState(false);
@@ -108,6 +120,11 @@ function App() {
         <Route path="/leaderboard" element={<PrivateRoute element={<Leaderboard />} />} />
         <Route path="/notifications" element={<PrivateRoute element={<Notifications />} />} />
         <Route path="/register/:eventId" element={<PrivateRoute element={<EventRegistration />} />} />
+        <Route path="/events" element={<PrivateRoute element={<Events />} />} />
+        <Route path="/event/:id" element={<PrivateRoute element={<EventDetails />} />} />
+        <Route path="/survey" element={<PrivateRoute element={<Survey />} />} />
+        <Route path="/redeem" element={<PrivateRoute element={<RedeemPoints />} />} />
+        <Route path="/test-notifications" element={<PrivateRoute element={<TestNotifications />} />} />
       </Routes>
 
       <footer className="footer">

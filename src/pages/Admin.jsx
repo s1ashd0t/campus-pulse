@@ -7,7 +7,7 @@ import CurrentUsers from "./components/CurrentUsers";
 import "./admin.css"; // Assuming you have a CSS file for admin styles
 
 const Admin = () => {
-  const { isAdmin } = useAuth();
+  // const { isAdmin } = useAuth();
 
   return (
     <div className="admin-container">

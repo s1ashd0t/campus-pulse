@@ -1,24 +1,28 @@
 // src/Profile.jsx
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../firebase";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { auth, storage } from "../firebase";
 import { getCurrentUserData, updateUserData, logout } from "../services/authService";
 import "./Profile.css";
 
 function Profile() {
     const navigate = useNavigate();
+    const fileInputRef = useRef(null);
     const [userData, setUserData] = useState({
         firstName: "",
         lastName: "",
         email: "",
         phoneNumber: "",
-        dob: ""
+        dob: "",
+        avatar: ""
     });
     const [isEditing, setIsEditing] = useState(false);
     const [signupMethod, setSignupMethod] = useState("email");
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+    const [uploadingImage, setUploadingImage] = useState(false);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -91,6 +95,49 @@ function Profile() {
         }
     };
 
+    const handleImageUpload = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        if (file.size > 5 * 1024 * 1024) { // 5MB limit
+            setError("Image size should be less than 5MB");
+            return;
+        }
+
+        try {
+            setUploadingImage(true);
+            setError("");
+            const user = auth.currentUser;
+            
+            if (!user) {
+                navigate("/login");
+                return;
+            }
+
+            const storageRef = ref(storage, `profilePictures/${user.uid}_${Date.now()}`);
+            await uploadBytes(storageRef, file);
+            const downloadURL = await getDownloadURL(storageRef);
+            
+            const result = await updateUserData(user.uid, {
+                ...userData,
+                avatar: downloadURL
+            });
+
+            if (result.success) {
+                setUserData(prev => ({
+                    ...prev,
+                    avatar: downloadURL
+                }));
+            } else {
+                setError(result.error);
+            }
+        } catch (error) {
+            setError("Error uploading image: " + error.message);
+        } finally {
+            setUploadingImage(false);
+        }
+    };
+
     if (loading) {
         return <div className="profile-container">Loading...</div>;
     }
@@ -103,6 +150,14 @@ function Profile() {
             
             {!isEditing ? (
                 <div className="profile-view">
+                    <div className="profile-picture-container">
+                        <div className="profile-picture">
+                            <img 
+                                src={userData.avatar || "https://api.dicebear.com/7.x/avataaars/svg"} 
+                                alt="Profile" 
+                            />
+                        </div>
+                    </div>
                     <div className="profile-info">
                         <div className="profile-field">
                             <label>Name:</label>
@@ -144,6 +199,29 @@ function Profile() {
             ) : (
                 <div className="profile-edit">
                     <form onSubmit={handleSubmit}>
+                        <div className="profile-picture-container">
+                            <div className="profile-picture">
+                                <img 
+                                    src={userData.avatar || "https://api.dicebear.com/7.x/avataaars/svg"} 
+                                    alt="Profile" 
+                                />
+                                <button 
+                                    type="button"
+                                    className="change-picture-button"
+                                    onClick={() => fileInputRef.current.click()}
+                                    disabled={uploadingImage}
+                                >
+                                    {uploadingImage ? "Uploading..." : "Change Picture"}
+                                </button>
+                                <input
+                                    type="file"
+                                    ref={fileInputRef}
+                                    accept="image/*"
+                                    onChange={handleImageUpload}
+                                    style={{ display: 'none' }}
+                                />
+                            </div>
+                        </div>
                         <div className="form-row">
                             <div className="form-group">
                                 <label>First Name</label>

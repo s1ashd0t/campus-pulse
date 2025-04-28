@@ -73,7 +73,7 @@ const CreateNews = () => {
 
     return (
         <div className="create-news">
-            <h2>Add News Item</h2>
+            <h2>Add Update</h2>
             {error && <div className="error-message">{error}</div>}
             {success && <div className="success-message">News item created successfully!</div>}
             <form onSubmit={handleSubmit}>

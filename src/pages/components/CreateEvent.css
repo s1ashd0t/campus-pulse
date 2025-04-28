@@ -23,7 +23,8 @@
 }
 
 .create-event input,
-.create-event textarea {
+.create-event textarea,
+.create-event select {
     width: 100%;
     padding: 0.7rem;
     background: var(--background-light);
@@ -31,6 +32,26 @@
     border-radius: 0.3rem;
     color: var(--text-color);
     font-size: 1rem;
+}
+
+.create-event select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.7rem center;
+    background-size: 1.5rem;
+    padding-right: 2.5rem;
+}
+
+.create-event select:focus {
+    background: rgba(0, 0, 0);
+    box-shadow: var(--shadow);
+    border-color: var(--primary-color);
+}
+
+.create-event select:focus {
+    outline: none;
+    border-color: var(--primary-color);
 }
 
 .create-event textarea {

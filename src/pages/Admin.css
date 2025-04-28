@@ -84,7 +84,7 @@ li {
     background: var(--background-dark);
     padding: 1rem;
     border-radius: var(--border-radius);
-    height: 500px;
+    /* height: 500px; */
 }
 
 .admin-section h2 {

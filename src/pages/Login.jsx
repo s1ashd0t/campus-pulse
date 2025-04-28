@@ -1,11 +1,13 @@
 // src/pages/Login.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginWithEmail, loginWithGoogle, loginWithFacebook, resetPassword } from "../services/authService";
+import { loginWithEmail, loginWithGoogle, loginWithFacebook, resetPassword, getCurrentUserData } from "../services/authService";
+import { useAuth } from "../context/AuthContext";
 import "../styles/auth.css";
 
 function Login() {
     const navigate = useNavigate();
+    const { userRole } = useAuth();
     const [formData, setFormData] = useState({
         email: "",
         password: ""
@@ -30,7 +32,13 @@ function Login() {
         const result = await loginWithEmail(formData.email, formData.password);
         
         if (result.success) {
-            navigate("/Homepage");
+            // Check user role and redirect accordingly
+            const userDoc = await getCurrentUserData(result.user.uid);
+            if (userDoc.success && userDoc.userData.role === "admin") {
+                navigate("/admin");
+            } else {
+                navigate("/homepage");
+            }
         } else {
             setError(result.error);
         }
@@ -48,7 +56,13 @@ function Login() {
             }
             
             if (result.success) {
-                navigate("/Homepage");
+                // Check user role and redirect accordingly
+                const userDoc = await getCurrentUserData(result.user.uid);
+                if (userDoc.success && userDoc.userData.role === "admin") {
+                    navigate("/admin");
+                } else {
+                    navigate("/homepage");
+                }
             } else {
                 setError(result.error);
             }

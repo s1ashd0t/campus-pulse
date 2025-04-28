@@ -5,7 +5,7 @@ import { db } from '../firebase';
 import './Homepage.css';
 import qrcode from '../assets/scan-icon.svg';
 import searchicon from '../assets/search-icon.svg';
-import leaderboardicon from '../assets/leaderboard.svg';
+import eventsicon from '../assets/leaderboard.svg';
 import profileicon from '../assets/name-id-icon.svg';
 
 const quickLinks = [
@@ -15,14 +15,14 @@ const quickLinks = [
         path: "/scanner"
     },
     {
+        icon: eventsicon,
+        title: "Events",
+        path: "/events"
+    },
+    {
         icon: searchicon,
         title: "Search",
         path: "/search"
-    },
-    {
-        icon: leaderboardicon,
-        title: "Leaderboard",
-        path: "/leaderboard"
     },
     {
         icon: profileicon,

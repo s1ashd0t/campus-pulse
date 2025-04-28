@@ -1,21 +1,26 @@
 // src/components/CreateEvent.jsx
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { addDoc, collection, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import QRCode from 'qrcode';
 import "./CreateEvent.css";
+import { AuthContext } from "../../context/AuthContext";
+
+const CAMPUS_LOCATIONS = ["Walb Union", "Kettler Hall", "Music Center"];
 
 export default function CreateEvent({ onSuccess }) {
   const { user, userRole } = useContext(AuthContext);
   const [eventData, setEventData] = useState({
     title: "",
     date: "",
-    location: "",
+    location: CAMPUS_LOCATIONS[0], // Default to first location
     description: "",
     points: 10,
     time: ""
   });
   const [qrCodeUrl, setQrCodeUrl] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const generateEventQRCode = async (eventId) => {
     try {
@@ -34,19 +39,19 @@ export default function CreateEvent({ onSuccess }) {
     setError("");
     
     try {
-      // Add event to Firestore
+      // Add event to Firestore with status "approved" since it's created by admin
       const eventRef = await addDoc(collection(db, "events"), {
         ...eventData,
+        status: "approved", // Explicitly setting status to approved
+        createdBy: user.uid,
         createdAt: new Date(),
         registeredUsers: [],
-        maxCapacity: 100, // Default capacity
+        maxCapacity: 100,
         isActive: true
       });
 
-      // Generate QR code for the event
       const qrCode = await generateEventQRCode(eventRef.id);
       
-      // Update event with QR code URL
       if (qrCode) {
         await updateDoc(eventRef, {
           qrCodeUrl: qrCode
@@ -54,12 +59,23 @@ export default function CreateEvent({ onSuccess }) {
         setQrCodeUrl(qrCode);
       }
 
-      alert("Event created successfully!");
-      setEventData({ title: "", date: "", location: "", description: "" });
+      if (onSuccess) {
+        onSuccess();
+      }
+
+      setEventData({
+        title: "",
+        date: "",
+        location: CAMPUS_LOCATIONS[0],
+        description: "",
+        points: 10,
+        time: ""
+      });
     } catch (error) {
       console.error("Error adding event: ", error);
-      alert("Error creating event. Please try again.");
-
+      setError("Failed to create event. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -74,6 +90,7 @@ export default function CreateEvent({ onSuccess }) {
   return (
     <div className="create-event">
       <h2>Create Event</h2>
+      {error && <div className="error-message">{error}</div>}
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -90,14 +107,18 @@ export default function CreateEvent({ onSuccess }) {
           onChange={handleChange}
           required
         />
-        <input
-          type="text"
-          placeholder="Location"
+        <select
           name="location"
           value={eventData.location}
           onChange={handleChange}
           required
-        />
+        >
+          {CAMPUS_LOCATIONS.map(location => (
+            <option key={location} value={location}>
+              {location}
+            </option>
+          ))}
+        </select>
         <textarea
           placeholder="Description"
           name="description"
@@ -105,16 +126,10 @@ export default function CreateEvent({ onSuccess }) {
           onChange={handleChange}
           required
         />
-        <button type="submit">Create Event</button>
+        <button type="submit" disabled={loading}>
+          {loading ? "Creating..." : "Create Event"}
+        </button>
       </form>
-      
-      {qrCodeUrl && (
-        <div className="qr-code-preview">
-          <h3>Event QR Code</h3>
-          <img src={qrCodeUrl} alt="Event QR Code" />
-          <p>Share this QR code with attendees for easy registration</p>
-        </div>
-      )}
-    </div>
-  );
+      </div>
+    );
 }
