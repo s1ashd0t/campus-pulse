@@ -20,6 +20,8 @@ import menuIcon from "./assets/menu.svg";
 import closeIcon from "./assets/close.svg";
 import icon from "./assets/icon.png";
 import Dashboard from "./pages/dashboard";
+import { FaBell, FaUserCircle, FaChartBar } from 'react-icons/fa';
+
 
 
 const PrivateRoute = ({ element }) => {
@@ -104,15 +106,29 @@ function App() {
           onClick={() => setShowNav(!showNav)}
         />
 
-        <div className="heading">
-          <a href="/">
-            <img src={icon} alt="" />
-            <div className="text">
-              <h1>Campus Pulse</h1>
-              <h6>Never miss a beat</h6>
-            </div>
-          </a>
-        </div>
+<div className="heading">
+  <Link to="/homepage" className="logo-link">
+    <img src={icon} alt="Campus Pulse Logo" />
+    <div className="text">
+      <h1>Campus Pulse</h1>
+      <h6>Never miss a beat</h6>
+    </div>
+  </Link>
+
+  {/* Right-aligned icons */}
+  <div className="header-icons">
+    <Link to="/notifications" title="Notifications">
+      <FaBell />
+    </Link>
+    <Link to="/profile" title="Profile">
+      <FaUserCircle />
+    </Link>
+    <Link to="/dashboard" title="Analytics">
+      <FaChartBar />
+    </Link>
+  </div>
+</div>
+
 
         {showNav && <NavBar isAuthenticated={isAuthenticated} onClose={() => setShowNav(false)} />}
 

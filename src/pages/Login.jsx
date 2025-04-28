@@ -49,7 +49,7 @@ function Login() {
             }
             
             if (result.success) {
-                navigate("/profile");
+                navigate("/homepage");
             } else {
                 setError(result.error);
             }

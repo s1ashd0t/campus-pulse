@@ -1,39 +1,102 @@
-import React, { useEffect, useState } from 'react';
-import './Notifications.css';
+import React, { useEffect, useState, useContext } from "react";
+import { collection, query, where, getDocs, updateDoc, deleteDoc, doc } from "firebase/firestore";
+import { db } from "../firebase";
+import { AuthContext } from "../context/AuthContext";
+import { FaTrash, FaCheck, FaStar } from "react-icons/fa";
+import "./Notifications.css";
 
 const Notifications = () => {
-    const [notifications, setNotifications] = useState([]);
+  const { user } = useContext(AuthContext);
+  const [notifications, setNotifications] = useState([]);
 
-    useEffect(() => {
-        // Expanded to 10 dummy notifications
-        const dummyNotifs = [
-            { message: '🎉 New Event: Tech Meetup', date: '2025-03-15' },
-            { message: '🏆 Leaderboard updated!', date: '2025-03-10' },
-            { message: '📢 Workshop: Resume Building', date: '2025-03-12' },
-            { message: '🎮 Gaming Night on Friday!', date: '2025-03-14' },
-            { message: '🎓 Seminar: Career Development', date: '2025-03-11' },
-            { message: '🏅 Badge awarded: Top Contributor', date: '2025-03-09' },
-            { message: '🚀 Hackathon registration open!', date: '2025-03-08' },
-            { message: '👥 New Group Study Session', date: '2025-03-13' },
-            { message: '🗓 Reminder: Club meeting tomorrow', date: '2025-03-16' },
-            { message: '🎁 Congrats! You earned 500 points!', date: '2025-03-07' },
-        ];
-        setNotifications(dummyNotifs);
-    }, []);
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      if (user) {
+        const notifRef = collection(db, "notifications");
+        const q = query(notifRef, where("userId", "==", user.uid));
+        const querySnapshot = await getDocs(q);
 
-    return (
-        <div className="notifications-container">
-            <h1>🔔 Notifications</h1>
-            <ul>
-                {notifications.map((notif, index) => (
-                    <li key={index} className="hover-card">
-                        <strong>{notif.message}</strong>
-                        <span>{notif.date}</span>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
+        const notifList = [];
+        querySnapshot.forEach((docSnap) => {
+          notifList.push({ id: docSnap.id, ...docSnap.data() });
+        });
+
+        setNotifications(notifList);
+      }
+    };
+
+    fetchNotifications();
+  }, [user]);
+
+  const toggleRead = async (id, currentStatus) => {
+    try {
+      const notifDoc = doc(db, "notifications", id);
+      await updateDoc(notifDoc, { read: !currentStatus });
+
+      setNotifications((prev) =>
+        prev.map((notif) =>
+          notif.id === id ? { ...notif, read: !currentStatus } : notif
+        )
+      );
+    } catch (error) {
+      console.error("Error updating notification:", error);
+    }
+  };
+
+  const deleteNotification = async (id) => {
+    try {
+      const notifDoc = doc(db, "notifications", id);
+      await deleteDoc(notifDoc);
+
+      setNotifications((prev) => prev.filter((notif) => notif.id !== id));
+    } catch (error) {
+      console.error("Error deleting notification:", error);
+    }
+  };
+
+  if (!user) {
+    return <p className="loading-text">Loading...</p>;
+  }
+
+  return (
+    <div className="notifications-container">
+      <h1>🔔 Notifications</h1>
+      <ul>
+        {notifications.length > 0 ? (
+          notifications.map((notif) => (
+            <li key={notif.id} className="notification-card">
+              <div className="notification-content">
+                <div className="notification-text">
+                  <span className={notif.read ? "read" : "unread"}>
+                    {notif.message}
+                  </span>
+                  <small>{notif.date}</small>
+                </div>
+                <div className="notification-actions">
+                  <span
+                    className="action-icon"
+                    title={notif.read ? "Mark Unread" : "Mark Read"}
+                    onClick={() => toggleRead(notif.id, notif.read)}
+                  >
+                    {notif.read ? <FaStar /> : <FaCheck />}
+                  </span>
+                  <span
+                    className="action-icon"
+                    title="Delete Notification"
+                    onClick={() => deleteNotification(notif.id)}
+                  >
+                    <FaTrash />
+                  </span>
+                </div>
+              </div>
+            </li>
+          ))
+        ) : (
+          <p>No notifications found.</p>
+        )}
+      </ul>
+    </div>
+  );
 };
 
 export default Notifications;

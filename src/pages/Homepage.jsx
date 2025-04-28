@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import { AuthContext } from '../context/AuthContext.jsx'; // Import AuthContext
 import './Homepage.css';
 import PointsSummary from './PointsSummary';
 
 const Homepage = () => {
+    const { user, loading } = useContext(AuthContext); // Get logged-in user
     const [upcomingEvents, setUpcomingEvents] = useState([]);
-    const [userPoints, setUserPoints] = useState(120);
-    
+    const [userPoints, setUserPoints] = useState(0); // Start from 0, not hardcoded 120
+    const db = getFirestore();
+
     useEffect(() => {
+        // Dummy Upcoming Events
         const dummyEvents = [
             {
                 id: 1,
@@ -36,7 +41,29 @@ const Homepage = () => {
         ];
         setUpcomingEvents(dummyEvents);
     }, []);
-    
+
+    useEffect(() => {
+        // Fetch user points from Firestore
+        const fetchUserPoints = async () => {
+            if (user) {
+                try {
+                    const userDocRef = doc(db, 'users', user.uid);
+                    const userDocSnap = await getDoc(userDocRef);
+                    if (userDocSnap.exists()) {
+                        const data = userDocSnap.data();
+                        setUserPoints(data.points ?? 0); // If no points, set 0
+                    }
+                } catch (error) {
+                    console.error("Error fetching user points:", error);
+                }
+            }
+        };
+
+        fetchUserPoints();
+    }, [user, db]);
+
+    if (loading) return <p>Loading...</p>;
+
     return (
         <div className="homepage-container">
             <div className="homepage-content">
@@ -50,7 +77,7 @@ const Homepage = () => {
                             <Link to="/profile" className="quick-link"><span>My Profile</span></Link>
                         </div>
                     </section>
-                    <PointsSummary points={userPoints} />
+                    <PointsSummary points={userPoints} /> {/* ✨ Now real points */}
                 </div>
                 <div className="left-column">
                     <section className="upcoming-events">

@@ -1,37 +1,69 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import './RedeemPoints.css';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext'; // Import AuthContext
+import { getFirestore, doc, getDoc, updateDoc } from 'firebase/firestore'; // Firestore functions
 
 const RedeemPoints = () => {
-    const [userPoints, setUserPoints] = useState(120); // Example starting points
+    const { user } = useContext(AuthContext);
+    const [userPoints, setUserPoints] = useState(null);
     const [redeemStatus, setRedeemStatus] = useState('');
     const navigate = useNavigate();
+    const db = getFirestore();
 
     const rewards = [
-        { id: 1, title: 'Discount Coupon (10%)', points: 50, image: '/api/placeholder/150/120', description: 'Valid at campus stores' },
-        { id: 2, title: 'Free Coffee/Snack', points: 60, image: '/api/placeholder/150/120', description: 'Redeem at campus cafeteria' },
-        { id: 3, title: 'Campus Water Bottle', points: 40, image: '/api/placeholder/150/120', description: 'Eco-friendly reusable bottle' },
-        { id: 4, title: 'Campus Hoodie', points: 100, image: '/api/placeholder/150/120', description: 'Comfortable university hoodie' },
-        { id: 5, title: 'Study Room Booking', points: 30, image: '/api/placeholder/150/120', description: 'Priority booking for 2 hours' },
-        { id: 6, title: 'Library Late Fee Waiver', points: 25, image: '/api/placeholder/150/120', description: 'One-time late fee waiver' },
+        { id: 1, title: 'Discount Coupon (10%)', points: 50, image: '/10d.png', description: 'Valid at campus stores' },
+        { id: 2, title: 'Free Coffee/Snack', points: 60, image: '/fcd.png', description: 'Redeem at campus cafeteria' },
+        { id: 3, title: 'Campus Water Bottle', points: 40, image: '/campwb.png', description: 'Eco-friendly reusable bottle' },
+        { id: 4, title: 'Campus Hoodie', points: 100, image: '/hoodie.png', description: 'Comfortable university hoodie' },
+        { id: 5, title: 'Study Room Booking', points: 30, image: '/stbook.png', description: 'Priority booking for 2 hours' },
+        { id: 6, title: 'Library Late Fee Waiver', points: 25, image: '/llfw.png', description: 'One-time late fee waiver' },
     ];
 
-    const handleRedeem = (reward) => {
+    useEffect(() => {
+        const fetchPoints = async () => {
+            if (user) {
+                const userRef = doc(db, 'users', user.uid);
+                const userSnap = await getDoc(userRef);
+                if (userSnap.exists()) {
+                    const data = userSnap.data();
+                    setUserPoints(data.points ?? 0);
+                }
+            }
+        };
+
+        fetchPoints();
+    }, [user, db]);
+
+    const handleRedeem = async (reward) => {
         if (userPoints >= reward.points) {
-            setUserPoints(prevPoints => prevPoints - reward.points);
-            setRedeemStatus(`Successfully redeemed ${reward.title}!`);
-            
-            setTimeout(() => {
-                setRedeemStatus('');
-            }, 3000);
+            const newPoints = userPoints - reward.points;
+            setUserPoints(newPoints);
+
+            try {
+                const userRef = doc(db, 'users', user.uid);
+                await updateDoc(userRef, {
+                    points: newPoints
+                });
+
+                setRedeemStatus(`Successfully redeemed ${reward.title}!`);
+                setTimeout(() => setRedeemStatus(''), 3000);
+
+            } catch (error) {
+                console.error("Error updating points:", error);
+                setRedeemStatus("Error redeeming reward. Try again.");
+                setTimeout(() => setRedeemStatus(''), 3000);
+            }
+
         } else {
             setRedeemStatus('Not enough points to redeem this reward.');
-            
-            setTimeout(() => {
-                setRedeemStatus('');
-            }, 3000);
+            setTimeout(() => setRedeemStatus(''), 3000);
         }
     };
+
+    if (userPoints === null) {
+        return <p className="loading-text">Loading your points...</p>;
+    }
 
     return (
         <div className="redeem-container">

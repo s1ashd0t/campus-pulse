@@ -1,37 +1,35 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext.jsx";
 import { useNavigate } from "react-router-dom";
-import { getFirestore, doc, getDoc } from "firebase/firestore"; // Import Firestore
-import "./Dashboard.css"; // Import the new dashboard styles
+import { getFirestore, doc, getDoc } from "firebase/firestore";
+import PointsSummary from "../pages/PointsSummary";
+import "./Dashboard.css";
 
 const Dashboard = () => {
   const { user, loading } = useContext(AuthContext);
   const navigate = useNavigate();
   const [dashboardData, setDashboardData] = useState(null);
-  const [error, setError] = useState(""); // Error handling
+  const [error, setError] = useState("");
 
-  const db = getFirestore(); // Firestore instance
+  const db = getFirestore();
 
-  // Redirect to login if user is not logged in
   useEffect(() => {
     if (!loading && !user) {
       navigate("/login");
     }
   }, [user, loading, navigate]);
-  
 
-  // Fetch user stats from Firestore
   useEffect(() => {
     if (user) {
       const fetchUserStats = async () => {
         try {
-          const userStatsRef = doc(db, "userStats", user.uid);
+          const userStatsRef = doc(db, "users", user.uid);
           const userStatsSnap = await getDoc(userStatsRef);
 
           if (userStatsSnap.exists()) {
-            setDashboardData(userStatsSnap.data()); // Store data
+            setDashboardData(userStatsSnap.data());
           } else {
-            setDashboardData(null);
+            setDashboardData({});
           }
         } catch (error) {
           setError("Error fetching stats. Please try again later.");
@@ -42,28 +40,43 @@ const Dashboard = () => {
     }
   }, [user, db]);
 
-  if (loading) return <p className="loading-text">Loading...</p>; // Loading state
-  if (!user) return null; // Prevent rendering if not logged in
+  if (loading) return <p className="loading-text">Loading...</p>;
+  if (!user) return null;
 
   return (
     <div className="dashboard-layout">
-      {/* Sidebar */}
-      <aside className="dashboard-sidebar">
-      </aside>
+      <aside className="dashboard-sidebar"></aside>
 
-      {/* Main Content */}
       <main className="dashboard-content">
         <h1>Welcome, {user.displayName || "User"}!</h1>
 
-        {/* Error Handling */}
         {error && <p className="error-text">⚠️ {error}</p>}
 
-        {/* User Stats */}
+        {/* Show only if dashboardData has loaded */}
         {dashboardData ? (
           <div className="dashboard-stats">
-            <p><strong>Events Attended:</strong> {dashboardData.eventsAttended}</p>
-            <p><strong>Points Earned:</strong> {dashboardData.pointsEarned}</p>
-            <p><strong>Rank:</strong> {dashboardData.rank}</p>
+            <p><strong>Events Attended:</strong> {dashboardData.eventsAttended ?? 0}</p>
+            <p><strong>Rank:</strong> {dashboardData.rank ?? "Unranked"}</p>
+
+            
+
+            {/* Badges */}
+            <div className="badges-section">
+              <h2>Badges Earned</h2>
+              {Array.isArray(dashboardData.badges) && dashboardData.badges.length > 0 ? (
+                <div className="badges-grid">
+                  {dashboardData.badges.map((badge, index) => (
+                    <div className="badge-card" key={index}>
+                      🏅 {badge}
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p>No badges earned yet!</p>
+              )}
+            </div>
+            {/* Points */}
+            <PointsSummary points={dashboardData.points ?? 0} />
           </div>
         ) : (
           <p className="no-stats-text">Sorry, no stats found.</p>

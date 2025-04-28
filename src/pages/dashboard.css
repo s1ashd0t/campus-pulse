@@ -69,3 +69,23 @@
     text-align: center;
     margin-top: 20px;
 }
+.badges-section {
+    margin-top: 2rem;
+  }
+  
+  .badges-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .badge-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  }
+  

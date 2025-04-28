@@ -49,7 +49,7 @@ function SignUp() {
             const result = await signUpWithEmail(formData.email, formData.password, userData);
             
             if (result.success) {
-                navigate("/profile");
+                navigate("/homepage");
             } else {
                 setError(result.error);
             }
@@ -73,7 +73,7 @@ function SignUp() {
             }
             
             if (result.success) {
-                navigate("/profile");
+                navigate("/homepage");
             } else {
                 setError(result.error);
             }
