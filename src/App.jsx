@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
+import { AuthContext } from "./context/AuthContext";
 import "./App.css";
+import EventDetails from "./pages/EventDetails";
+import EventsPage from "./pages/EventsPage";
+import Survey from "./pages/Survey";
 import Login from "./pages/Login";
 import Landing from "./pages/Landing";
 import Profile from "./pages/Profile";
@@ -18,26 +22,42 @@ import icon from "./assets/icon.png";
 import Unauthorized from "./pages/Unauthorized";
 import EventRegistration from "./pages/EventRegistration";
 import { AdminRoute } from "./components/AdminRoute";
+import TestNotifications from "./pages/TestNotifications";
+import RedeemPoints from "./pages/RedeemPoints";
+import menuIcon from "./assets/menu.svg";
+import closeIcon from "./assets/close.svg";
+import icon from "./assets/icon.png";
+import Dashboard from "./pages/dashboard";
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminHomepage from "./pages/AdminHomepage";
+import AdminEventsPage from "./pages/AdminEventsPage";
 
-const PrivateRoute = ({ element }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(null);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setIsAuthenticated(!!user);
-      setLoading(false);
-    });
-
-    return () => unsubscribe();
-  }, []);
-
+const PrivateRoute = ({ element, requireAdmin }) => {
+  const { user, userRole, loading } = useContext(AuthContext);
+  
   if (loading) {
     return <div>Loading...</div>;
   }
-
-  return isAuthenticated ? element : <Navigate to="/login" />;
+  
+  // Not authenticated at all
+  if (!user) {
+    return <Navigate to="/login" />;
+  }
+  
+  // If route requires admin access but user is not admin
+  if (requireAdmin && userRole !== "admin") {
+    return <Navigate to="/homepage" />;
+  }
+  
+  return element;
 };
+
+// Admin route wrapper
+const AdminRoute = ({ element }) => {
+  return <PrivateRoute element={element} requireAdmin={true} />;
+};
+
 
 function App() {
   const [showNav, setShowNav] = useState(false);

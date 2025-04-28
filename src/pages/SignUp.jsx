@@ -49,6 +49,7 @@ function SignUp() {
             
             if (result.success) {
                 navigate("/Homepage");
+
             } else {
                 setError(result.error);
             }
@@ -72,7 +73,7 @@ function SignUp() {
             }
             
             if (result.success) {
-                navigate("/profile");
+                navigate("/homepage");
             } else {
                 setError(result.error);
             }

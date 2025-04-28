@@ -8,8 +8,50 @@ function QRScannerComponent() {
   const [locationAllowed, setLocationAllowed] = useState(false);
   const [error, setError] = useState("Accessing location...");
 
-  const handleScan = (result) => {
+  const handleScan = async (result) => {
+    if (processing) return; // Prevent multiple scans while processing
+    
+    setProcessing(true);
     setScanResult(result);
+    setScanSuccess(true);
+    setError(null);
+    
+    try {
+      // The QR code should contain the event ID
+      // If we came from an event page, use that event ID
+      // Otherwise, try to parse the QR code content as the event ID
+      const scannedEventId = fromEvent ? eventId : result.data || result;
+      
+      if (!scannedEventId) {
+        setError("Invalid QR code. No event ID found.");
+        return;
+      }
+      
+      if (!user) {
+        setError("You must be logged in to check in to an event.");
+        setTimeout(() => {
+          navigate('/login');
+        }, 2000);
+        return;
+      }
+      
+      // Mark the user as having attended the event
+      const attendanceResult = await markEventAttendance(user.uid, scannedEventId);
+      
+      if (attendanceResult.success) {
+        // Redirect to the events page with "my" filter after successful check-in
+        setTimeout(() => {
+          navigate('/events', { state: { filter: 'my' } });
+        }, 2000);
+      } else {
+        setError(attendanceResult.error || "Failed to check in to the event.");
+      }
+    } catch (error) {
+      console.error("Error processing QR code:", error);
+      setError("An error occurred while processing the QR code.");
+    } finally {
+      setProcessing(false);
+    }
   };
 
   const handleError = (error) => {
@@ -21,17 +63,18 @@ function QRScannerComponent() {
     const scannerWrapper = document.querySelector('.scanner-wrapper');
     scannerWrapper.appendChild(videoElement);
 
-    const scanner = new QrScanner(
-      videoElement,
-      handleScan,
-      {
-        onDecodeError: handleError,
-        highlightCodeOutline: true,
-      },
-    );
 
-    setQrScanner(scanner);
-    scanner.start();
+      const scanner = new QrScanner(
+        videoElement,
+        handleScan,
+        {
+          onDecodeError: handleError,
+          highlightCodeOutline: true,
+        },
+      );
+
+      setQrScanner(scanner);
+      scanner.start();
 
     return () => {
       scanner.stop();
@@ -93,6 +136,7 @@ function QRScannerComponent() {
       ) : (
         <div className="status-message">{error}</div>
       )}
+
     </div>
   );
 }

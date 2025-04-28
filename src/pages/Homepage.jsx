@@ -52,6 +52,7 @@ const Homepage = () => {
             } catch (err) {
                 console.error('Error fetching news:', err);
                 setError('Failed to load news items');
+
             } finally {
                 setLoading(false);
             }
@@ -100,3 +101,4 @@ const Homepage = () => {
 };
 
 export default Homepage;
+

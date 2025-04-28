@@ -1,8 +1,10 @@
+
 import React, { createContext, useState, useEffect, useContext } from "react";
 import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { checkAdminRole } from "../services/authService";
 import { useNavigate } from "react-router-dom";
+
 
 export const AuthContext = createContext();
 
@@ -10,6 +12,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {

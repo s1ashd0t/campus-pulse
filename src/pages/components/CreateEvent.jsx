@@ -5,12 +5,15 @@ import { db } from "../../firebase";
 import QRCode from 'qrcode';
 import "./CreateEvent.css";
 
-export default function CreateEvent() {
+export default function CreateEvent({ onSuccess }) {
+  const { user, userRole } = useContext(AuthContext);
   const [eventData, setEventData] = useState({
     title: "",
     date: "",
     location: "",
-    description: ""
+    description: "",
+    points: 10,
+    time: ""
   });
   const [qrCodeUrl, setQrCodeUrl] = useState(null);
 
@@ -27,6 +30,9 @@ export default function CreateEvent() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError("");
+    
     try {
       // Add event to Firestore
       const eventRef = await addDoc(collection(db, "events"), {
@@ -53,6 +59,7 @@ export default function CreateEvent() {
     } catch (error) {
       console.error("Error adding event: ", error);
       alert("Error creating event. Please try again.");
+
     }
   };
 
