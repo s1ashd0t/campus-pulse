@@ -48,6 +48,15 @@
     margin-bottom: 1rem;
 }
 
+.loading-events, .no-events {
+    text-align: center;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0.3rem;
+    font-style: italic;
+    color: #ccc;
+}
+
 .event-card {
     background: rgba(255, 255, 255, 0.1);
     padding: 1rem;
