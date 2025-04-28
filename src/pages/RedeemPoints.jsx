@@ -8,12 +8,12 @@ const RedeemPoints = () => {
     const navigate = useNavigate();
 
     const rewards = [
-        { id: 1, title: 'Discount Coupon (10%)', points: 50, image: '/api/placeholder/150/120', description: 'Valid at campus stores' },
-        { id: 2, title: 'Free Coffee/Snack', points: 60, image: '/api/placeholder/150/120', description: 'Redeem at campus cafeteria' },
-        { id: 3, title: 'Campus Water Bottle', points: 40, image: '/api/placeholder/150/120', description: 'Eco-friendly reusable bottle' },
-        { id: 4, title: 'Campus Hoodie', points: 100, image: '/api/placeholder/150/120', description: 'Comfortable university hoodie' },
-        { id: 5, title: 'Study Room Booking', points: 30, image: '/api/placeholder/150/120', description: 'Priority booking for 2 hours' },
-        { id: 6, title: 'Library Late Fee Waiver', points: 25, image: '/api/placeholder/150/120', description: 'One-time late fee waiver' },
+        { id: 1, title: 'Discount Coupon (10%)', points: 50, image: '/10d.png', description: 'Valid at campus stores' },
+        { id: 2, title: 'Free Coffee/Snack', points: 60, image: '/fcd.png', description: 'Redeem at campus cafeteria' },
+        { id: 3, title: 'Campus Water Bottle', points: 40, image: '/campwb.png', description: 'Eco-friendly reusable bottle' },
+        { id: 4, title: 'Campus Hoodie', points: 100, image: '/hoodie.png', description: 'Comfortable university hoodie' },
+        { id: 5, title: 'Study Room Booking', points: 30, image: '/stbook.png', description: 'Priority booking for 2 hours' },
+        { id: 6, title: 'Library Late Fee Waiver', points: 25, image: '/llfw.png', description: 'One-time late fee waiver' },
     ];
 
     const handleRedeem = (reward) => {
