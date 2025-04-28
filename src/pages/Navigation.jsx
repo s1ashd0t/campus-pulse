@@ -1,46 +1,56 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../firebase';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import { useAuth } from '../context/AuthContext';
 import menu from '../assets/menu.svg';
 import close from '../assets/close.svg';
-import '../App.css';
+import './Navigation.css';
 
-const Navigation = () => {
-    const [user] = useAuthState(auth);
-    const [menuOpen, setMenuOpen] = useState(false);
-
-    const toggleMenu = () => setMenuOpen(!menuOpen);
+const Navigation = ({ isOpen, onClose }) => {
+    const { user, isAdmin } = useAuth();
+    const navigate = useNavigate();
 
     const handleLogout = () => {
         auth.signOut();
-        setMenuOpen(false); // Close menu on logout
+        onClose();
+        navigate("/login");
     };
 
     return (
-        <div className="navigation">
+        <div>
             <img 
-                src={menuOpen ? close : menu} 
-                className="menu" 
-                onClick={toggleMenu} 
-                alt="Menu"
+                src={isOpen ? close : menu} 
+                className="menu-icon" 
+                onClick={onClose} 
+                alt={isOpen ? "Close menu" : "Open menu"}
             />
-            <ul style={{ display: menuOpen ? 'block' : 'none' }}>
-                <li><Link to="/" onClick={toggleMenu}>Home</Link></li>
-                {user && <li><Link to="/leaderboard" onClick={toggleMenu}>Leaderboard</Link></li>}
-                {user && <li><Link to="/notifications" onClick={toggleMenu}>Notifications</Link></li>}
+        <nav className={`navigation ${isOpen ? 'open' : ''}`}>
+
+            <ul>
+                <li><Link to="/homepage" onClick={onClose}>Home</Link></li>
                 {user ? (
                     <>
-                        <li><Link to="/profile" onClick={toggleMenu}>Profile</Link></li>
-                        <li><button onClick={handleLogout} className="logout-btn">Logout</button></li>
+                        <li><Link to="/leaderboard" onClick={onClose}>Leaderboard</Link></li>
+                        <li><Link to="/notifications" onClick={onClose}>Notifications</Link></li>
+                        <li><Link to="/redeem" onClick={onClose}>Redeem Points</Link></li>
+                        <li><Link to="/profile" onClick={onClose}>Profile</Link></li>
+                        {isAdmin && (
+                            <li><Link to="/admin" onClick={onClose}>Admin Panel</Link></li>
+                        )}
+                        <li>
+                            <button onClick={handleLogout} className="logout-btn">
+                                Logout
+                            </button>
+                        </li>
                     </>
                 ) : (
                     <>
-                        <li><Link to="/login" onClick={toggleMenu}>Login</Link></li>
-                        <li><Link to="/signup" onClick={toggleMenu}>Sign Up</Link></li>
+                        <li><Link to="/login" onClick={onClose}>Login</Link></li>
+                        <li><Link to="/signup" onClick={onClose}>Sign Up</Link></li>
                     </>
                 )}
             </ul>
+        </nav>
         </div>
     );
 };

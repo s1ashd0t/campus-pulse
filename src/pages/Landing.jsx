@@ -1,9 +1,19 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./Landing.css";
-import Login from './Login'
+import Login from './Login';
+import { useAuth } from "../context/AuthContext";
 
 const Landing = () => {
+  const { user, isAdmin } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate(isAdmin ? '/admin' : '/homepage');
+    }
+  }, [user, isAdmin, navigate]);
+
   return (
     <div className="landing">
       {/* Hero Section */}
@@ -32,17 +42,13 @@ const Landing = () => {
         </div>
       </header>
 
-      
-
       {/* Call-to-Action Section */}
       <section className="cta-section">
-        <h2>Don’t Miss Out on the Rewards. Start Earning Today!</h2>
+        <h2>Don't Miss Out on the Rewards. Start Earning Today!</h2>
         <Link to="/signup">
           <button className="cta-button">Sign Up & Start Winning</button>
         </Link>
       </section>
-
-      {/* Footer */}
 
     </div>
   );

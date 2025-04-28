@@ -1,46 +1,51 @@
-import React, { createContext, useState, useEffect } from "react";
-import { auth, db } from "../firebase";
+
+import React, { createContext, useState, useEffect, useContext } from "react";
+import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
+import { checkAdminRole } from "../services/authService";
+import { useNavigate } from "react-router-dom";
+
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [userRole, setUserRole] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       setUser(firebaseUser);
-      
       if (firebaseUser) {
-        try {
-          // Fetch user data from Firestore to get role
-          const userDoc = await getDoc(doc(db, "users", firebaseUser.uid));
-          if (userDoc.exists()) {
-            const userData = userDoc.data();
-            setUserRole(userData.role || "student"); // Default to "student" if role is not set
-          } else {
-            setUserRole("student"); // Default role
-          }
-        } catch (error) {
-          console.error("Error fetching user role:", error);
-          setUserRole("student"); // Default to student on error
-        }
+        const { isAdmin: adminStatus } = await checkAdminRole(firebaseUser.uid);
+        setIsAdmin(adminStatus);
       } else {
-        setUserRole(null);
+        setIsAdmin(false);
       }
-      
       setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
 
+  const value = {
+    user,
+    loading,
+    isAdmin
+  };
+
   return (
-    <AuthContext.Provider value={{ user, userRole, loading }}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );
+};
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
 };

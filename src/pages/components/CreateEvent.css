@@ -1,121 +1,90 @@
-.create-event-container {
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: rgba(0, 0, 0, 0.6);
-  border-radius: 10px;
-  color: white;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+.create-event {
+    margin-top: 1rem;
+    padding: 1.5rem;
+    background: var(--background-dark);
+    color: white;
+    max-width: 40rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    width: 100%;
+    height: 100%;
 }
 
-.create-event-container h2 {
-  margin-bottom: 1.5rem;
-  color: #ff7b00;
-  text-align: center;
+.create-event h2 {
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
 }
 
-.create-event-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+.create-event form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+.create-event input,
+.create-event textarea {
+    width: 100%;
+    padding: 0.7rem;
+    background: var(--background-light);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.3rem;
+    color: var(--text-color);
+    font-size: 1rem;
 }
 
-.form-group label {
-  font-weight: bold;
-  color: #ddd;
+.create-event textarea {
+    min-height: 100px;
+    resize: vertical;
 }
 
-.form-row {
-  display: flex;
-  gap: 1rem;
+.create-event button {
+    background: var(--primary-color);
+    color: var(--text-color);
+    border: none;
+    padding: 0.8rem;
+    border-radius: 0.3rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
 }
 
-.form-row .form-group {
-  flex: 1;
+.create-event button:hover {
+    background: var(--primary-hover);
 }
 
-.create-event-form input,
-.create-event-form textarea,
-.create-event-form select {
-  padding: 0.75rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 5px;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: white;
-  font-size: 1rem;
+/* QR Code Preview Styles */
+.qr-code-preview {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+    text-align: center;
 }
 
-.create-event-form textarea {
-  min-height: 120px;
-  resize: vertical;
+.qr-code-preview h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
 }
 
-.create-event-form input:focus,
-.create-event-form textarea:focus,
-.create-event-form select:focus {
-  outline: none;
-  border-color: #ff7b00;
-  background-color: rgba(255, 255, 255, 0.15);
+.qr-code-preview img {
+    max-width: 200px;
+    height: auto;
+    margin: 1rem auto;
+    padding: 1rem;
+    background: white;
+    border-radius: 0.5rem;
 }
 
-.create-event-form button {
-  margin-top: 1rem;
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 5px;
-  background-color: #ff7b00;
-  color: white;
-  font-weight: bold;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s;
+.qr-code-preview p {
+    color: var(--text-color);
+    opacity: 0.8;
+    font-size: 0.9rem;
+    margin-top: 1rem;
 }
 
-.create-event-form button:hover {
-  background-color: #e66a00;
-}
-
-.create-event-form button:disabled {
-  background-color: #aaa;
-  cursor: not-allowed;
-}
-
-.error-message {
-  color: #ff6b6b;
-  margin-top: 0.25rem;
-  font-size: 0.875rem;
-}
-
-.success-message {
-  margin: 1rem 0;
-  padding: 0.75rem;
-  background-color: rgba(39, 174, 96, 0.2);
-  border-radius: 5px;
-  color: #2ecc71;
-  text-align: center;
-}
-
-.image-preview {
-  margin-top: 0.5rem;
-  width: 100%;
-  max-height: 200px;
-  object-fit: cover;
-  border-radius: 5px;
-}
-
-.checkbox-group {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.checkbox-group input[type="checkbox"] {
-  width: auto;
-  margin-right: 0.5rem;
+@media (max-width: 768px) {
+    .create-event {
+        padding: 1rem;
+    }
 }

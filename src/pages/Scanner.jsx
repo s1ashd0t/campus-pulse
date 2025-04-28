@@ -1,23 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
-import { markEventAttendance } from '../services/rsvpService';
+import React, { useState, useEffect } from 'react';
 import QrScanner from 'qr-scanner';
 import './Scanner.css';
 
 function QRScannerComponent() {
   const [scanResult, setScanResult] = useState('');
   const [qrScanner, setQrScanner] = useState(null);
-  const [scanSuccess, setScanSuccess] = useState(false);
-  const [processing, setProcessing] = useState(false);
-  const [error, setError] = useState(null);
-  const location = useLocation();
-  const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
-  
-  // Check if we came from an event page
-  const fromEvent = location.state?.fromEvent;
-  const eventId = location.state?.eventId;
+  const [locationAllowed, setLocationAllowed] = useState(false);
+  const [error, setError] = useState("Accessing location...");
 
   const handleScan = async (result) => {
     if (processing) return; // Prevent multiple scans while processing
@@ -71,10 +60,9 @@ function QRScannerComponent() {
 
   const startScan = () => {
     const videoElement = document.createElement('video');
-    const scan = document.querySelector('.scanner');
-    
-    if (scan) {
-      scan.appendChild(videoElement);
+    const scannerWrapper = document.querySelector('.scanner-wrapper');
+    scannerWrapper.appendChild(videoElement);
+
 
       const scanner = new QrScanner(
         videoElement,
@@ -88,62 +76,67 @@ function QRScannerComponent() {
       setQrScanner(scanner);
       scanner.start();
 
-      return () => {
-        scanner.stop();
-        scanner.destroy();
-        if (scan.contains(videoElement)) {
-          scan.removeChild(videoElement);
+    return () => {
+      scanner.stop();
+      scanner.destroy();
+      scannerWrapper.removeChild(videoElement);
+    };
+  };
+
+  const checkLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          // Bottom left corner of the campus: 41.114346, -85.114388
+          // Top right corner of the campus: 41.122330, -85.102813
+          if (position.coords.longitude >= -85.114388 && 
+              position.coords.longitude <= -85.102813 &&
+              position.coords.latitude >= 41.114346 && 
+              position.coords.latitude <= 41.122330) {
+            setLocationAllowed(true);
+          } else {
+            setError("You must be on campus to scan QR codes.");
+          }
+        },
+        (error) => {
+          console.error('Location access denied:', error);
+          setError("Please enable location services to use the scanner.");
         }
-      };
+      );
+    } else {
+      setError("Your browser doesn't support geolocation.");
     }
-    
-    return () => {};
   };
 
   useEffect(() => {
-    const cleanup = startScan();
-    return cleanup;
+    checkLocation();
   }, []);
 
-  const handleBackToEvents = () => {
-    navigate('/events');
-  };
+  useEffect(() => {
+    if (locationAllowed) {
+      const cleanup = startScan();
+      return cleanup;
+    }
+  }, [locationAllowed]);
 
   return (
-    <div className='scanner-container'>
-      <div className='scanner-header'>
-        <h2>QR Code Scanner</h2>
-        {fromEvent && (
-          <p className='scanner-instruction'>
-            Scan the QR code at the event to check in
-          </p>
-        )}
-      </div>
-      
-      <div className='scanner'>
-        {error ? (
-          <div className="error-message">
-            <p>{error}</p>
+    <div className="scanner-container">
+      {locationAllowed ? (
+        <>
+          <div className="scanner-wrapper">
+            <div className="scan-line"></div>
           </div>
-        ) : scanSuccess ? (
-          <div id='result'>
-            <p>Scan Successful!</p>
-            <p>{scanResult.data || scanResult}</p>
-            <p>Redirecting to My Events...</p>
-          </div>
-        ) : (
-          <p id='status'>{processing ? 'Processing...' : 'Scanning...'}</p>
-        )}
-      </div>
-      
-      <div className='scanner-actions'>
-        <button 
-          onClick={handleBackToEvents}
-          className='back-button'
-        >
-          Back to Events
-        </button>
-      </div>
+          {scanResult && (
+            <div className="scan-result">
+              <p>Scan Result:</p>
+              <p>{scanResult}</p>
+            </div>
+          )}
+        </>
+      ) : (
+        <div className="status-message">{error}</div>
+      )}
+
     </div>
   );
 }

@@ -1,24 +1,56 @@
 import React, { useEffect, useState } from 'react';
+import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
+import { db } from '../firebase';
 import './Leaderboard.css';
 
 const Leaderboard = () => {
     const [leaders, setLeaders] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        const dummyData = [
-            { id: 1, name: 'Alice', points: 1200, avatar: 'https://i.pravatar.cc/150?img=10', level: 10, events: 20 },
-            { id: 2, name: 'Bob', points: 1100, avatar: 'https://i.pravatar.cc/150?img=6', level: 9, events: 18 },
-            { id: 3, name: 'Charlie', points: 1000, avatar: 'https://i.pravatar.cc/150?img=8', level: 8, events: 15 },
-            { id: 4, name: 'Diana', points: 950, avatar: 'https://i.pravatar.cc/150?img=4', level: 7, events: 14 },
-            { id: 5, name: 'Eve', points: 900, avatar: 'https://i.pravatar.cc/150?img=11', level: 7, events: 13 },
-            { id: 6, name: 'Frank', points: 850, avatar: 'https://i.pravatar.cc/150?img=12', level: 6, events: 12 },
-            { id: 7, name: 'Grace', points: 800, avatar: 'https://i.pravatar.cc/150?img=13', level: 6, events: 11 },
-            { id: 8, name: 'Hank', points: 750, avatar: 'https://i.pravatar.cc/150?img=14', level: 5, events: 10 },
-            { id: 9, name: 'Ivy', points: 700, avatar: 'https://i.pravatar.cc/150?img=15', level: 5, events: 9 },
-            { id: 10, name: 'Jack', points: 650, avatar: 'https://i.pravatar.cc/150?img=16', level: 4, events: 8 },
-        ];
-        setLeaders(dummyData);
+        const fetchLeaderboard = async () => {
+            try {
+                const usersRef = collection(db, 'users');
+                const q = query(usersRef, orderBy('points', 'desc'), limit(10));
+                const querySnapshot = await getDocs(q);
+                
+                const leaderboardData = querySnapshot.docs.map(doc => ({
+                    id: doc.id,
+                    name: `${doc.data().firstName} ${doc.data().lastName}`,
+                    points: doc.data().points || 0,
+                    avatar: doc.data().avatar || `https://i.pravatar.cc/150?img=${Math.floor(Math.random() * 70)}`,
+                    level: Math.floor((doc.data().points || 0) / 100) + 1,
+                    events: doc.data().eventsAttended || 0
+                }));
+
+                setLeaders(leaderboardData);
+                setLoading(false);
+            } catch (err) {
+                console.error('Error fetching leaderboard:', err);
+                setError('Failed to load leaderboard data');
+                setLoading(false);
+            }
+        };
+
+        fetchLeaderboard();
     }, []);
+
+    if (loading) {
+        return (
+            <div className="container">
+                <div className="loading">Loading leaderboard...</div>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="container">
+                <div className="error">{error}</div>
+            </div>
+        );
+    }
 
     return (
         <div className="container">

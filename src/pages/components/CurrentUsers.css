@@ -1,0 +1,109 @@
+.current-users{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.current-users h2{
+    color: white;
+    margin-bottom: 20px;
+}
+
+.current-users ul{
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    height: 500px;
+    overflow-y: auto;
+}
+
+.current-users li{
+    padding: 15px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+
+
+.current-users li:hover{
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.user-info {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex: 1;
+}
+
+.user-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.role-badge {
+    background: var(--primary-color);
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    text-transform: uppercase;
+}
+
+.role-toggle-btn, .delete-btn {
+    padding: 8px 16px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.role-toggle-btn.promote {
+    background: var(--primary-color);
+    color: white;
+}
+
+.role-toggle-btn.promote:hover {
+    background: var(--primary-hover);
+}
+
+.role-toggle-btn.demote {
+    background: var(--error-color);
+    color: white;
+}
+
+.role-toggle-btn.demote:hover {
+    background: #ff0000;
+}
+
+.delete-btn {
+    background: #333;
+    color: white;
+}
+
+.delete-btn:hover {
+    background: var(--error-color);
+}
+
+.error-message {
+    background: rgba(255, 0, 0, 0.1);
+    color: var(--error-color);
+    padding: 10px;
+    border-radius: var(--border-radius);
+    margin-bottom: 15px;
+    width: 100%;
+    text-align: center;
+}
+
+.success-message {
+    background: rgba(76, 175, 80, 0.1);
+    color: var(--success-color);
+    padding: 10px;
+    border-radius: var(--border-radius);
+    margin-bottom: 15px;
+    width: 100%;
+    text-align: center;
+}

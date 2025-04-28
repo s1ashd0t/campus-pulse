@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signUpWithEmail, loginWithGoogle, loginWithFacebook } from "../services/authService";
-import "./SignUp.css";
+import "../styles/auth.css";
 
 function SignUp() {
     const navigate = useNavigate();
@@ -20,16 +20,15 @@ function SignUp() {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({
-            ...formData,
+        setFormData(prevData => ({
+            ...prevData,
             [name]: value
-        });
+        }));
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         
-        // Basic validation
         if (formData.password !== formData.confirmPassword) {
             setError("Passwords do not match");
             return;
@@ -49,7 +48,8 @@ function SignUp() {
             const result = await signUpWithEmail(formData.email, formData.password, userData);
             
             if (result.success) {
-                navigate("/homepage");
+                navigate("/Homepage");
+
             } else {
                 setError(result.error);
             }
@@ -85,13 +85,13 @@ function SignUp() {
     };
 
     return (
-        <div className="signup-container">
+        <div className="auth-container">
             <h1>Sign Up</h1>
-            <p className="description">Join Campus Pulse to track and earn rewards</p>
+            <p className="auth-description">Join Campus Pulse to track and earn rewards</p>
             
             {error && <p className="error-message">{error}</p>}
             
-            <form onSubmit={handleSubmit}>
+            <form className="auth-form" onSubmit={handleSubmit}>
                 <div className="form-row">
                     <input
                         type="text"
@@ -148,22 +148,26 @@ function SignUp() {
                     onChange={handleChange}
                     required
                 />
-                <button type="submit" disabled={loading}>
+                <button 
+                    type="submit" 
+                    className="submit-button"
+                    disabled={loading}
+                >
                     {loading ? "Signing up..." : "Sign Up"}
                 </button>
             </form>
 
-            <div className="line-divider"><h6>or continue with</h6></div>
+            <div className="social-divider">or continue with</div>
 
             <button 
-                className="google-login" 
+                className="social-button google-login" 
                 onClick={() => handleSocialSignup("google")}
                 disabled={loading}
             >
                 Google
             </button>
             
-            <p className="login-link">
+            <p className="auth-link">
                 Already have an account? <a href="/login">Log in</a>
             </p>
         </div>
