@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
@@ -21,12 +21,10 @@ import Navigation from "./pages/Navigation";
 import icon from "./assets/icon.png";
 import Unauthorized from "./pages/Unauthorized";
 import EventRegistration from "./pages/EventRegistration";
-import { AdminRoute } from "./components/AdminRoute";
 import TestNotifications from "./pages/TestNotifications";
 import RedeemPoints from "./pages/RedeemPoints";
 import menuIcon from "./assets/menu.svg";
 import closeIcon from "./assets/close.svg";
-import icon from "./assets/icon.png";
 import Dashboard from "./pages/dashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminHomepage from "./pages/AdminHomepage";
