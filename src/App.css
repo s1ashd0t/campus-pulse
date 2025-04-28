@@ -59,7 +59,7 @@
 
 /* General page styling */
 body {
-  color: white;
+  /* color: white; */
   font-family: 'Poppins', sans-serif;
   margin: 0;
 }
@@ -191,7 +191,7 @@ input {
   border: none;
   border-radius: 0.3rem;
   /* background: #222; */
-  color: white;
+  /* color: white; */
   font-size: 0.9rem;
   outline: none;
 }
