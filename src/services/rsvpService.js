@@ -1,4 +1,4 @@
-import { collection, addDoc, query, where, getDocs, updateDoc, deleteDoc, doc, Timestamp } from "firebase/firestore";
+import { collection, addDoc, query, where, getDocs, updateDoc, deleteDoc, doc, getDoc, Timestamp } from "firebase/firestore";
 import { db } from "../firebase";
 import { createNotification } from "./notificationService";
 import { getFunctions, httpsCallable } from "firebase/functions";
@@ -21,6 +21,7 @@ export const rsvpToEvent = async (userId, eventId) => {
     );
     
     const querySnapshot = await getDocs(q);
+    let isNewRsvp = false;
     
     if (!querySnapshot.empty) {
       // Update existing RSVP
@@ -37,6 +38,38 @@ export const rsvpToEvent = async (userId, eventId) => {
         status,
         createdAt: Timestamp.now()
       });
+      isNewRsvp = true;
+    }
+    
+    // Get event details for notification
+    let eventTitle = "Event";
+    try {
+      // Try to get event details from Firestore
+      const eventDoc = await doc(db, "events", eventId).get();
+      if (eventDoc.exists) {
+        eventTitle = eventDoc.data().title;
+      } else {
+        // If event not found in Firestore, check dummy events
+        const dummyEvents = [
+          { id: "1", title: "Tech Career Fair" },
+          { id: "2", title: "Entrepreneurship Workshop" },
+          { id: "3", title: "Campus Cleanup Day" }
+        ];
+        const dummyEvent = dummyEvents.find(e => e.id === eventId);
+        if (dummyEvent) {
+          eventTitle = dummyEvent.title;
+        }
+      }
+    } catch (error) {
+      console.error("Error getting event details:", error);
+    }
+    
+    // Send RSVP confirmation notification
+    try {
+      await sendRsvpConfirmation(userId, eventId, eventTitle);
+    } catch (notifError) {
+      console.error("Failed to send RSVP confirmation notification:", notifError);
+      // Continue even if notification fails
     }
     
     // Send RSVP confirmation email
@@ -47,7 +80,7 @@ export const rsvpToEvent = async (userId, eventId) => {
       // Continue even if email fails
     }
     
-    return { success: true };
+    return { success: true, isNewRsvp };
   } catch (error) {
     return { success: false, error: error.message };
   }
@@ -172,6 +205,57 @@ export const sendRsvpConfirmationEmail = async (userId, eventId) => {
     return { success: true, data: result.data };
   } catch (error) {
     console.error("Error sending RSVP confirmation email:", error);
+    return { success: false, error: error.message };
+  }
+};
+
+/**
+ * Mark user as having attended an event
+ * @param {string} userId - The user ID
+ * @param {string} eventId - The event ID
+ * @returns {Promise<Object>} - Success status and any error
+ */
+export const markEventAttendance = async (userId, eventId) => {
+  try {
+    // Get the event document
+    const eventRef = doc(db, "events", eventId);
+    const eventDoc = await getDoc(eventRef);
+    
+    if (!eventDoc.exists()) {
+      return { success: false, error: "Event not found" };
+    }
+    
+    // Get current attended array or initialize empty array
+    const eventData = eventDoc.data();
+    const attended = eventData.attended || [];
+    
+    // Check if user is already marked as attended
+    if (attended.includes(userId)) {
+      return { success: true, message: "User already marked as attended" };
+    }
+    
+    // Add user to attended array
+    attended.push(userId);
+    
+    // Update the event document
+    await updateDoc(eventRef, { attended });
+    
+    // Create a notification for the user
+    try {
+      await createNotification(
+        userId,
+        "attendance",
+        `You've checked in to: ${eventData.title}. Don't forget to complete the survey!`,
+        eventId
+      );
+    } catch (notifError) {
+      console.error("Failed to send attendance notification:", notifError);
+      // Continue even if notification fails
+    }
+    
+    return { success: true };
+  } catch (error) {
+    console.error("Error marking attendance:", error);
     return { success: false, error: error.message };
   }
 };

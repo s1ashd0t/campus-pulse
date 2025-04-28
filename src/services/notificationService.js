@@ -1,17 +1,18 @@
-import { collection, addDoc, query, where, orderBy, getDocs, Timestamp, updateDoc, doc } from "firebase/firestore";
+import { collection, addDoc, query, where, orderBy, getDocs, Timestamp, updateDoc, doc, deleteDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
 export const createNotification = async (userId, type, message, relatedId = null) => {
   try {
-    await addDoc(collection(db, "notifications"), {
+    const docRef = await addDoc(collection(db, "notifications"), {
       userId,
       type,
       message,
       relatedId,
       read: false,
+      important: false,
       createdAt: Timestamp.now()
     });
-    return { success: true };
+    return { success: true, notificationId: docRef.id };
   } catch (error) {
     return { success: false, error: error.message };
   }
@@ -31,14 +32,14 @@ export const getUserNotifications = async (userId) => {
 
     querySnapshot.forEach((doc) => {
       const data = doc.data();
-      console.log("Notification data:", data); // Debugging line
+      console.log("Notification data:", data);
 
       notifications.push({
         id: doc.id,
         ...data,
         date: data.createdAt
           ? data.createdAt.toDate().toISOString().split('T')[0]
-          : "Unknown date" // Safe fallback if createdAt is missing
+          : "Unknown date" //safe fallback 
       });
     });
 
@@ -54,6 +55,34 @@ export const markNotificationAsRead = async (notificationId) => {
     await updateDoc(doc(db, "notifications", notificationId), {
       read: true
     });
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+};
+
+export const updateNotification = async (notificationId, updates) => {
+  try {
+    await updateDoc(doc(db, "notifications", notificationId), updates);
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+};
+
+export const deleteNotification = async (notificationId) => {
+  try {
+    await deleteDoc(doc(db, "notifications", notificationId));
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+};
+
+export const deleteMultipleNotifications = async (notificationIds) => {
+  try {
+    const promises = notificationIds.map(id => deleteNotification(id));
+    await Promise.all(promises);
     return { success: true };
   } catch (error) {
     return { success: false, error: error.message };

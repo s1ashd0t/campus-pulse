@@ -1,26 +1,32 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext.jsx";
-import { useNavigate } from "react-router-dom";
-import { getFirestore, doc, getDoc } from "firebase/firestore"; // Import Firestore
-import "./Dashboard.css"; // Import the new dashboard styles
+import { useNavigate, Navigate } from "react-router-dom";
+import { getFirestore, doc, getDoc } from "firebase/firestore"; 
+import "./Dashboard.css"; 
+import AdminHomepage from "./AdminHomepage"; 
 
 const Dashboard = () => {
-  const { user, loading } = useContext(AuthContext);
+  const { user, userRole, loading } = useContext(AuthContext);
   const navigate = useNavigate();
   const [dashboardData, setDashboardData] = useState(null);
-  const [error, setError] = useState(""); // Error handling
+  const [error, setError] = useState(""); 
 
   const db = getFirestore(); // Firestore instance
 
-  // Redirect to login if user is not logged in
+  //Redirect to login if user is not logged in
   useEffect(() => {
     if (!loading && !user) {
       navigate("/login");
     }
   }, [user, loading, navigate]);
   
+  //if the user is an admin it would render AdminHomepage :p
+  if (!loading && user && userRole === "admin") {
+    return <AdminHomepage />;
+  }
+  
 
-  // Fetch user stats from Firestore
+  //feting user stats from Firestore
   useEffect(() => {
     if (user) {
       const fetchUserStats = async () => {
@@ -29,7 +35,7 @@ const Dashboard = () => {
           const userStatsSnap = await getDoc(userStatsRef);
 
           if (userStatsSnap.exists()) {
-            setDashboardData(userStatsSnap.data()); // Store data
+            setDashboardData(userStatsSnap.data());
           } else {
             setDashboardData(null);
           }
@@ -42,8 +48,8 @@ const Dashboard = () => {
     }
   }, [user, db]);
 
-  if (loading) return <p className="loading-text">Loading...</p>; // Loading state
-  if (!user) return null; // Prevent rendering if not logged in
+  if (loading) return <p className="loading-text">Loading...</p>; //loading state because why not
+  if (!user) return null; 
 
   return (
     <div className="dashboard-layout">

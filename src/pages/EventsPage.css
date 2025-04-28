@@ -51,7 +51,7 @@
 
 .event-header h3 {
   margin: 0;
-  color: #333;
+  color: #ffffff;
   font-size: 1.2rem;
 }
 
@@ -85,13 +85,13 @@
 .event-details p {
   margin: 8px 0;
   font-size: 0.9rem;
-  color: #555;
+  color: #ffffff;
 }
 
 .event-description {
   margin-bottom: 15px;
   padding: 10px;
-  background-color: #f9f9f9;
+  background-color: rgba(0, 0, 0, 0.4);
   border-radius: 4px;
   border-left: 3px solid #ff7b00;
 }
@@ -99,7 +99,7 @@
 .event-description p {
   margin: 0;
   font-size: 0.9rem;
-  color: #555;
+  color: #ffffff;
   line-height: 1.4;
 }
 
@@ -124,15 +124,16 @@
   gap: 20px;
 }
 
-.signed-up-column,
+.rsvp-column,
 .pending-column,
 .completed-column {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(0, 0, 0, 0.6);
   border-radius: 8px;
   padding: 20px;
+  color: white;
 }
 
-.signed-up-column h2,
+.rsvp-column h2,
 .pending-column h2,
 .completed-column h2 {
   margin-top: 0;
@@ -142,7 +143,7 @@
   text-align: center;
 }
 
-.signed-up-column h2 {
+.rsvp-column h2 {
   color: #ff7b00;
 }
 
@@ -188,7 +189,7 @@
   margin-top: 15px; 
 }
 
-.rsvp-button, .view-details-button {
+.rsvp-button, .view-details-button, .survey-button {
   background-color: #4285f4;
   color: white;
   border: none;
@@ -196,11 +197,28 @@
   padding: 8px 16px;
   cursor: pointer;
   font-weight: bold;
-  transition: none; 
+  transition: background-color 0.3s ease; 
 }
 
-.rsvp-button:hover, .view-details-button:hover {
-  background-color: #4285f4; 
+.rsvp-button:hover, .view-details-button:hover, .survey-button:hover {
+  background-color: #3367d6; 
+}
+
+.survey-button {
+  background-color: #f39c12;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.survey-button:hover {
+  background-color: #e67e22;
+}
+
+.rsvp-status {
+  color: #ff7b00;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
 }
 
 .view-details-button {
@@ -212,15 +230,18 @@
 }
 
 .event-card {
-  background-color: white;
+  background-color: rgba(0, 0, 0, 0.6);
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   padding: 20px;
-  transition: transform 0.3s ease;
+  margin-bottom: 15px;
   display: flex;
   flex-direction: column;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .event-card:hover {
-  transform: none;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-color: rgba(255, 255, 255, 0.2);
 }

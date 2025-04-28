@@ -1,9 +1,9 @@
 .notifications-container {
-  margin-top: 1rem;
+  margin: 1rem auto;
   padding: 2rem;
   background: rgba(0, 0, 0, 0.8);
   color: white;
-  max-width: 40rem;
+  max-width: 50rem;
   border-radius: 0.5rem;
   box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.3);
   width: 100%;
@@ -11,24 +11,342 @@
 
 .notifications-container h1 {
   margin-bottom: 1.5rem;
+  text-align: center;
 }
 
-.notifications-container ul {
+.notification-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+}
+
+.search-container {
+  flex: 1;
+  min-width: 200px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 0.25rem;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 1rem;
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.sort-container {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.sort-button {
+  padding: 0.5rem 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 0.25rem;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.sort-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.sort-button.active {
+  background-color: #4a86e8;
+}
+
+.sort-button:last-child {
+  margin-left: 0.5rem;
+  background-color: rgba(255, 215, 0, 0.2);
+  border: 1px solid rgba(255, 215, 0, 0.5);
+}
+
+.sort-button:last-child.active {
+  background-color: rgba(255, 215, 0, 0.5);
+  border: 1px solid gold;
+}
+
+.bulk-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.delete-button {
+  padding: 0.5rem 1rem;
+  background-color: #dc3545;
+  border: none;
+  border-radius: 0.25rem;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+.delete-confirmation {
+  background-color: rgba(220, 53, 69, 0.1);
+  border: 1px solid #dc3545;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.25rem;
+  text-align: center;
+}
+
+.confirmation-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.cancel-button {
+  padding: 0.5rem 1rem;
+  background-color: #6c757d;
+  border: none;
+  border-radius: 0.25rem;
+  color: white;
+  cursor: pointer;
+}
+
+.confirm-button {
+  padding: 0.5rem 1rem;
+  background-color: #dc3545;
+  border: none;
+  border-radius: 0.25rem;
+  color: white;
+  cursor: pointer;
+}
+
+.notifications-list {
   list-style: none;
   padding: 0;
 }
 
-.notifications-container li {
+.notifications-list li {
   padding: 1rem;
   border-bottom: 1px solid #333;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  border-left: 4px solid transparent;
 }
 
-.notifications-container li:hover {
+.notifications-list li:hover {
   background: rgba(255, 255, 255, 0.1);
+}
+
+.notification-checkbox {
+  size: 10rem;
+  margin-right: 1rem;
+}
+
+.notification-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.notification-date {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 0.5rem;
+}
+
+.notification-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.star-button {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+.star-button.important {
+  color: gold;
 }
 
 .hover-card {
   transition: all 0.3s;
+}
+
+
+.notification-rsvp {
+  border-left: 8px solid #28a745;
+  background-color: rgba(40, 167, 69, 0.1);
+}
+
+.notification-admin {
+  border-left: 8px solid #dc3545;
+  background-color: rgba(220, 53, 69, 0.1);
+}
+
+.notification-points {
+  border-left: 8px solid #ffc107;
+  background-color: rgba(255, 193, 7, 0.1);
+}
+
+.notification-event {
+  border-left: 8px solid #007bff;
+  background-color: rgba(0, 123, 255, 0.1);
+}
+
+
+.unread {
+  background-color: rgba(74, 134, 232, 0.2);
+  font-weight: 500;
+}
+
+.read {
+  opacity: 0.7;
+}
+
+.unread-indicator {
+  width: 10px;
+  height: 10px;
+  background-color: #4a86e8;
+  border-radius: 50%;
+}
+
+.loading, .error-message, .no-notifications {
+  padding: 1rem;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.error-message {
+  color: #ff6b6b;
+}
+
+/*for testing purposes*/
+.test-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.test-button {
+  padding: 0.75rem 1rem;
+  background-color: #4a86e8;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  margin-bottom: 0.5rem;
+}
+
+.test-button:hover {
+  background-color: #3a76d8;
+}
+
+.test-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.notification-type-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.event-button {
+  background-color: #007bff;
+}
+
+.event-button:hover {
+  background-color: #0069d9;
+}
+
+.rsvp-button {
+  background-color: #28a745; 
+}
+
+.rsvp-button:hover {
+  background-color: #218838;
+}
+
+.points-button {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.points-button:hover {
+  background-color: #e0a800;
+}
+
+.admin-button {
+  background-color: #dc3545; 
+}
+
+.admin-button:hover {
+  background-color: #c82333;
+}
+
+.result {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border-radius: 0.25rem;
+}
+
+.result.success {
+  background-color: rgba(40, 167, 69, 0.2);
+  border: 1px solid #28a745;
+}
+
+.result.error {
+  background-color: rgba(220, 53, 69, 0.2);
+  border: 1px solid #dc3545;
+}
+
+.instructions {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #333;
+}
+
+.instructions h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.instructions ol {
+  padding-left: 1.5rem;
+}
+
+.instructions li {
+  margin-bottom: 0.5rem;
+}
+
+.instructions a {
+  color: #4a86e8;
+  text-decoration: none;
+}
+
+.instructions a:hover {
+  text-decoration: underline;
 }

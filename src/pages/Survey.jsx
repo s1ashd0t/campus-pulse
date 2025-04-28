@@ -1,59 +1,100 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { db } from '../firebase';
+import { AuthContext } from '../context/AuthContext';
+import { createNotification } from '../services/notificationService';
 import './Survey.css';
 
 const Survey = () => {
-    const [currentSurvey, setCurrentSurvey] = useState(0);
+    const { eventId } = useParams();
+    const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
+    
+    const [event, setEvent] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const [submitted, setSubmitted] = useState(false);
     const [responses, setResponses] = useState({});
 
-    const surveys = [
-        {
-            id: 1,
-            title: "Campus Events Feedback",
-            description: "Help us improve our campus events!",
-            questions: [
-                {
-                    id: 'q1',
-                    text: "How would you rate our recent campus events?",
-                    type: "rating",
-                },
-                {
-                    id: 'q2',
-                    text: "Which types of events would you like to see more of?",
-                    type: "select",
-                    options: ["Academic", "Social", "Career", "Cultural", "Sports"]
-                },
-                {
-                    id: 'q3',
-                    text: "Any suggestions for improving campus events?",
-                    type: "text"
+    // Default survey template
+    const defaultSurvey = {
+        title: "Event Feedback",
+        description: "Help us improve our campus events!",
+        questions: [
+            {
+                id: 'q1',
+                text: "How would you rate this event overall?",
+                type: "rating",
+            },
+            {
+                id: 'q2',
+                text: "What did you like most about this event?",
+                type: "select",
+                options: ["Content/Topic", "Speakers/Presenters", "Networking Opportunities", "Location/Venue", "Food/Refreshments"]
+            },
+            {
+                id: 'q3',
+                text: "Any suggestions for improving future events?",
+                type: "text"
+            }
+        ]
+    };
+
+    useEffect(() => {
+        const fetchEvent = async () => {
+            if (!user) {
+                setError("You must be logged in to complete a survey");
+                setLoading(false);
+                return;
+            }
+            
+            if (!eventId) {
+                setError("No event specified");
+                setLoading(false);
+                return;
+            }
+            
+            try {
+                const eventRef = doc(db, "events", eventId);
+                const eventDoc = await getDoc(eventRef);
+                
+                if (!eventDoc.exists()) {
+                    setError("Event not found");
+                    setLoading(false);
+                    return;
                 }
-            ]
-        },
-        {
-            id: 2,
-            title: "Student Engagement Survey",
-            description: "Tell us how we can better engage with students",
-            questions: [
-                {
-                    id: 'q1',
-                    text: "How connected do you feel to campus activities?",
-                    type: "rating",
-                },
-                {
-                    id: 'q2',
-                    text: "What would motivate you to attend more events?",
-                    type: "select",
-                    options: ["Free food", "Career opportunities", "Meeting new people", "Learning new skills", "Earning points/rewards"]
-                },
-                {
-                    id: 'q3',
-                    text: "How can we better communicate about upcoming events?",
-                    type: "text"
+                
+                const eventData = {
+                    id: eventDoc.id,
+                    ...eventDoc.data()
+                };
+                
+                // Check if user attended this event
+                if (!eventData.attended?.includes(user.uid)) {
+                    setError("You must attend this event to complete the survey");
+                    setLoading(false);
+                    return;
                 }
-            ]
-        }
-    ];
+                
+                // Check if user already completed the survey
+                if (eventData.surveys && eventData.surveys[user.uid]) {
+                    setError("You have already completed the survey for this event");
+                    setLoading(false);
+                    return;
+                }
+                
+                setEvent(eventData);
+                setLoading(false);
+            } catch (error) {
+                console.error("Error fetching event:", error);
+                setError("Error loading event details");
+                setLoading(false);
+            }
+        };
+        
+        fetchEvent();
+    }, [eventId, user]);
 
     const handleOptionSelect = (questionId, value) => {
         setResponses({
@@ -76,21 +117,57 @@ const Survey = () => {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Here you would normally send the data to your backend
-        console.log("Survey responses:", responses);
-        setSubmitted(true);
         
-        // Reset after 3 seconds to show another survey
-        setTimeout(() => {
-            setSubmitted(false);
-            setResponses({});
-            setCurrentSurvey((currentSurvey + 1) % surveys.length);
-        }, 3000);
+        if (!user || !eventId || !event) {
+            setError("Unable to submit survey");
+            return;
+        }
+        
+        try {
+            setLoading(true);
+            
+            // Get the event document
+            const eventRef = doc(db, "events", eventId);
+            
+            // Update the event document with the survey responses
+            await updateDoc(eventRef, {
+                [`surveys.${user.uid}`]: {
+                    responses,
+                    submittedAt: new Date()
+                }
+            });
+            
+            // Send a notification to the user
+            try {
+                await createNotification(
+                    user.uid,
+                    "survey",
+                    `Thank you for completing the survey for ${event.title}!`,
+                    eventId
+                );
+            } catch (notifError) {
+                console.error("Failed to send survey notification:", notifError);
+                // Continue even if notification fails
+            }
+            
+            setSubmitted(true);
+            
+            // Redirect to events page after 3 seconds
+            setTimeout(() => {
+                navigate('/events', { state: { filter: 'my' } });
+            }, 3000);
+        } catch (error) {
+            console.error("Error submitting survey:", error);
+            setError("Failed to submit survey. Please try again.");
+        } finally {
+            setLoading(false);
+        }
     };
 
-    const activeSurvey = surveys[currentSurvey];
+    // Use the event's survey if available, otherwise use the default survey
+    const activeSurvey = event?.survey || defaultSurvey;
 
     const renderQuestion = (question) => {
         switch(question.type) {
@@ -136,14 +213,39 @@ const Survey = () => {
         }
     };
 
+    if (loading) {
+        return (
+            <div className="survey-container">
+                <h2>📋 Event Survey</h2>
+                <div className="loading">Loading survey...</div>
+            </div>
+        );
+    }
+    
+    if (error) {
+        return (
+            <div className="survey-container">
+                <h2>📋 Event Survey</h2>
+                <div className="error-message">{error}</div>
+                <button 
+                    onClick={() => navigate('/events')}
+                    className="back-button"
+                >
+                    Back to Events
+                </button>
+            </div>
+        );
+    }
+
     return (
         <div className="survey-container">
-            <h2>📋 Campus Surveys</h2>
+            <h2>📋 Event Survey: {event?.title}</h2>
             
             {submitted ? (
                 <div className="survey-success">
                     <h3>Thank you for your feedback!</h3>
                     <p>Your responses have been recorded.</p>
+                    <p>Redirecting to My Events...</p>
                 </div>
             ) : (
                 <div className="survey-card">
@@ -160,7 +262,13 @@ const Survey = () => {
                             </div>
                         ))}
                         
-                        <button type="submit" className="survey-submit-btn">Submit Survey</button>
+                        <button 
+                            type="submit" 
+                            className="survey-submit-btn"
+                            disabled={loading}
+                        >
+                            {loading ? 'Submitting...' : 'Submit Survey'}
+                        </button>
                     </form>
                 </div>
             )}

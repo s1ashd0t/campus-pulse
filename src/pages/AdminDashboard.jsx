@@ -9,7 +9,7 @@ const AdminDashboard = () => {
   const { user, userRole, loading } = useContext(AuthContext);
   const [activeTab, setActiveTab] = useState('events');
   
-  // Redirect if not admin
+  //redirecting if the user is not an admin
   if (loading) {
     return <div className="loading">Loading...</div>;
   }
