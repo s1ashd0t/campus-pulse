@@ -8,6 +8,8 @@ export default function EventList() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editingEvent, setEditingEvent] = useState(null);
+  const [showQRModal, setShowQRModal] = useState(false);
+  const [selectedQR, setSelectedQR] = useState(null);
   const { isAdmin } = useAuth();
 
   const formatLocation = (location) => {
@@ -31,6 +33,18 @@ export default function EventList() {
 
     return () => unsubscribe();
   }, []);
+
+  // Add effect to handle body scrolling when modal is open
+  useEffect(() => {
+    if (showQRModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [showQRModal]);
 
   const handleEdit = (event) => {
     setEditingEvent({
@@ -71,6 +85,11 @@ export default function EventList() {
       ...prev,
       [name]: value
     }));
+  };
+
+  const handleShowQR = (event) => {
+    setSelectedQR(event);
+    setShowQRModal(true);
   };
 
   if (loading) {
@@ -148,6 +167,14 @@ export default function EventList() {
                 </div>
                 {isAdmin && (
                   <div className="event-actions">
+                    {event.qrCodeUrl && (
+                      <button 
+                        className="qr-button"
+                        onClick={() => handleShowQR(event)}
+                      >
+                        Show QR
+                      </button>
+                    )}
                     <button 
                       className="edit-button"
                       onClick={() => handleEdit(event)}
@@ -168,6 +195,22 @@ export default function EventList() {
         </div>
       ))}
       </div>
+
+      {/* QR Code Modal */}
+      {showQRModal && selectedQR && (
+        <div className="modal-overlay" onClick={() => setShowQRModal(false)}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <h3>{selectedQR.title} - QR Code</h3>
+            <div className="modal-qr-code">
+              <img src={selectedQR.qrCodeUrl} alt="Event QR Code" />
+            </div>
+            <p>Share this QR code with attendees for easy registration</p>
+            <button className="close-modal-button" onClick={() => setShowQRModal(false)}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

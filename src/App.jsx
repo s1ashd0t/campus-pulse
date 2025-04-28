@@ -16,6 +16,7 @@ import Notifications from "./pages/Notifications";
 import Navigation from "./pages/Navigation";
 import icon from "./assets/icon.png";
 import Unauthorized from "./pages/Unauthorized";
+import EventRegistration from "./pages/EventRegistration";
 import { AdminRoute } from "./components/AdminRoute";
 
 const PrivateRoute = ({ element }) => {
@@ -50,6 +51,18 @@ function App() {
     return () => unsubscribe();
   }, []);
 
+  // Add effect to handle body scrolling
+  useEffect(() => {
+    if (showNav) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [showNav]);
+
   return (
     <div className="app-container">
       <Navigation isOpen={showNav} onClose={() => setShowNav(!showNav)} />
@@ -76,6 +89,7 @@ function App() {
         <Route path="/admin" element={<AdminRoute element={<Admin />} />} />
         <Route path="/leaderboard" element={<PrivateRoute element={<Leaderboard />} />} />
         <Route path="/notifications" element={<PrivateRoute element={<Notifications />} />} />
+        <Route path="/register/:eventId" element={<PrivateRoute element={<EventRegistration />} />} />
       </Routes>
 
       <footer className="footer">

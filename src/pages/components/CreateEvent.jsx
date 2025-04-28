@@ -1,6 +1,6 @@
 // src/components/CreateEvent.jsx
 import { useState } from "react";
-import { addDoc, collection, updateDoc, increment } from "firebase/firestore";
+import { addDoc, collection, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import QRCode from 'qrcode';
 import "./CreateEvent.css";

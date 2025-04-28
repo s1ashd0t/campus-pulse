@@ -29,11 +29,6 @@
     transition: var(--transition);
 }
 
-.event-item:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow);
-}
-
 .event-item h3 {
     color: var(--primary-color);
     margin-bottom: 0.5rem;
@@ -65,6 +60,19 @@
     align-items: center;
 }
 
+.qr-code-preview {
+    background: var(--background-light);
+    padding: 0.5rem;
+    border-radius: var(--border-radius);
+    margin-right: 0.5rem;
+}
+
+.qr-code-preview img {
+    width: 100px;
+    height: 100px;
+    display: block;
+}
+
 .edit-button, .delete-button {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
@@ -88,6 +96,77 @@
 
 .delete-button:hover {
     background: #dc2626;
+}
+
+.qr-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    background: #4CAF50;
+    color: var(--text-color);
+}
+
+.qr-button:hover {
+    background: #45a049;
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    max-height: 100vh;
+}
+
+.modal-content {
+    background: var(--background-dark);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    max-width: 90%;
+    width: 400px;
+    text-align: center;
+}
+
+.modal-content h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.modal-qr-code {
+    background: white;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    margin: 1rem auto;
+    width: fit-content;
+}
+
+.modal-qr-code img {
+    max-width: 250px;
+    height: auto;
+    display: block;
+}
+
+.close-modal-button {
+    margin-top: 1.5rem;
+    padding: 0.7rem 1.5rem;
+    background: var(--background-light);
+    color: var(--text-color);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.close-modal-button:hover {
+    background: var(--primary-color);
 }
 
 /* Edit Form Styles */
