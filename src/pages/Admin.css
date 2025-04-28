@@ -85,6 +85,7 @@ li {
     padding: 1rem;
     border-radius: var(--border-radius);
     /* height: 500px; */
+    max-width: 90vw;
 }
 
 .admin-section h2 {

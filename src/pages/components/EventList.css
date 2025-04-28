@@ -4,6 +4,8 @@
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
     height: 100%;
+    max-width: 90vw;
+    padding: 1rem;
 }
 
 .events-container h2 {
@@ -123,7 +125,7 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    max-height: 100vh;
+    max-height: 250vh;
 }
 
 .modal-content {
@@ -131,7 +133,6 @@
     padding: 2rem;
     border-radius: var(--border-radius);
     max-width: 90%;
-    width: 400px;
     text-align: center;
 }
 
@@ -149,7 +150,7 @@
 }
 
 .modal-qr-code img {
-    max-width: 250px;
+    width: 30vw;
     height: auto;
     display: block;
 }

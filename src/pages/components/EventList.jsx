@@ -37,7 +37,7 @@ export default function EventList() {
   // Add effect to handle body scrolling when modal is open
   useEffect(() => {
     if (showQRModal) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = 'unset';
     } else {
       document.body.style.overflow = 'unset';
     }

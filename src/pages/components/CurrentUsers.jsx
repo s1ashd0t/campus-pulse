@@ -70,7 +70,6 @@ const CurrentUsers = () => {
                     <li key={user.id}>
                         <div className="user-info">
                             <span>{user.firstName} {user.lastName}</span>
-                            <span>{user.email}</span>
                         </div>
                         <div className="user-actions">
                             <button 
