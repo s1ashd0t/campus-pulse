@@ -1,76 +1,69 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext.jsx";
-import { useNavigate, Navigate } from "react-router-dom";
-import { getFirestore, doc, getDoc } from "firebase/firestore"; 
-import "./Dashboard.css"; 
-import AdminHomepage from "./AdminHomepage"; 
+import { useNavigate } from "react-router-dom";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
+import PointsSummary from "../pages/PointsSummary";
+import "./Dashboard.css";
 
 const Dashboard = () => {
-  const { user, userRole, loading } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const navigate = useNavigate();
   const [dashboardData, setDashboardData] = useState(null);
-  const [error, setError] = useState(""); 
+  const [error, setError] = useState("");
 
-  const db = getFirestore(); // Firestore instance
+  const db = getFirestore();
 
-  //Redirect to login if user is not logged in
   useEffect(() => {
     if (!loading && !user) {
       navigate("/login");
     }
   }, [user, loading, navigate]);
-  
-  //if the user is an admin it would render AdminHomepage :p
-  if (!loading && user && userRole === "admin") {
-    return <AdminHomepage />;
-  }
-  
 
-  //feting user stats from Firestore
   useEffect(() => {
-    if (user) {
-      const fetchUserStats = async () => {
-        try {
-          const userStatsRef = doc(db, "userStats", user.uid);
-          const userStatsSnap = await getDoc(userStatsRef);
-
-          if (userStatsSnap.exists()) {
-            setDashboardData(userStatsSnap.data());
-          } else {
-            setDashboardData(null);
-          }
-        } catch (error) {
-          setError("Error fetching stats. Please try again later.");
+    const fetchUserData = async () => {
+      try {
+        const userRef = doc(db, "users", user.uid);
+        const userSnap = await getDoc(userRef);
+        if (userSnap.exists()) {
+          setDashboardData(userSnap.data());
+        } else {
+          setDashboardData(null);
         }
-      };
+      } catch (err) {
+        setError("Error fetching user data.");
+      }
+    };
 
-      fetchUserStats();
-    }
-  }, [user, db]);
+    if (user) fetchUserData();
+  }, [user]);
 
-  if (loading) return <p className="loading-text">Loading...</p>; //loading state because why not
-  if (!user) return null; 
+  const getBadgeTier = (points) => {
+    if (points >= 501) return "Gold";
+    if (points >= 101) return "Silver";
+    return "Bronze";
+  };
+
+  if (loading) return <p className="loading-text">Loading...</p>;
+  if (!user) return null;
 
   return (
     <div className="dashboard-layout">
-      {/* Sidebar */}
-      <aside className="dashboard-sidebar">
-      </aside>
-
-      {/* Main Content */}
       <main className="dashboard-content">
         <h1>Welcome, {user.displayName || "User"}!</h1>
 
-        {/* Error Handling */}
         {error && <p className="error-text">⚠️ {error}</p>}
 
-        {/* User Stats */}
         {dashboardData ? (
-          <div className="dashboard-stats">
-            <p><strong>Events Attended:</strong> {dashboardData.eventsAttended}</p>
-            <p><strong>Points Earned:</strong> {dashboardData.pointsEarned}</p>
-            <p><strong>Rank:</strong> {dashboardData.rank}</p>
-          </div>
+          <>
+            <div className="dashboard-stats">
+              <p><strong>Events Attended:</strong> {dashboardData.eventsAttended ?? 0}</p>
+              <p><strong>Rank:</strong> {dashboardData.rank ?? "Unranked"}</p>
+              <p><strong>Badge Tier:</strong> {getBadgeTier(dashboardData.points ?? 0)}</p>
+              <p><strong>Total Badges:</strong> {dashboardData.badges?.length ?? 0}</p>
+            </div>
+
+            <PointsSummary points={dashboardData.points ?? 0} />
+          </>
         ) : (
           <p className="no-stats-text">Sorry, no stats found.</p>
         )}
