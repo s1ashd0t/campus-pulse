@@ -1,14 +1,15 @@
 import React, { useEffect, useState, useContext } from 'react';
 import './RedeemPoints.css';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
-import { getCurrentUserData, updateUserData } from '../services/authService';
+import { AuthContext } from '../context/AuthContext'; // Import AuthContext
+import { getFirestore, doc, getDoc, updateDoc } from 'firebase/firestore'; // Firestore functions
 
 const RedeemPoints = () => {
     const { user } = useContext(AuthContext);
     const [userPoints, setUserPoints] = useState(null);
     const [redeemStatus, setRedeemStatus] = useState('');
     const navigate = useNavigate();
+    const db = getFirestore();
 
     const rewards = [
         { id: 1, title: 'Discount Coupon (10%)', points: 50, image: '/10d.png', description: 'Valid at campus stores' },
@@ -19,37 +20,41 @@ const RedeemPoints = () => {
         { id: 6, title: 'Library Late Fee Waiver', points: 25, image: '/llfw.png', description: 'One-time late fee waiver' },
     ];
 
-    const fetchPoints = async () => {
-        if (user) {
-            const res = await getCurrentUserData(user.uid);
-            if (res.success) {
-                setUserPoints(res.userData.points ?? 0);
-            } else {
-                console.error("Error fetching user points:", res.error);
-            }
-        }
-    };
-
     useEffect(() => {
+        const fetchPoints = async () => {
+            if (user) {
+                const userRef = doc(db, 'users', user.uid);
+                const userSnap = await getDoc(userRef);
+                if (userSnap.exists()) {
+                    const data = userSnap.data();
+                    setUserPoints(data.points ?? 0);
+                }
+            }
+        };
+
         fetchPoints();
-    }, [user]);
+    }, [user, db]);
 
     const handleRedeem = async (reward) => {
         if (userPoints >= reward.points) {
             const newPoints = userPoints - reward.points;
+            setUserPoints(newPoints);
+
             try {
-                const updateRes = await updateUserData(user.uid, { points: newPoints });
-                if (updateRes.success) {
-                    setRedeemStatus(`Successfully redeemed ${reward.title}!`);
-                    setUserPoints(newPoints);
-                } else {
-                    throw new Error(updateRes.error);
-                }
+                const userRef = doc(db, 'users', user.uid);
+                await updateDoc(userRef, {
+                    points: newPoints
+                });
+
+                setRedeemStatus(`Successfully redeemed ${reward.title}!`);
+                setTimeout(() => setRedeemStatus(''), 3000);
+
             } catch (error) {
                 console.error("Error updating points:", error);
                 setRedeemStatus("Error redeeming reward. Try again.");
+                setTimeout(() => setRedeemStatus(''), 3000);
             }
-            setTimeout(() => setRedeemStatus(''), 3000);
+
         } else {
             setRedeemStatus('Not enough points to redeem this reward.');
             setTimeout(() => setRedeemStatus(''), 3000);
