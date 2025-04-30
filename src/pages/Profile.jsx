@@ -67,12 +67,26 @@ function Profile() {
                 return;
             }
             
-            const result = await updateUserData(user.uid, {
+            // Include all editable fields, including name fields if not using social signup
+            const updatedData = {
                 phoneNumber: userData.phoneNumber,
                 dob: userData.dob
-            });
+            };
+            
+            // Include name fields only if using email signup method
+            if (signupMethod === "email") {
+                updatedData.firstName = userData.firstName;
+                updatedData.lastName = userData.lastName;
+            }
+            
+            const result = await updateUserData(user.uid, updatedData);
             
             if (result.success) {
+                // Update userData state with the latest data
+                setUserData(prevData => ({
+                    ...prevData,
+                    ...updatedData
+                }));
                 setIsEditing(false);
             } else {
                 setError(result.error);
@@ -118,15 +132,16 @@ function Profile() {
             await uploadBytes(storageRef, file);
             const downloadURL = await getDownloadURL(storageRef);
             
-            const result = await updateUserData(user.uid, {
-                ...userData,
+            const updatedData = {
                 avatar: downloadURL
-            });
+            };
+            
+            const result = await updateUserData(user.uid, updatedData);
 
             if (result.success) {
                 setUserData(prev => ({
                     ...prev,
-                    avatar: downloadURL
+                    ...updatedData
                 }));
             } else {
                 setError(result.error);
@@ -231,6 +246,7 @@ function Profile() {
                                     value={userData.firstName}
                                     onChange={handleChange}
                                     disabled={signupMethod !== "email"}
+                                    required={signupMethod === "email"}
                                 />
                             </div>
                             <div className="form-group">
@@ -241,6 +257,7 @@ function Profile() {
                                     value={userData.lastName}
                                     onChange={handleChange}
                                     disabled={signupMethod !== "email"}
+                                    required={signupMethod === "email"}
                                 />
                             </div>
                         </div>
@@ -273,6 +290,7 @@ function Profile() {
                                 name="dob"
                                 value={userData.dob || ""}
                                 onChange={handleChange}
+                                max={new Date().toISOString().split('T')[0]} // Prevents future dates
                             />
                         </div>
                         

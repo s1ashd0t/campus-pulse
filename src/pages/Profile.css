@@ -121,6 +121,19 @@
     font-size: 1rem;
 }
 
+/* Date input specific styling */
+.form-group input[type="date"] {
+    color: white;
+    background-color: #222;
+}
+
+/* Styling for date picker calendar icon */
+.form-group input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1); /* Makes the calendar icon white */
+    opacity: 0.8;
+    cursor: pointer;
+}
+
 .form-group input:disabled {
     background-color: #1a1a1a;
     color: #666;
@@ -214,4 +227,13 @@
 .change-picture-button:disabled {
     background: rgba(0, 0, 0, 0.5);
     cursor: not-allowed;
+}
+
+/* Error message styling */
+.error-message {
+    padding: 0.8rem;
+    background-color: rgba(255, 0, 0, 0.2);
+    border-left: 4px solid #ff0000;
+    color: #ff9999;
+    margin-bottom: 1.5rem;
 }
