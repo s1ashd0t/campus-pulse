@@ -105,7 +105,7 @@
     cursor: pointer;
     z-index: 10000;
     padding: 10px;
-    background: #F0BB78;
+    background: var(--secondary-hover);
     border-radius: var(--border-radius);
     filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.05));
     transition: var(--transition);
