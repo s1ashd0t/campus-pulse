@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
-import './Homepage.css';
+import '../styles/components.css';
 import qrcode from '../assets/scan-icon.svg';
 import searchicon from '../assets/search-icon.svg';
 import eventsicon from '../assets/leaderboard.svg';
@@ -101,4 +101,3 @@ const Homepage = () => {
 };
 
 export default Homepage;
-

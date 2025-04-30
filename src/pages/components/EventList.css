@@ -36,6 +36,7 @@
 }
 
 .event-info {
+    background-color: var(--card-background);
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -49,7 +50,7 @@
 
 .event-details p {
     margin: 0.3rem 0;
-    color: var(--text-color);
+    color: var(#684b00);
     opacity: 0.8;
     font-size: 0.9rem;
 }
@@ -113,7 +114,7 @@
 
 /* Modal Styles */
 .modal-overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -123,7 +124,6 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    max-height: 100vh;
 }
 
 .modal-content {
@@ -133,6 +133,7 @@
     max-width: 90%;
     width: 400px;
     text-align: center;
+    position: relative;
 }
 
 .modal-content h3 {
@@ -146,10 +147,11 @@
     border-radius: var(--border-radius);
     margin: 1rem auto;
     width: fit-content;
+    max-width: 100%;
 }
 
 .modal-qr-code img {
-    max-width: 250px;
+    max-width: 100%;
     height: auto;
     display: block;
 }
@@ -249,4 +251,27 @@
         margin-top: 1rem;
         justify-content: flex-end;
     }
+}
+
+/* Option B: Strong fixed-position modal overlay */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    overflow-y: auto;
+}
+
+/* Scrollable modal content if too tall */
+.modal-content {
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+/* Prevent background scroll when modal is open */
+body.modal-open {
+    overflow: hidden;
 }

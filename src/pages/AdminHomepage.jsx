@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import './AdminHomepage.css';
+import '../styles/components.css';
 import { getAllEvents } from '../services/eventService';
 
 const AdminHomepage = () => {

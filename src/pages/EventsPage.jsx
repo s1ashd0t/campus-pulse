@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { getAllEvents } from "../services/eventService";
 import { useNavigate, Navigate, useLocation } from "react-router-dom";
-import "./EventsPage.css";
+import "../styles/components.css";
 
 const EventsPage = () => {
   const { userRole, user } = useContext(AuthContext);

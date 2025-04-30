@@ -1,4 +1,3 @@
-// src/pages/Login.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginWithEmail, loginWithGoogle, loginWithFacebook, resetPassword, getCurrentUserData } from "../services/authService";
