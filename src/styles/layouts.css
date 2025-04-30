@@ -19,6 +19,24 @@
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
+@media (max-width: 480px) {
+  .grid {
+    gap: 1rem;
+  }
+  
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+  
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+  
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Flex Layouts */
 .flex-row {
   display: flex;
@@ -103,6 +121,18 @@
   max-width: 100%;
 }
 
+@media (max-width: 768px) {
+  .container {
+    padding: 0 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 0.5rem;
+  }
+}
+
 /* Hero Layout */
 .hero-layout {
   position: relative;
@@ -120,6 +150,20 @@
   max-width: 800px;
   width: 100%;
   z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .hero-layout {
+    padding: 2.5rem 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-layout {
+    padding: 2rem 0.5rem;
+    margin-bottom: 1rem;
+  }
 }
 
 /* Feature Layout */
@@ -191,6 +235,16 @@
 }
 
 /* Media Queries */
+@media (max-width: 1024px) {
+  .dashboard-body {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+  
+  .features-layout {
+    gap: 1.75rem;
+  }
+}
+
 @media (max-width: 768px) {
   .grid-2, .grid-3, .grid-4 {
     grid-template-columns: 1fr;
@@ -207,5 +261,62 @@
   
   .features-layout {
     gap: 1.5rem;
+  }
+  
+  .dashboard-body {
+    grid-template-columns: 1fr;
+  }
+  
+  .section {
+    margin: 1.5rem 0;
+  }
+  
+  .section-lg {
+    margin: 2.5rem 0;
+  }
+  
+  .section-header {
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-tabs {
+    gap: 0.25rem;
+  }
+  
+  .hero-layout {
+    padding: 1.5rem 0.75rem;
+  }
+  
+  .features-layout {
+    gap: 1.25rem;
+    margin: 2rem auto;
+  }
+  
+  .section {
+    margin: 1.25rem 0;
+  }
+  
+  .section-lg {
+    margin: 2rem 0;
+  }
+  
+  .section-header {
+    margin-bottom: 1.25rem;
+  }
+  
+  .dashboard-header {
+    margin-bottom: 1.5rem;
+  }
+  
+  .dashboard-footer {
+    margin-top: 1.5rem;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .admin-header {
+    margin-bottom: 1.5rem;
   }
 }

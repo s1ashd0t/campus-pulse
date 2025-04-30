@@ -12,7 +12,7 @@
     background: var(--card-background);
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-lg);
-    color: var(--text-dark);
+    color: var(--primary-color);
     position: relative;
     overflow: hidden;
     border: 1px solid rgba(240, 187, 120, 0.3);
@@ -73,7 +73,7 @@
     margin-top: 2rem;
 }
 
-.edit-button, .logout-button {
+.edit-button, .logout-button { 
     padding: 0.8rem 1.5rem;
     border: none;
     border-radius: var(--border-radius);
@@ -114,7 +114,7 @@
 
 .logout-button {
     background: linear-gradient(45deg, var(--primary-color), var(--primary-hover));
-    color: var(--text-dark);
+    color: var(--text-color);
     box-shadow: var(--shadow);
 }
 

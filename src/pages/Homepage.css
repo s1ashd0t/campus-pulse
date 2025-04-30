@@ -10,11 +10,21 @@
     user-select: none;
 }
 
+.homepage::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+}
+
 /* Card Grid */
 .cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1rem;
+    gap: 1.5rem;
     padding: 1rem;
 }
 
@@ -22,88 +32,173 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 1.5rem;
-    background-color: var(--primary-color);
+    padding: 2rem 1.5rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
     color: var(--text-color);
     text-decoration: none;
-    font-weight: 600;
+    font-weight: var(--font-weight-bold);
     font-size: 1.2rem;
     transition: var(--transition);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    letter-spacing: 0.5px;
 }
 
 .cards a:hover {
     transform: translateY(-2px);
-    background-color: var(--primary-hover);
     box-shadow: var(--shadow-lg);
 }
 
 .card-image {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    padding: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .card-image img {
-    height: 50px;
-    width: 50px;
+    height: 60px;
+    width: 60px;
     padding: 10px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 /* News Section */
 .news-container {
-    margin-top: 2rem;
+    margin: 3rem auto 2rem;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.news-container h2 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    letter-spacing: 0.5px;
+    padding-bottom: 0.75rem;
+}
+
+.news-container h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--accent-color);
+    border-radius: 3px;
 }
 
 .news-section {
     background-color: var(--background-dark);
     border-radius: var(--border-radius);
-    padding: 1.5rem;
+    padding: 2rem;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
+    gap: 2rem;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .newscard {
     display: flex;
     flex-direction: column;
-    background: var(--background-light);
+    background: rgba(255, 255, 255, 0.05);
     border-radius: var(--border-radius);
     overflow: hidden;
     cursor: pointer;
     transition: var(--transition);
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .newscard:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
 }
 
 .newscard img {
     width: 100%;
-    height: 180px;
+    height: 200px;
     object-fit: cover;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .newscard-content {
-    padding: 1rem;
-    font-size: 1rem;
+    padding: 1.5rem;
+    font-size: 1.05rem;
     text-align: center;
+    color: var(--text-color);
+    line-height: 1.5;
 }
 
-@media (max-width: 568px) {
+.newscard-content h3 {
+    margin-bottom: 0.75rem;
+    color: var(--accent-color);
+    font-size: 1.3rem;
+    font-weight: var(--font-weight-bold);
+}
+
+.newscard-content p {
+    opacity: 0.9;
+}
+
+@media (max-width: 768px) {
     .homepage {
-        width: 95vw;
-        padding: 0.5rem;
+        width: 95%;
+        padding: 1.5rem 1rem;
     }
 
     .news-section {
-        padding: 1rem;
+        padding: 1.5rem;
+        gap: 1.5rem;
+    }
+    
+    .cards {
+        gap: 1rem;
+    }
+    
+    .cards a {
+        padding: 1.5rem 1rem;
+    }
+    
+    .card-image {
+        margin-bottom: 1rem;
+    }
+    
+    .card-image img {
+        height: 50px;
+        width: 50px;
+    }
+    
+    .news-container h2 {
+        font-size: 1.6rem;
     }
 }
 
 @media (max-width: 600px) {
-    .card {
-        width: 40vw;
-        height: 9rem;
+    .cards a {
+        padding: 1.25rem 1rem;
+        font-size: 1.1rem;
+    }
+    
+    .newscard img {
+        height: 180px;
+    }
+    
+    .newscard-content {
+        padding: 1.25rem;
+        font-size: 1rem;
+    }
+    
+    .newscard-content h3 {
+        font-size: 1.2rem;
     }
 }

@@ -190,11 +190,6 @@
     background: linear-gradient(45deg, var(--accent-color), var(--accent-hover));
 }
 
-.facebook-login {
-    background: linear-gradient(45deg, var(--primary-color), var(--primary-hover));
-    color: var(--text-color);
-}
-
 /* Links */
 .auth-link {
     margin-top: 2rem;

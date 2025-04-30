@@ -13,6 +13,7 @@
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     align-items: flex-start;
     opacity: 0;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
 }
 
 .navigation.open {
@@ -31,7 +32,7 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.75rem;
     overflow-y: auto;
     background: linear-gradient(135deg, rgba(240, 187, 120, 0.98), rgba(229, 173, 106, 0.95));
     box-shadow: 5px 0 20px rgba(0, 0, 0, 0.1);
@@ -53,16 +54,16 @@
 .navigation ul li a,
 .navigation ul li button {
     color: #626F47;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s;
-    padding: 1rem;
+    padding: 1rem 1.25rem;
     border-radius: var(--border-radius);
     width: 100%;
     text-align: center;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.1);
     border: none;
     cursor: pointer;
     font-weight: var(--font-weight-medium);
@@ -71,8 +72,6 @@
     overflow: hidden;
     box-shadow: var(--shadow-sm);
 }
-
-
 
 .menu-icon {
     position: fixed;
@@ -85,33 +84,69 @@
     padding: 10px;
     background: var(--secondary-hover);
     border-radius: var(--border-radius);
-    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.05));
+    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.1));
     transition: var(--transition);
     border: 1px solid rgba(245, 236, 213, 0.3);
 }
-
 
 .logout-btn {
     color: var(--text-dark) !important;
     background: linear-gradient(45deg, rgba(229, 164, 164, 0.7), rgba(229, 164, 164, 0.5)) !important;
     border: 1px solid rgba(245, 236, 213, 0.2) !important;
+    margin-top: 1rem;
+    font-weight: var(--font-weight-bold) !important;
 }
 
+@media (max-width: 480px) {
+    .menu-icon {
+        top: 15px;
+        left: 15px;
+        width: 40px;
+        height: 40px;
+        padding: 8px;
+    }
+}
 
 @media (max-width: 768px) {
     .navigation ul {
         padding-top: 4rem;
         max-width: 280px;
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
     }
     
     .navigation ul li a,
     .navigation ul li button {
-        font-size: 1.1rem;
+        font-size: 1.05rem;
         padding: 0.9rem;
     }
 }
 
-@media (min-width: 769px) {
+@media (max-width: 480px) {
+    .navigation ul {
+        padding-top: 3.5rem;
+        max-width: 250px;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        gap: 0.5rem;
+    }
+    
+    .navigation ul li {
+        margin-bottom: 0.4rem;
+    }
+    
+    .navigation ul li a,
+    .navigation ul li button {
+        font-size: 1rem;
+        padding: 0.8rem;
+    }
+    
+    .logout-btn {
+        margin-top: 0.75rem;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1400px) {
     .navigation {
         width: 320px;
     }
@@ -119,4 +154,58 @@
     .navigation.open {
         box-shadow: 2px 0 20px rgba(0, 0, 0, 0.3);
     }
+    
+    .navigation ul li a,
+    .navigation ul li button {
+        width: 100%;
+        min-width: unset;
+    }
+}
+
+@media (min-width: 1401px) {
+    .navigation {
+        width: 320px;
+    }
+    
+    .navigation.open {
+        box-shadow: 2px 0 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    .navigation ul li a,
+    .navigation ul li button {
+        width: 100%;
+        min-width: unset;
+    }
+}
+
+@media (min-width: 1401px) {
+    .navigation ul {
+        max-width: 320px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .navigation {
+        backdrop-filter: blur(4px);
+    }
+}
+
+/* Improved text contrast for navigation items */
+.navigation ul li a,
+.navigation ul li button {
+    color: #3d472e;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+/* Ensure padding and text is not cut off */
+.navigation ul li a,
+.navigation ul li button {
+    padding: 1.2rem 1.25rem;
+    line-height: 1.4;
+    overflow: visible;
+}
+
+/* Allow list items to grow naturally */
+.navigation ul li {
+    overflow: visible;
 }

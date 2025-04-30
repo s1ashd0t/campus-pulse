@@ -44,6 +44,36 @@
     display: flex;
     gap: 10px;
     align-items: center;
+    flex-wrap: wrap;
+}
+
+@media (min-width: 1025px) and (max-width: 1400px) {
+    .user-actions {
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+    
+    .role-toggle-btn, .delete-btn {
+        padding: 8px 12px;
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 1024px) {
+    .current-users li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .user-info {
+        margin-bottom: 10px;
+        width: 100%;
+    }
+    
+    .user-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
 }
 
 .role-badge {
@@ -106,4 +136,41 @@
     margin-bottom: 15px;
     width: 100%;
     text-align: center;
+}
+
+/* Ensure proper vertical layout and wrapping for user info */
+.user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    width: 100%;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+/* Specifically style email spans */
+.user-email {
+    font-size: 0.9rem;
+    color: white;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+/* Prevent user list items from shrinking awkwardly */
+.current-users li {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* Buttons layout */
+.user-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 8px;
+    width: 100%;
 }
