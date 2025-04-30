@@ -1,12 +1,25 @@
 .notifications-container {
   margin-top: 6rem;
   padding: 2rem;
-  background: rgba(0, 0, 0, 0.8);
-  color: white;
+  background: var(--card-background);
+  color: var(--text-dark);
   max-width: 40rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.3);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-lg);
   width: 100%;
+  border: 1px solid rgba(240, 187, 120, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.notifications-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
 }
 
 .notifications-container h1 {
@@ -21,16 +34,18 @@
 
 .notification-card {
   padding: 1rem;
-  border-bottom: 1px solid #333;
-  background: rgba(255,255,255,0.05);
-  border-radius: 0.5rem;
+  border-bottom: 1px solid rgba(240, 187, 120, 0.2);
+  background: rgba(245, 236, 213, 0.1);
+  border-radius: var(--border-radius);
   margin-bottom: 1rem;
-  transition: all 0.3s ease;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
 }
 
 .notification-card:hover {
-  background: rgba(255, 255, 255, 0.1);
-  transform: scale(1.01);
+  background: rgba(245, 236, 213, 0.2);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
 }
 
 .notification-content {
@@ -47,7 +62,8 @@
 
 .notification-text small {
   font-size: 0.8rem;
-  color: #aaa;
+  color: var(--text-dark);
+  opacity: 0.7;
 }
 
 .notification-actions {
@@ -58,13 +74,13 @@
 .action-icon {
   font-size: 1.2rem;
   cursor: pointer;
-  color: white;
-  transition: transform 0.2s;
+  color: var(--text-dark);
+  transition: var(--transition);
 }
 
 .action-icon:hover {
   transform: scale(1.3);
-  color: #ff7b00;
+  color: var(--accent-color);
 }
 
 .read {
@@ -72,5 +88,6 @@
 }
 
 .unread {
-  font-weight: bold;
+  font-weight: var(--font-weight-bold);
+  border-left: 3px solid var(--accent-color);
 }

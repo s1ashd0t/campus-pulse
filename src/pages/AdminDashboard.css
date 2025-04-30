@@ -1,16 +1,32 @@
 .admin-dashboard-container {
+  background: var(--card-background);
+  color: var(--text-dark);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(240, 187, 120, 0.3);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 0.6s ease-out;
+  width: 100%;
   max-width: 1200px;
   margin: 2rem auto;
   padding: 2rem;
-  background-color: rgba(0, 0, 0, 0.6);
-  border-radius: 10px;
-  color: white;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.admin-dashboard-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
 }
 
 .admin-dashboard-container h1 {
   margin-bottom: 2rem;
-  color: #ff7b00;
+  color: var(--accent-color);
   text-align: center;
   font-size: 2rem;
 }
@@ -21,27 +37,30 @@
   gap: 1rem;
   margin-bottom: 2rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(240, 187, 120, 0.3);
 }
 
 .tab-button {
   padding: 0.75rem 1.5rem;
   border: none;
-  border-radius: 5px;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: white;
-  font-weight: bold;
+  border-radius: var(--border-radius-sm);
+  background-color: rgba(245, 236, 213, 0.1);
+  color: var(--text-dark);
+  font-weight: var(--font-weight-medium);
   cursor: pointer;
-  transition: all 0.3s;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
 }
 
 .tab-button:hover {
-  background-color: rgba(255, 123, 0, 0.3);
+  background-color: rgba(240, 187, 120, 0.3);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
 }
 
 .tab-button.active {
-  background-color: #ff7b00;
-  color: white;
+  background-color: var(--accent-color);
+  color: var(--text-dark);
 }
 
 .tab-content {
@@ -52,14 +71,16 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 2rem;
-  background-color: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
+  background-color: rgba(245, 236, 213, 0.1);
+  border-radius: var(--border-radius);
   text-align: center;
+  border: 1px solid rgba(240, 187, 120, 0.2);
+  box-shadow: var(--shadow);
 }
 
 .placeholder-content h2 {
   margin-bottom: 1rem;
-  color: #ff7b00;
+  color: var(--accent-color);
 }
 
 .placeholder-content p {
@@ -82,7 +103,8 @@
   text-align: center;
   padding: 2rem;
   font-style: italic;
-  color: #aaa;
+  color: var(--text-dark);
+  opacity: 0.7;
 }
 
 @media (max-width: 768px) {

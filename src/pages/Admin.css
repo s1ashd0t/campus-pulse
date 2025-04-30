@@ -1,8 +1,8 @@
 :root {
-    --background-dark: #4B2840;
+    --background-dark: #626F47;
     --border-radius: 0.5rem;
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --text-color: #ffffff;
+    --text-color: #F5ECD5;
 }
 
 .admin {
@@ -32,10 +32,11 @@ ul {
 }
 
 li {
-    background-color: #1c5242;
+    background-color: #A4B465;
     border-radius: 5px;
     padding: 5px;
     margin: 10px;
+    color: #626F47;
 }
 
 .create-event {
@@ -68,7 +69,7 @@ li {
     margin: 0 auto;
     color: var(--text-color);
     text-align: center;
-    background-color: #4B2840;
+    background-color: #626F47;
     width: 100%;
 }   
 
