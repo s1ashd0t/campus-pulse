@@ -30,7 +30,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AdminHomepage from "./pages/AdminHomepage";
 import AdminEventsPage from "./pages/AdminEventsPage";
 import Events from "./pages/Events";
-// import Analytics from "./pages/components/Analytics";
+import Analytics from "./pages/components/Analytics";
 
 const PrivateRoute = ({ element, requireAdmin }) => {
   const { user, userRole, loading } = useContext(AuthContext);
@@ -124,9 +124,10 @@ function App() {
         <Route path="/events" element={<PrivateRoute element={<Events />} />} />
         <Route path="/event/:id" element={<PrivateRoute element={<EventDetails />} />} />
         <Route path="/survey" element={<PrivateRoute element={<Survey />} />} />
+        <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} />} />
         <Route path="/redeem" element={<PrivateRoute element={<RedeemPoints />} />} />
         <Route path="/test-notifications" element={<PrivateRoute element={<TestNotifications />} />} />
-        {/* <Route path="/analytics" element={<PrivateRoute element={<Analytics />} />} /> */}
+        {<Route path="/analytics" element={<PrivateRoute element={<Analytics />} />} />}
       </Routes>
 
       <footer className="footer">

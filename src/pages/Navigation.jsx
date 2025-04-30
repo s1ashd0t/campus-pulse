@@ -37,6 +37,9 @@ const Navigation = ({ isOpen, onClose }) => {
                         {isAdmin && (
                             <li><Link to="/admin" onClick={onClose}>Admin Panel</Link></li>
                         )}
+                        {isAdmin && (
+                            <li><Link to="/analytics" onClick={onClose}>Admin Analytics</Link></li>
+                        )}
                         <li>
                             <button onClick={handleLogout} className="logout-btn">
                                 Logout

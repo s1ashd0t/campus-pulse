@@ -1,5 +1,5 @@
 .notifications-container {
-  margin-top: 6rem;
+  margin: 1rem auto;
   padding: 2rem;
   background: var(--card-background);
   color: var(--text-dark);
@@ -27,12 +27,91 @@
   text-align: center;
 }
 
-.notifications-container ul {
-  list-style: none;
-  padding: 0;
+.notification-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
 }
 
-.notification-card {
+.search-container {
+  flex: 1;
+  min-width: 200px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 0.25rem;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 1rem;
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.sort-container {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.sort-button {
+  padding: 0.5rem 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 0.25rem;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.sort-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.sort-button.active {
+  background-color: #4a86e8;
+}
+
+.sort-button:last-child {
+  margin-left: 0.5rem;
+  background-color: rgba(255, 215, 0, 0.2);
+  border: 1px solid rgba(255, 215, 0, 0.5);
+}
+
+.sort-button:last-child.active {
+  background-color: rgba(255, 215, 0, 0.5);
+  border: 1px solid gold;
+}
+
+.bulk-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.delete-button {
+  padding: 0.5rem 1rem;
+  background-color: #dc3545;
+  border: none;
+  border-radius: 0.25rem;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+.delete-confirmation {
+  background-color: rgba(220, 53, 69, 0.1);
+  border: 1px solid #dc3545;
   padding: 1rem;
   border-bottom: 1px solid rgba(240, 187, 120, 0.2);
   background: rgba(245, 236, 213, 0.1);
@@ -48,19 +127,56 @@
   box-shadow: var(--shadow);
 }
 
-.notification-content {
+.cancel-button {
+  padding: 0.5rem 1rem;
+  background-color: #6c757d;
+  border: none;
+  border-radius: 0.25rem;
+  color: white;
+  cursor: pointer;
+}
+
+.confirm-button {
+  padding: 0.5rem 1rem;
+  background-color: #dc3545;
+  border: none;
+  border-radius: 0.25rem;
+  color: white;
+  cursor: pointer;
+}
+
+.notifications-list {
+  list-style: none;
+  padding: 0;
+}
+
+.notifications-list li {
+  padding: 1rem;
+  border-bottom: 1px solid #333;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  cursor: pointer;
+  border-left: 4px solid transparent;
 }
 
-.notification-text {
+.notifications-list li:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.notification-checkbox {
+  size: 10rem;
+  margin-right: 1rem;
+}
+
+.notification-content {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  text-align: left;
 }
 
-.notification-text small {
+.notification-date {
   font-size: 0.8rem;
   color: var(--text-dark);
   opacity: 0.7;
@@ -68,10 +184,14 @@
 
 .notification-actions {
   display: flex;
-  gap: 0.7rem;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.action-icon {
+.star-button {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
   font-size: 1.2rem;
   cursor: pointer;
   color: var(--text-dark);
@@ -83,9 +203,31 @@
   color: var(--accent-color);
 }
 
-.read {
-  opacity: 0.6;
+.hover-card {
+  transition: all 0.3s;
 }
+
+
+.notification-rsvp {
+  border-left: 8px solid #28a745;
+  background-color: rgba(40, 167, 69, 0.1);
+}
+
+.notification-admin {
+  border-left: 8px solid #dc3545;
+  background-color: rgba(220, 53, 69, 0.1);
+}
+
+.notification-points {
+  border-left: 8px solid #ffc107;
+  background-color: rgba(255, 193, 7, 0.1);
+}
+
+.notification-event {
+  border-left: 8px solid #007bff;
+  background-color: rgba(0, 123, 255, 0.1);
+}
+
 
 .unread {
   font-weight: var(--font-weight-bold);
