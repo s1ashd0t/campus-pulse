@@ -163,16 +163,6 @@
     transform: translateY(-1px);
 }
 
-.btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: var(--transition-slow);
-}
 
 .btn:disabled {
     opacity: 0.6;
@@ -245,16 +235,6 @@
     cursor: pointer;
 }
 
-.social-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transition: var(--transition-slow);
-}
 
 .google-login {
     background: linear-gradient(45deg, var(--accent-color), var(--accent-hover));
@@ -461,16 +441,6 @@
     transform: translateY(-1px);
 }
 
-.cta-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: var(--transition-slow);
-}
 
 /* CTA Section */
 .cta-section {
