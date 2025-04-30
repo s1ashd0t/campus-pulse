@@ -1,12 +1,26 @@
 .redeem-container {
-    margin-top: 1rem;
-    padding: 2rem;
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
+    margin: 2rem auto;
+    padding: 2.5rem;
+    background: var(--card-background);
+    color: var(--text-dark);
     max-width: 60rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.3);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
+    width: 90%;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(240, 187, 120, 0.3);
+    backdrop-filter: blur(10px);
+  }
+  
+  .redeem-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
   }
   
   .redeem-header {
@@ -14,105 +28,172 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
-    border-bottom: 1px solid #444;
-    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(240, 187, 120, 0.3);
+    padding-bottom: 1.5rem;
   }
   
   .points-display {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: #ff7b00;
-    border-radius: 0.5rem;
-    padding: 0.5rem 1rem;
+    background: linear-gradient(45deg, var(--accent-color), var(--accent-hover));
+    border-radius: var(--border-radius);
+    padding: 0.8rem 1.5rem;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+  }
+  
+  .points-display:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
   }
   
   .points-value {
-    font-size: 1.8rem;
-    font-weight: bold;
+    font-size: 2rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--text-dark);
   }
   
   .points-label {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    opacity: 0.9;
   }
   
   .rewards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
   }
   
   .reward-card {
-    background: #222;
-    border-radius: 0.5rem;
+    background: var(--card-background);
+    border-radius: var(--border-radius);
     overflow: hidden;
-    transition: transform 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(240, 187, 120, 0.2);
+    position: relative;
   }
   
   .reward-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .reward-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    z-index: 1;
   }
   
   .reward-image {
     width: 100%;
-    height: 120px;
+    height: 160px;
     object-fit: cover;
+    transition: var(--transition);
+  }
+  
+  .reward-card:hover .reward-image {
+    transform: scale(1.05);
   }
   
   .reward-info {
-    padding: 1rem;
+    padding: 1.5rem;
   }
   
   .reward-info h3 {
-    margin: 0 0 0.5rem 0;
-    font-size: 1.2rem;
+    margin: 0 0 0.8rem 0;
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    font-weight: var(--font-weight-bold);
   }
   
   .reward-description {
-    color: #ccc;
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
-    height: 2.5rem;
+    color: var(--text-dark);
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    min-height: 2.8rem;
   }
   
   .reward-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 0.5rem;
   }
   
   .reward-points {
-    font-weight: bold;
-    color: #ff7b00;
+    font-weight: var(--font-weight-bold);
+    color: var(--accent-color);
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  
+  .reward-points::before {
+    content: '★';
+    font-size: 1.2rem;
   }
   
   .redeem-button {
-    background-color: #ff7b00;
-    color: white;
+    background: linear-gradient(45deg, var(--accent-color), var(--accent-hover));
+    color: var(--text-dark);
     border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 0.3rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--border-radius);
     cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s;
+    font-weight: var(--font-weight-medium);
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
   }
   
   .redeem-button:hover {
-    background-color: #e66a00;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+    background: linear-gradient(45deg, var(--accent-hover), var(--accent-color));
+  }
+  
+  .redeem-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: var(--transition-slow);
+  }
+  
+  .redeem-button:hover::before {
+    left: 100%;
   }
   
   .redeem-button.disabled {
-    background-color: #666;
+    background: linear-gradient(45deg, #c0c0c0, #a0a0a0);
     cursor: not-allowed;
+    transform: none;
   }
   
   .redeem-status {
-    background: rgba(255, 123, 0, 0.2);
-    border-left: 4px solid #ff7b00;
-    padding: 1rem;
-    margin-bottom: 1.5rem;
-    border-radius: 0.3rem;
+    background: rgba(240, 187, 120, 0.1);
+    border-left: 4px solid var(--accent-color);
+    padding: 1.2rem;
+    margin-bottom: 2rem;
+    border-radius: var(--border-radius-sm);
+    color: var(--text-dark);
+    box-shadow: var(--shadow-sm);
   }
   
   @media (max-width: 768px) {

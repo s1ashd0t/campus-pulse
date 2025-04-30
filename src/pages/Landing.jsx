@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./Landing.css";
+import "../styles/components.css";
 import Login from './Login';
 import { useAuth } from "../context/AuthContext";
 
@@ -24,15 +24,15 @@ const Landing = () => {
             <p>Engage in campus activities, earn points, and unlock exclusive rewards.</p>
             {/* Features Section */}
             <section className="features">
-              <div className="feature">
+              <div className="feature-card">
                 <h2>🎟 Easy Event Check-ins</h2>
                 <p>Scan QR codes or use GPS to check in instantly.</p>
               </div>
-              <div className="feature">
+              <div className="feature-card">
                 <h2>📊 Engagement Dashboard</h2>
                 <p>Track your event participation and leaderboard ranking.</p>
               </div>
-              <div className="feature">
+              <div className="feature-card">
                 <h2>🏆 Earn & Redeem Rewards</h2>
                 <p>Gain points for attending events and exchange them for prizes!</p>
               </div>

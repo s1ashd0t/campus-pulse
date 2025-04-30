@@ -1,37 +1,76 @@
 .unauthorized-container {
-  margin-top: 1rem;
-  padding: 2rem;
-  background: rgba(0, 0, 0, 0.8);
-  color: white;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background: var(--card-background);
+  color: var(--text-dark);
   max-width: 40rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.3);
-  width: 100%;
+  width: 90%;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-lg);
   text-align: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(240, 187, 120, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.unauthorized-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
 }
 
 .unauthorized-container h1 {
   font-size: 2.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  color: var(--accent-color);
+  font-weight: var(--font-weight-bold);
 }
 
 .unauthorized-container p {
-  margin: 0.5rem 0;
-  color: #ccc;
+  margin: 0.8rem 0;
+  color: var(--text-dark);
   font-size: 1.1rem;
+  line-height: 1.6;
+  opacity: 0.9;
 }
 
 .back-home {
   display: inline-block;
   margin-top: 2rem;
-  padding: 0.8rem 1.5rem;
-  background: var(--primary-color);
-  color: white;
+  padding: 1rem 2rem;
+  background: linear-gradient(45deg, var(--accent-color), var(--accent-hover));
+  color: var(--text-dark);
   text-decoration: none;
-  border-radius: 0.3rem;
-  transition: background-color 0.3s;
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+  font-weight: var(--font-weight-medium);
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
 }
 
 .back-home:hover {
-  background: var(--primary-hover);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  background: linear-gradient(45deg, var(--accent-hover), var(--accent-color));
+}
+
+.back-home::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: var(--transition-slow);
+}
+
+.back-home:hover::before {
+  left: 100%;
 }

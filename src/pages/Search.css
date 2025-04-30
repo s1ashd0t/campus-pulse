@@ -30,13 +30,13 @@
 }
 
 .search-input:focus {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(245, 236, 213, 0.15);
     box-shadow: var(--shadow);
-    border-color: var(--primary-color);
+    border-color: var(--accent-color);
 }
 
 .search-input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(245, 236, 213, 0.5);
 }
 
 .search-loading {

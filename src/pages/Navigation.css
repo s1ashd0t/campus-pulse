@@ -1,90 +1,211 @@
 .navigation {
     display: flex;
     justify-content: center;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     height: 100vh;
     width: 100vw;
     z-index: 9999;
-    background-color: rgba(49, 13, 32, 0.8);
-    backdrop-filter: blur(5px);
+    background-color: rgba(240, 187, 120, 0.95);
+    backdrop-filter: blur(10px);
     transform: translateX(-100%);
-    transition: transform 0.3s ease;
-    display: flex;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     align-items: flex-start;
+    opacity: 0;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
 }
 
 .navigation.open {
     transform: translateX(0);
-    /* stop scrolling */
     overflow: hidden;
     pointer-events: auto;
-
+    opacity: 1;
 }
 
 .navigation ul {
-    /* background: var(--background-dark); */
     margin: 0;
-    padding-top: 3rem;
-    padding-left: 0;
+    padding: 5rem 1.5rem 2rem;
     list-style: none;
     width: 100%;
-    max-width: 300px;
+    max-width: 320px;
     height: 100vh;
-    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    overflow-y: auto;
+    background: linear-gradient(135deg, rgba(240, 187, 120, 0.98), rgba(229, 173, 106, 0.95));
+    box-shadow: 5px 0 20px rgba(0, 0, 0, 0.1);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .navigation ul li {
-    /* padding: 1rem 1.5rem; */
     text-align: center;
-    border-bottom: 1px solid var(--background-light);
+    margin-bottom: 0.5rem;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.navigation ul li:last-child {
+    margin-top: auto;
 }
 
 .navigation ul li a,
 .navigation ul li button {
-    color: var(--text-color);
-    font-size: 1.4rem;
-    display: block;
-    transition: all 0.2s;
-    padding: 0.9rem;
+    color: #626F47;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    padding: 1rem 1.25rem;
     border-radius: var(--border-radius);
     width: 100%;
     text-align: center;
-    background: none;
+    background: rgba(255, 255, 255, 0.1);
     border: none;
     cursor: pointer;
-}
-
-.navigation ul li a:hover,
-.navigation ul li button:hover {
-    background-color: var(--background-light);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
 }
 
 .menu-icon {
     position: fixed;
     top: 20px;
     left: 20px;
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     cursor: pointer;
     z-index: 10000;
-    padding: 8px;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 5px;
-    filter: invert(1);
+    padding: 10px;
+    background: var(--secondary-hover);
+    border-radius: var(--border-radius);
+    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.1));
+    transition: var(--transition);
+    border: 1px solid rgba(245, 236, 213, 0.3);
 }
 
 .logout-btn {
-    color: var(--error-color) !important;
+    color: var(--text-dark) !important;
+    background: linear-gradient(45deg, rgba(229, 164, 164, 0.7), rgba(229, 164, 164, 0.5)) !important;
+    border: 1px solid rgba(245, 236, 213, 0.2) !important;
+    margin-top: 1rem;
+    font-weight: var(--font-weight-bold) !important;
 }
 
-@media (width: 769px) {
+@media (max-width: 480px) {
+    .menu-icon {
+        top: 15px;
+        left: 15px;
+        width: 40px;
+        height: 40px;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navigation ul {
+        padding-top: 4rem;
+        max-width: 280px;
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+    
+    .navigation ul li a,
+    .navigation ul li button {
+        font-size: 1.05rem;
+        padding: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .navigation ul {
+        padding-top: 3.5rem;
+        max-width: 250px;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        gap: 0.5rem;
+    }
+    
+    .navigation ul li {
+        margin-bottom: 0.4rem;
+    }
+    
+    .navigation ul li a,
+    .navigation ul li button {
+        font-size: 1rem;
+        padding: 0.8rem;
+    }
+    
+    .logout-btn {
+        margin-top: 0.75rem;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1400px) {
     .navigation {
-        width: 300px;
+        width: 320px;
     }
     
     .navigation.open {
-        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+        box-shadow: 2px 0 20px rgba(0, 0, 0, 0.3);
     }
+    
+    .navigation ul li a,
+    .navigation ul li button {
+        width: 100%;
+        min-width: unset;
+    }
+}
+
+@media (min-width: 1401px) {
+    .navigation {
+        width: 320px;
+    }
+    
+    .navigation.open {
+        box-shadow: 2px 0 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    .navigation ul li a,
+    .navigation ul li button {
+        width: 100%;
+        min-width: unset;
+    }
+}
+
+@media (min-width: 1401px) {
+    .navigation ul {
+        max-width: 320px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .navigation {
+        backdrop-filter: blur(4px);
+    }
+}
+
+/* Improved text contrast for navigation items */
+.navigation ul li a,
+.navigation ul li button {
+    color: #3d472e;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+/* Ensure padding and text is not cut off */
+.navigation ul li a,
+.navigation ul li button {
+    padding: 1.2rem 1.25rem;
+    line-height: 1.4;
+    overflow: visible;
+}
+
+/* Allow list items to grow naturally */
+.navigation ul li {
+    overflow: visible;
 }
