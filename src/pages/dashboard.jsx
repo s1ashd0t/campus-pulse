@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext.jsx";
-
-
 import "../styles/components.css"; 
 import AdminHomepage from "./AdminHomepage"; 
 import { useNavigate } from "react-router-dom";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import PointsSummary from "../pages/PointsSummary";
-import "./Dashboard.css";
+
 
 
 const Dashboard = () => {

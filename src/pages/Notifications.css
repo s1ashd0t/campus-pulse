@@ -46,7 +46,7 @@
   padding: 0.75rem;
   border-radius: 0.25rem;
   border: none;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: #a4b465d4;
   color: white;
   font-size: 1rem;
 }
@@ -62,10 +62,10 @@
 
 .sort-button {
   padding: 0.5rem 1rem;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: #f0bb78;
   border: none;
   border-radius: 0.25rem;
-  color: white;
+  color: rgba(0, 0, 0, 0.6);
   cursor: pointer;
   transition: background-color 0.2s;
 }
@@ -75,7 +75,7 @@
 }
 
 .sort-button.active {
-  background-color: #4a86e8;
+  background-color:  #4a86e8d9;
 }
 
 .sort-button:last-child {
