@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import './RedeemPoints.css';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
-import { getFirestore, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { AuthContext } from '../context/AuthContext'; // Import AuthContext
+import { getFirestore, doc, getDoc, updateDoc } from 'firebase/firestore'; // Firestore functions
 
 const RedeemPoints = () => {
     const { user } = useContext(AuthContext);
@@ -20,31 +20,28 @@ const RedeemPoints = () => {
         { id: 6, title: 'Library Late Fee Waiver', points: 25, image: '/llfw.png', description: 'One-time late fee waiver' },
     ];
 
-    const fetchPoints = async () => {
-        if (user) {
-            try {
+    useEffect(() => {
+        const fetchPoints = async () => {
+            if (user) {
                 const userRef = doc(db, 'users', user.uid);
                 const userSnap = await getDoc(userRef);
                 if (userSnap.exists()) {
                     const data = userSnap.data();
                     setUserPoints(data.points ?? 0);
                 }
-            } catch (error) {
-                console.error("Error fetching points:", error);
             }
-        }
-    };
+        };
 
-    useEffect(() => {
         fetchPoints();
     }, [user, db]);
 
     const handleRedeem = async (reward) => {
         if (userPoints >= reward.points) {
+            const newPoints = userPoints - reward.points;
+            setUserPoints(newPoints);
+
             try {
                 const userRef = doc(db, 'users', user.uid);
-                const newPoints = userPoints - reward.points;
-
                 await updateDoc(userRef, {
                     points: newPoints
                 });
@@ -52,14 +49,12 @@ const RedeemPoints = () => {
                 setRedeemStatus(`Successfully redeemed ${reward.title}!`);
                 setTimeout(() => setRedeemStatus(''), 3000);
 
-                // 🧠 Fetch fresh points after redeem
-                fetchPoints();
-
             } catch (error) {
                 console.error("Error updating points:", error);
                 setRedeemStatus("Error redeeming reward. Try again.");
                 setTimeout(() => setRedeemStatus(''), 3000);
             }
+
         } else {
             setRedeemStatus('Not enough points to redeem this reward.');
             setTimeout(() => setRedeemStatus(''), 3000);
