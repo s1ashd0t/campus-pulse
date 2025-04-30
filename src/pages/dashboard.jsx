@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext.jsx";
 import { useNavigate, Navigate } from "react-router-dom";
 import { getFirestore, doc, getDoc } from "firebase/firestore"; 
-import "./Dashboard.css"; 
+import "../styles/components.css"; 
 import AdminHomepage from "./AdminHomepage"; 
 
 const Dashboard = () => {

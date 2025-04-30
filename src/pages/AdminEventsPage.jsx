@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import EventManagement from "./components/EventManagement";
 import CreateEvent from "./components/CreateEvent";
-import "./AdminEventsPage.css";
+import "../styles/components.css";
 
 const AdminEventsPage = () => {
   const [activeTab, setActiveTab] = useState("manage"); // manage, create

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./Landing.css";
+import "../styles/components.css";
 import Login from './Login';
 import { useAuth } from "../context/AuthContext";
 

@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import EventManagement from './components/EventManagement';
 import Analytics from './components/Analytics';
-import './AdminDashboard.css';
+import '../styles/components.css';
 
 const AdminDashboard = () => {
   const { user, userRole, loading } = useContext(AuthContext);

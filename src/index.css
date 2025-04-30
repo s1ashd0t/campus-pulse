@@ -314,3 +314,4 @@ a.underline-effect:hover:after {
 /* Import shared styles */
 @import url('./styles/components.css');
 @import url('./styles/layouts.css');
+@import url('./styles/auth.css');

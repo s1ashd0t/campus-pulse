@@ -1,3 +1,6 @@
+/* Homepage specific styles */
+/* Most common styles have been moved to components.css */
+
 .homepage {
     margin-top: 1rem;
     background: var(--accent-color);
@@ -85,36 +88,6 @@
     padding: 1rem;
     font-size: 1rem;
     text-align: center;
-}
-
-.create-event {
-    padding: 10px;
-}
-
-textarea {
-    width: 100%;
-    padding: 1rem 1.2rem;
-    background: rgba(245, 236, 213, 0.1);
-    border: 1px solid rgba(240, 187, 120, 0.2);
-    border-radius: var(--border-radius);
-    color: var(--text-dark);
-    font-size: 1rem;
-    transition: var(--transition);
-    box-shadow: var(--shadow-inset);
-    min-height: 150px;
-    resize: vertical;
-    line-height: 1.6;
-}
-
-textarea:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 2px rgba(44, 118, 83, 0.1);
-    background: rgba(245, 236, 213, 0.15);
-    outline: none;
-}
-
-textarea::placeholder {
-    color: rgba(98, 111, 71, 0.5);
 }
 
 @media (max-width: 568px) {

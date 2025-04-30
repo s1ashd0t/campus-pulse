@@ -3,7 +3,7 @@ import { useState, useContext } from "react";
 import { addDoc, collection, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import QRCode from 'qrcode';
-import "./CreateEvent.css";
+import "../../styles/components.css";
 import { AuthContext } from "../../context/AuthContext";
 
 const CAMPUS_LOCATIONS = ["Walb Union", "Kettler Hall", "Music Center"];

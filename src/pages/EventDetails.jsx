@@ -5,7 +5,7 @@ import { rsvpToEvent, getUserRsvpStatus, cancelRsvp } from '../services/rsvpServ
 import { sendRsvpConfirmation } from '../services/rsvpService';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../firebase';
-import './EventDetails.css';
+import '../styles/components.css';
 
 const EventDetails = () => {
   const { id } = useParams();

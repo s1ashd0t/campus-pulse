@@ -1,47 +1,7 @@
-.events-page-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
+/* EventsPage specific styles */
+/* Most common styles have been moved to components.css */
 
-.events-page-container h1 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #333;
-}
-
-.filter-controls {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-  gap: 10px;
-}
-
-.filter-button {
-  padding: 8px 16px;
-  background-color: #f0f0f0;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.filter-button:hover {
-  background-color: #e0e0e0;
-}
-
-.filter-button.active {
-  background-color: #626F47;
-  color: #F5ECD5;
-  border-color: #626F47;
-}
-
-.events-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-}
-
+/* Event Header */
 .event-header {
   display: flex;
   justify-content: space-between;
@@ -55,6 +15,7 @@
   font-size: 1.2rem;
 }
 
+/* Event Points Badge */
 .event-points {
   background-color: #F0BB78;
   color: #626F47;
@@ -78,39 +39,7 @@
   line-height: 1;
 }
 
-.event-details {
-  margin-bottom: 15px;
-}
-
-.event-details p {
-  margin: 8px 0;
-  font-size: 0.9rem;
-  color: #ffffff;
-}
-
-.event-description {
-  margin-bottom: 15px;
-  padding: 10px;
-  background-color: rgba(0, 0, 0, 0.4);
-  border-radius: 4px;
-  border-left: 3px solid #F0BB78;
-}
-
-.event-description p {
-  margin: 0;
-  font-size: 0.9rem;
-  color: #ffffff;
-  line-height: 1.4;
-}
-
-.view-details-button {
-  background-color: #F0BB78;
-}
-
-.view-details-button:hover {
-  background-color: #E5AD6A;
-}
-
+/* Event Status */
 .survey-status {
   color: #A4B465;
   font-weight: bold;
@@ -118,6 +47,14 @@
   margin-top: 10px;
 }
 
+.rsvp-status {
+  color: #F0BB78;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* My Events Columns */
 .my-events-columns {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -147,49 +84,13 @@
   color: #F0BB78;
 }
 
-.pending-column h2 {
-  color: #A4B465;
-}
-
+.pending-column h2,
 .completed-column h2 {
   color: #A4B465;
 }
 
-.loading, .no-events, .error-message {
-  text-align: center;
-  padding: 20px;
-  color: #666;
-}
-
-.error-message {
-  color: #E5A4A4;
-}
-
-@media (max-width: 768px) {
-  .events-list {
-    grid-template-columns: 1fr;
-  }
-  
-  .filter-controls {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .filter-button {
-    width: 100%;
-    max-width: 300px;
-  }
-}
-
-.event-actions {
-  display: flex;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-  gap: 10px; 
-  margin-top: 15px; 
-}
-
-.rsvp-button, .view-details-button, .survey-button {
+/* Event Buttons */
+.rsvp-button, .survey-button {
   background-color: #626F47;
   color: #F5ECD5;
   border: none;
@@ -200,7 +101,7 @@
   transition: background-color 0.3s ease; 
 }
 
-.rsvp-button:hover, .view-details-button:hover, .survey-button:hover {
+.rsvp-button:hover {
   background-color: #545F3D; 
 }
 
@@ -214,165 +115,8 @@
   background-color: #94A458;
 }
 
-.rsvp-status {
-  color: #F0BB78;
-  font-weight: bold;
-  text-align: center;
-  margin-top: 10px;
-}
-
-.view-details-button {
-  background-color: #F0BB78;
-}
-
-.view-details-button:hover {
-  background-color: #E5AD6A; 
-}
-
-.event-card {
-  background-color: rgba(0, 0, 0, 0.6);
-  border-radius: 8px;
-  /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); */
-  padding: 20px;
-  margin-bottom: 15px;
-  display: flex;
-  flex-direction: column;
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.event-card:hover {
-  background-color: rgba(0, 0, 0, 0.7);
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
-.events-container {
-    max-width: 1200px;
-    min-width: 600px;
-    margin: 0 auto;
-    padding: 2rem;
-    color: white;
-}
-
-.events-container h1 {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: #F0BB78;
-}
-
-.filter-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
-}
-
-.filter-button {
-    padding: 0.7rem 1.5rem;
-    border: none;
-    border-radius: 0.3rem;
-    background-color: rgba(0, 0, 0, 0.6);
-    color: white;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.filter-button:hover {
-    background-color: rgba(240, 187, 120, 0.8);
-}
-
-.filter-button.active {
-    background-color: #F0BB78;
-}
-
-.events-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.event-card {
-    background-color: rgba(0, 0, 0, 0.6);
-    border-radius: 8px;
-    padding: 1.5rem;
-    transition: transform 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.event-card:hover {
-    transform: translateY(-5px);
-}
-
-.event-card h3 {
-    color: #F0BB78;
-    margin-bottom: 1rem;
-    font-size: 1.4rem;
-}
-
-.event-card p {
-    margin: 0.5rem 0;
-    color: #ffffff;
-}
-
-.event-card strong {
-    color: #F0BB78;
-}
-
-.event-description {
-    margin: 1rem 0;
-    padding: 1rem;
-    background-color: rgba(0, 0, 0, 0.4);
-    border-radius: 4px;
-    border-left: 3px solid #F0BB78;
-}
-
-.event-description p {
-    margin: 0;
-    font-size: 0.9rem;
-    color: #ffffff;
-    line-height: 1.4;
-}
-
-.event-actions {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 1.5rem;
-}
-
-.view-details-button {
-    padding: 0.7rem 1.5rem;
-    border: none;
-    border-radius: 0.3rem;
-    background-color: #F0BB78;
-    color: white;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.view-details-button:hover {
-    background-color: #E5AD6A;
-}
-
-.error-message {
-    text-align: center;
-    padding: 1rem;
-    background-color: rgba(255, 0, 0, 0.2);
-    border-radius: 0.3rem;
-    color: #E5A4A4;
-    margin-bottom: 1rem;
-}
-
-.no-events {
-    text-align: center;
-    color: #999;
-    grid-column: 1 / -1;
-    padding: 2rem;
-    background-color: rgba(15, 13, 13, 0.4);
-    border-radius: 8px;
-}
-
+/* User-specific event list */
 .events-list-user {
-
   display: flex;
   width: 90vw;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -384,17 +128,10 @@
   width: 40vw;
   background-color: rgba(15, 12, 93, 0.6);
   border-radius: 8px;
-  /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); */
   padding: 20px;
   margin-bottom: 15px;
   display: flex;
   flex-direction: column;
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.events-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
 }

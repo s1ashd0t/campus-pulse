@@ -1,14 +1,5 @@
-.admin-homepage-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-.admin-homepage-container h1 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: var(--accent-color);
-}
+/* AdminHomepage specific styles */
+/* Common container styles have been moved to components.css */
 
 .admin-homepage-content {
   display: flex;
@@ -149,16 +140,6 @@
   text-decoration: underline;
 }
 
-.loading, .no-events, .error-message {
-  text-align: center;
-  padding: 20px;
-  color: var(--text-dark);
-  opacity: 0.7;
-}
-
-.error-message {
-  color: var(--error-color);
-}
 
 @media (max-width: 768px) {
   .admin-homepage-content {

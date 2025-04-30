@@ -1,4 +1,3 @@
-// src/SignUp.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signUpWithEmail, loginWithGoogle, loginWithFacebook } from "../services/authService";
