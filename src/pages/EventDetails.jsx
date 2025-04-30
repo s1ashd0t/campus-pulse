@@ -129,7 +129,7 @@ const EventDetails = () => {
         <p>{error || "Event not found"}</p>
         <button 
           onClick={() => navigate('/events')}
-          className="back-button"
+          className="btn btn-secondary"
         >
           Back to Events
         </button>
@@ -169,7 +169,7 @@ const EventDetails = () => {
             
             <button 
               onClick={handleScanQR}
-              className="scan-qr-button"
+              className="btn btn-success"
             >
               Scan QR Code
             </button>
@@ -178,7 +178,7 @@ const EventDetails = () => {
             <button 
               onClick={handleCancelRSVP} 
               disabled={loading}
-              className="cancel-rsvp-button"
+              className="btn btn-danger"
             >
               {loading ? 'Processing...' : 'Cancel Registration'}
             </button>
@@ -187,7 +187,7 @@ const EventDetails = () => {
           <button 
             onClick={handleRSVP} 
             disabled={loading}
-            className="rsvp-button"
+            className="btn btn-primary"
           >
             {loading ? 'Processing...' : 'Register for Event'}
           </button>
@@ -195,7 +195,7 @@ const EventDetails = () => {
         
         <button 
           onClick={() => navigate('/events')}
-          className="back-button"
+          className="btn btn-secondary"
         >
           Back to Events
         </button>

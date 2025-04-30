@@ -1,3 +1,4 @@
+/* Event Details Container - using card-container as a base */
 .event-details-container {
     background: var(--card-background);
     color: var(--text-dark);
@@ -45,6 +46,7 @@
     border-radius: 3px;
 }
 
+/* Event Info */
 .event-info {
     margin-bottom: 2rem;
 }
@@ -54,6 +56,7 @@
     font-size: 1.1rem;
 }
 
+/* Event Actions */
 .event-actions {
     display: flex;
     justify-content: center;
@@ -62,192 +65,6 @@
     margin-top: 2rem;
 }
 
-.rsvp-button {
-    padding: 1rem 2rem;
-    border: none;
-    border-radius: var(--border-radius);
-    font-size: 1.1rem;
-    font-weight: var(--font-weight-medium);
-    cursor: pointer;
-    transition: var(--transition);
-    box-shadow: var(--shadow);
-    position: relative;
-    overflow: hidden;
-    letter-spacing: 0.5px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    background: linear-gradient(45deg, var(--accent-color), var(--accent-hover));
-    color: var(--text-dark);
+.event-actions .btn {
     margin: 0 0.5rem;
-}
-
-.rsvp-button:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-lg);
-    background: linear-gradient(45deg, var(--accent-hover), var(--accent-color));
-}
-
-.rsvp-button:active {
-    transform: translateY(-1px);
-}
-
-.rsvp-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: var(--transition-slow);
-}
-
-.rsvp-button:hover::before {
-    left: 100%;
-}
-
-.cancel-rsvp-button {
-    padding: 1rem 2rem;
-    border: none;
-    border-radius: var(--border-radius);
-    font-size: 1.1rem;
-    font-weight: var(--font-weight-medium);
-    cursor: pointer;
-    transition: var(--transition);
-    box-shadow: var(--shadow);
-    position: relative;
-    overflow: hidden;
-    letter-spacing: 0.5px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    background: linear-gradient(45deg, var(--error-color), #D99494);
-    color: var(--text-dark);
-    margin: 0 0.5rem;
-}
-
-.cancel-rsvp-button:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-lg);
-    background: linear-gradient(45deg, #D99494, var(--error-color));
-}
-
-.cancel-rsvp-button:active {
-    transform: translateY(-1px);
-}
-
-.cancel-rsvp-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: var(--transition-slow);
-}
-
-.cancel-rsvp-button:hover::before {
-    left: 100%;
-}
-
-.scan-qr-button {
-    padding: 1rem 2rem;
-    border: none;
-    border-radius: var(--border-radius);
-    font-size: 1.1rem;
-    font-weight: var(--font-weight-medium);
-    cursor: pointer;
-    transition: var(--transition);
-    box-shadow: var(--shadow);
-    position: relative;
-    overflow: hidden;
-    letter-spacing: 0.5px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    background: linear-gradient(45deg, var(--success-color), #94A458);
-    color: var(--text-dark);
-    margin: 0 0.5rem;
-}
-
-.scan-qr-button:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-lg);
-    background: linear-gradient(45deg, #94A458, var(--success-color));
-}
-
-.scan-qr-button:active {
-    transform: translateY(-1px);
-}
-
-.scan-qr-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: var(--transition-slow);
-}
-
-.scan-qr-button:hover::before {
-    left: 100%;
-}
-
-.back-button {
-    padding: 1rem 2rem;
-    border: none;
-    border-radius: var(--border-radius);
-    font-size: 1.1rem;
-    font-weight: var(--font-weight-medium);
-    cursor: pointer;
-    transition: var(--transition);
-    box-shadow: var(--shadow);
-    position: relative;
-    overflow: hidden;
-    letter-spacing: 0.5px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    background: linear-gradient(45deg, var(--secondary-color), var(--secondary-hover));
-    color: var(--text-dark);
-    margin: 0 0.5rem;
-}
-
-.back-button:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-lg);
-    background: linear-gradient(45deg, var(--secondary-hover), var(--secondary-color));
-}
-
-.back-button:active {
-    transform: translateY(-1px);
-}
-
-.back-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: var(--transition-slow);
-}
-
-.back-button:hover::before {
-    left: 100%;
-}
-
-.rsvp-button:disabled, .cancel-rsvp-button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
 }

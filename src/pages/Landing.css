@@ -104,90 +104,11 @@
   padding: 0 1rem;
 }
 
-.feature {
-  background: var(--card-background);
-  color: var(--text-dark);
-  border-radius: var(--border-radius);
+.features .feature-card {
   width: 300px;
-  min-height: 320px;
-  text-align: center;
-  transition: var(--transition);
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-shadow: var(--shadow);
-  border: 1px solid rgba(240, 187, 120, 0.2);
-  position: relative;
-  overflow: hidden;
 }
 
-.feature::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 5px;
-  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-}
-
-.feature:hover {
-  transform: translateY(-10px);
-  box-shadow: var(--shadow-lg);
-}
-
-.feature h2 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: var(--primary-color);
-  position: relative;
-  display: inline-block;
-}
-
-.feature h2::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50px;
-  height: 2px;
-  background: var(--accent-color);
-}
-
-.feature p {
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-top: 1rem;
-  opacity: 0.9;
-}
-
-/* Call-to-Action Section */
-.cta-section {
-  margin: 3rem auto;
-  background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
-  padding: 4rem 2rem;
-  border-radius: var(--border-radius);
-  color: var(--text-dark);
-  max-width: 1000px;
-  width: 90%;
-  box-shadow: var(--shadow-lg);
-  position: relative;
-  overflow: hidden;
-  text-align: center;
-}
-
-.cta-section h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
-  font-weight: var(--font-weight-bold);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  position: relative;
-  z-index: 1;
-}
-
+/* Call-to-Action Section - using cta-section from components.css */
 .cta-section::before {
   content: '';
   position: absolute;
@@ -226,17 +147,9 @@
     font-size: 1.1rem;
   }
   
-  .feature {
+  .features .feature-card {
     width: 100%;
     max-width: 350px;
     min-height: auto;
-  }
-  
-  .cta-section {
-    padding: 3rem 1.5rem;
-  }
-  
-  .cta-section h2 {
-    font-size: 2rem;
   }
 }
