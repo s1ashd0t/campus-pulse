@@ -28,7 +28,7 @@
 }
 
 .event-details {
-  background: rgba(245, 236, 213, 0.1);
+  background: rgb(247 202 88 / 15%);
   padding: 1.5rem;
   border-radius: var(--border-radius);
   margin-bottom: 1.5rem;
