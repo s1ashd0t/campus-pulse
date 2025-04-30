@@ -88,48 +88,97 @@ export default function CreateEvent({ onSuccess }) {
   };
 
   return (
-    <div className="create-event">
+    <div className="event-details-container">
       <h2>Create Event</h2>
       {error && <div className="error-message">{error}</div>}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Event Title"
-          name="title"
-          value={eventData.title}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="datetime-local"
-          name="date"
-          value={eventData.date}
-          onChange={handleChange}
-          required
-        />
-        <select
-          name="location"
-          value={eventData.location}
-          onChange={handleChange}
-          required
-        >
-          {CAMPUS_LOCATIONS.map(location => (
-            <option key={location} value={location}>
-              {location}
-            </option>
-          ))}
-        </select>
-        <textarea
-          placeholder="Description"
-          name="description"
-          value={eventData.description}
-          onChange={handleChange}
-          required
-        />
-        <button type="submit" disabled={loading}>
-          {loading ? "Creating..." : "Create Event"}
-        </button>
-      </form>
+      
+      <div className="event-info">
+        <form onSubmit={handleSubmit}>
+          <p>
+            <strong>Title:</strong>
+            <input
+              type="text"
+              placeholder="Event Title"
+              name="title"
+              value={eventData.title}
+              onChange={handleChange}
+              required
+              className="form-input"
+            />
+          </p>
+          
+          <p>
+            <strong>Date:</strong>
+            <input
+              type="datetime-local"
+              name="date"
+              value={eventData.date}
+              onChange={handleChange}
+              required
+              className="form-input"
+            />
+          </p>
+          
+          <p>
+            <strong>Location:</strong>
+            <select
+              name="location"
+              value={eventData.location}
+              onChange={handleChange}
+              required
+              className="form-select"
+            >
+              {CAMPUS_LOCATIONS.map(location => (
+                <option key={location} value={location}>
+                  {location}
+                </option>
+              ))}
+            </select>
+          </p>
+          
+          <p>
+            <strong>Points:</strong>
+            <input
+              type="number"
+              name="points"
+              value={eventData.points}
+              onChange={handleChange}
+              required
+              className="form-input"
+            />
+          </p>
+          
+          <p>
+            <strong>Description:</strong>
+            <textarea
+              placeholder="Description"
+              name="description"
+              value={eventData.description}
+              onChange={handleChange}
+              required
+              className="form-textarea"
+            />
+          </p>
+          
+          <div className="event-actions">
+            <button 
+              type="submit" 
+              disabled={loading}
+              className="btn btn-primary"
+            >
+              {loading ? "Creating..." : "Create Event"}
+            </button>
+          </div>
+        </form>
       </div>
-    );
+      
+      {qrCodeUrl && (
+        <div className="qr-code-preview">
+          <h3>Event QR Code</h3>
+          <img src={qrCodeUrl} alt="Event QR Code" />
+          <p>This QR code can be used for event check-in.</p>
+        </div>
+      )}
+    </div>
+  );
 }

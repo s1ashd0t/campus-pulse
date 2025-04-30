@@ -592,6 +592,24 @@
 .event-info p {
     margin-bottom: 0.75rem;
     font-size: 1.1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.event-info strong {
+    margin-bottom: 0.5rem;
+    display: block;
+    color: var(--primary-color);
+}
+
+.event-info .form-input,
+.event-info .form-select,
+.event-info .form-textarea {
+    margin-top: 0.5rem;
+}
+
+.event-info .form-textarea {
+    min-height: 120px;
 }
 
 /* Event Actions */
