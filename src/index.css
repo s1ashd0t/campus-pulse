@@ -1,4 +1,8 @@
+/* Import shared styles */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Indie+Flower&display=swap');
+@import url('./styles/components.css');
+@import url('./styles/layouts.css');
+@import url('./styles/auth.css');
 
 :root {
   /* Main color palette - earth tones */
@@ -614,7 +618,3 @@ a.underline-effect:hover {
   }
 }
 
-/* Import shared styles */
-@import url('./styles/components.css');
-@import url('./styles/layouts.css');
-@import url('./styles/auth.css');

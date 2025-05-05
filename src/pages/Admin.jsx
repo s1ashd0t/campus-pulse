@@ -16,10 +16,10 @@ const Admin = () => {
         <div className="admin-section">
           <CreateEvent />
         </div>
-        <div className="news-section">
+        <div className="admin-section">
           <CreateNews />
         </div>
-        <div >
+        <div className="admin-section">
           <EventList />
         </div>
         <div className="admin-section">

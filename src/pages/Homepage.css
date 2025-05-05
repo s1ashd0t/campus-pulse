@@ -23,9 +23,9 @@
 /* Card Grid */
 .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    padding: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 2rem;
+    width: 100%;
 }
 
 .cards a {
@@ -100,11 +100,13 @@
     background-color: var(--background-dark);
     border-radius: var(--border-radius);
     padding: 2rem;
-    display: grid;
+    display: flex;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     box-shadow: var(--shadow-lg);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    max-width: 1200px;
 }
 
 .newscard {

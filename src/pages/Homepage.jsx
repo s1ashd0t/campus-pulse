@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
-import '../styles/components.css';
+import './homepage.css';
 import qrcode from '../assets/scan-icon.svg';
 import searchicon from '../assets/search-icon.svg';
 import eventsicon from '../assets/leaderboard.svg';
@@ -79,7 +79,7 @@ const Homepage = () => {
                 <h1>Updates</h1>
                 <div className="news-section">
                     {loading ? (
-                        <div className="loading">Loading news...</div>
+                        <div className="loading">Loading updates...</div>
                     ) : error ? (
                         <div className="error">{error}</div>
                     ) : newsItems.length > 0 ? (
@@ -92,7 +92,7 @@ const Homepage = () => {
                             </article>
                         ))
                     ) : (
-                        <div className="no-news">No news items available</div>
+                        <div className="no-news">No updates available</div>
                     )}
                 </div>
             </section>

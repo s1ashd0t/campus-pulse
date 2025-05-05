@@ -7,6 +7,17 @@
     gap: 1.5rem;
     width: 100%;
     margin-top: 1.5rem;
+    justify-content: center;
+}
+
+.create-event form input[type="text"]{
+    width: 100%;
+    padding: 0.75rem;
+    background: var(--background-light);
+    border: 1px solid var(--background-dark);
+    border-radius: var(--border-radius-sm);
+    color: white;
+    font-size: 1rem;
 }
 
 .create-event button {
