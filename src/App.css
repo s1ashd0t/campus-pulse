@@ -29,7 +29,7 @@
 
 @media (max-width: 480px) {
   .app-container {
-    padding-bottom: 1.5rem;
+    /* padding-bottom: 1.5rem; */
   }
 }
 
