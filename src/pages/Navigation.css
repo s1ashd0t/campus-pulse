@@ -18,7 +18,7 @@
 
 .navigation.open {
     transform: translateX(0);
-    overflow: hidden;
+    overflow-y: auto;
     pointer-events: auto;
     opacity: 1;
 }
