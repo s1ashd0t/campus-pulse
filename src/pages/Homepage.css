@@ -3,6 +3,7 @@
 
 .homepage {
     margin-top: 1rem;
+    margin-bottom: 1rem;
     background: var(--accent-color);
     width: 90vw;
     border-radius: var(--border-radius);
