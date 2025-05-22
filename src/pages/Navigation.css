@@ -32,14 +32,10 @@
     list-style: none;
     width: 100%;
     max-width: 320px;
-    /* height: 100vh; */
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
     overflow-y: auto;
-    background: linear-gradient(135deg, rgba(240, 187, 120, 0.98), rgba(229, 173, 106, 0.95));
-    box-shadow: 5px 0 20px rgba(0, 0, 0, 0.1);
-    border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .navigation ul::-webkit-scrollbar {

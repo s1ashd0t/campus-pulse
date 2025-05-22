@@ -4,7 +4,6 @@
 .homepage {
     margin-top: 1rem;
     margin-bottom: 1rem;
-    background: var(--accent-color);
     width: 90vw;
     border-radius: var(--border-radius);
     padding: 1rem;
@@ -19,6 +18,16 @@
     width: 100%;
     height: 5px;
     background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+}
+
+.quick-actions, .updates {
+    background: var(--accent-color);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+}
+
+.quick-actions{
+    margin-bottom: 1rem;
 }
 
 /* Card Grid */

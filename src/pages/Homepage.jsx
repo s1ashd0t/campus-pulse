@@ -63,6 +63,7 @@ const Homepage = () => {
 
     return (
         <main className="homepage">
+        <div className="quick-actions">
             <h1>Quick Actions</h1>
             <section className="cards">
                 {quickLinks.map((link, index) => (
@@ -74,9 +75,10 @@ const Homepage = () => {
                     </Link>
                 ))}
             </section>
-
+        </div>
+        <div className="updates">
+            <h1>Updates</h1>
             <section className="news-container">
-                <h1>Updates</h1>
                 <div className="news-section">
                     {loading ? (
                         <div className="loading">Loading updates...</div>
@@ -96,6 +98,7 @@ const Homepage = () => {
                     )}
                 </div>
             </section>
+        </div>
         </main>
     );
 };

@@ -152,7 +152,6 @@
 .user-email {
     font-size: 0.9rem;
     color: white;
-    overflow-wrap: anywhere;
     word-break: break-word;
 }
 
@@ -170,7 +169,7 @@
 .user-actions {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 8px;
     width: 100%;
 }
