@@ -26,3 +26,34 @@
     max-width: 300px;
     align-self: center;
 }
+
+.event-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    gap: 1rem;
+    color: var(--text-color);
+}
+
+.event-info ::placeholder, .event-info * {
+    color: var(--text-color);
+}
+
+.event-actions{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.event-actions button {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+    border-radius: var(--border-radius);
+    background: white;
+    color: black;
+    cursor: pointer;
+    transition: var(--transition);
+}

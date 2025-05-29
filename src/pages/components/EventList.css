@@ -1,13 +1,12 @@
 .events-container {
     padding: 1.5rem;
-    background: var(--background-dark);
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
     height: 100%;
 }
 
 .events-container h2 {
-    color: var(--text-color);
+    color: var(--primary-color);
     margin-bottom: 1.5rem;
     font-size: 1.5rem;
 }
@@ -21,39 +20,22 @@
 }
 
 .event-item {
-    background: var(--card-background);
-    margin-bottom: 1rem;
-    padding: 1.5rem;
+    padding: 1rem;
     border-radius: var(--border-radius);
-    border: 1px solid var(--background-light);
+    border: 2px solid var(--secondary-color);
     transition: var(--transition);
 }
 
-.event-item h3 {
-    color: var(--primary-color);
+.event-item h3{
+    color: var(--text-color);
     margin-bottom: 0.5rem;
     font-size: 1.2rem;
-}
-
-.event-info {
-    background-color: var(--card-background);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 1rem;
-    gap: 1rem;
+    text-align: center;
 }
 
 .event-details {
-    flex: 1;
-}
-
-.event-details p {
-    margin: 0.3rem 0;
-    color: var(#684b00);
-    opacity: 0.8;
-    font-size: 0.9rem;
+    text-align: left;
+    width: 100%;
 }
 
 .event-actions {
@@ -83,12 +65,7 @@
 }
 
 .edit-button {
-    background: var(--primary-color);
     color: var(--text-color);
-}
-
-.edit-button:hover {
-    background: var(--primary-hover);
 }
 
 .delete-button {

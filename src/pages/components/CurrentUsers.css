@@ -25,13 +25,9 @@
     justify-content: space-between;
     align-items: center;
     color: white;
-}
-
-
-
-.current-users li:hover{
     background: rgba(255, 255, 255, 0.1);
 }
+
 
 .user-info {
     display: flex;
@@ -92,30 +88,16 @@
 }
 
 .role-toggle-btn.promote {
-    background: var(--primary-color);
-    color: white;
-}
-
-.role-toggle-btn.promote:hover {
-    background: var(--primary-hover);
+    background-color: #85ac81;
 }
 
 .role-toggle-btn.demote {
     background: var(--error-color);
-    color: white;
-}
-
-.role-toggle-btn.demote:hover {
-    background: #ff0000;
 }
 
 .delete-btn {
-    background: #333;
+    background: #6a0303;
     color: white;
-}
-
-.delete-btn:hover {
-    background: var(--error-color);
 }
 
 .error-message {

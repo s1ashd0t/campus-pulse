@@ -54,25 +54,25 @@
 }
 
 .leader-1 img { 
-  width: 110px; 
-  height: 110px; 
-  border-radius: 50%; 
+  width: 80px; 
+  height: auto; 
+  border-radius: 20%; 
   border: 5px solid #FFD700; 
   box-shadow: var(--shadow);
   transition: var(--transition);
 }
 .leader-2 img { 
-  width: 90px; 
-  height: 90px; 
-  border-radius: 50%; 
+  width: 80px; 
+  height: auto; 
+  border-radius: 20%; 
   border: 4px solid #C0C0C0; 
   box-shadow: var(--shadow);
   transition: var(--transition);
 }
 .leader-3 img { 
-  width: 90px; 
-  height: 90px; 
-  border-radius: 50%; 
+  width: 80px; 
+  height: auto; 
+  border-radius: 20%; 
   border: 4px solid #CD7F32; 
   box-shadow: var(--shadow);
   transition: var(--transition);
@@ -130,7 +130,6 @@
 
 .player:hover {
   background: rgba(245, 236, 213, 0.1);
-  transform: translateX(5px);
 }
 
 /* Avatar styling */
