@@ -21,9 +21,8 @@ npm install
 # Start the development server
 npm run dev
 
+# Status:
 
-What you have now:
-firestore.rules — to manage security (we can tweak for testing).
-firestore.indexes.json — for custom Firestore indexes (leave it for now unless needed).
+*awaiting further updates...*
 
 ```
